@@ -49,6 +49,15 @@ public class Player {
         this.lastName = lastName;
     }
 
+    public Player(long id, String username, String password, String email, String firstName, String lastName) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public long getId() {
         return id;
     }
