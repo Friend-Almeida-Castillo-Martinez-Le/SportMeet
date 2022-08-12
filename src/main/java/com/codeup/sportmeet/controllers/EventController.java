@@ -1,7 +1,9 @@
 package com.codeup.sportmeet.controllers;
 
 import com.codeup.sportmeet.models.Event;
+import com.codeup.sportmeet.models.Sport;
 import com.codeup.sportmeet.repositories.EventRepository;
+import com.codeup.sportmeet.repositories.SportRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EventController {
 
     private EventRepository eventsDao;
+    private SportRepository sportsDao;
 
-    public EventController(EventRepository eventsDao) {
+    public EventController(EventRepository eventsDao, SportRepository sportsDao) {
         this.eventsDao = eventsDao;
+        this.sportsDao = sportsDao;
     }
 
     @GetMapping("/events")
@@ -27,6 +31,7 @@ public class EventController {
     @GetMapping("event/create")
     public String showCreateEvent(Model model) {
         model.addAttribute("event", new Event());
+        model.addAttribute("sports", sportsDao.findAll());
         return "event/create";
     }
 
