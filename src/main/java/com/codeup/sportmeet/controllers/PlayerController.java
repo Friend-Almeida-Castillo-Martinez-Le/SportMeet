@@ -1,6 +1,7 @@
 package com.codeup.sportmeet.controllers;
 
 
+import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import org.springframework.stereotype.Controller;
@@ -54,8 +55,5 @@ public class PlayerController {
         playerDao.deleteById(id);
         return "redirect:/players";
     }
-
-
-
 
 }
