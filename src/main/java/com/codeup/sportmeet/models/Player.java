@@ -37,6 +37,9 @@ public class Player {
 
     @Column
     private long upvote;
+
+    @Basic
+    private java.sql.Time sqlTime;
 //
 //    @ManyToMany(mappedBy = "events")
 //    private List events;
