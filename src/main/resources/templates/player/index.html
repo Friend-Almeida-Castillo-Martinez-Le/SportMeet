@@ -3,18 +3,22 @@
 <head th:replace="fragments/partials :: head('Post Create')" />
 <body>
 <nav th:replace="fragments/partials :: navbar" />
-<ul>
-    <li th:each="player: ${players}">
-        <div>
-            <h6 th:text="${player.id}"></h6>
-            <h6 th:text="${player.username}"></h6>
-            <h6 th:text="${player.password}"></h6>
-            <h6 th:text="${player.email}"></h6>
-            <h6 th:text="${player.firstName}"></h6>
-            <h6 th:text="${player.lastName}"></h6>
+<div class="container">
+    <div class="row">
+        <div class="col-3 card border border-dark mx-2 my-2" th:each="player: ${players}">
+            <h3>ID: <span th:text="${player.id}"></span></h3>
+            <p>
+                Username:<span th:text="${player.username}"></span><br>
+                Password:<span th:text="${player.password}"></span><br>
+                Email:<span th:text="${player.email}"></span><br>
+                First Name:<span th:text="${player.firstName}"></span><br>
+                Last Name:<span th:text="${player.lastName}"></span>
+            </p>
+
         </div>
-    </li>
-</ul>
+    </div>
+</div>
+
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
