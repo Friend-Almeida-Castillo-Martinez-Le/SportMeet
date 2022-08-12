@@ -1,6 +1,7 @@
 package com.codeup.sportmeet.controllers;
 
 
+import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import org.springframework.stereotype.Controller;
@@ -42,8 +43,5 @@ public class PlayerController {
         model.addAttribute("player", playerDao.getById(id));
         return "/player/show";
     }
-
-
-
 
 }
