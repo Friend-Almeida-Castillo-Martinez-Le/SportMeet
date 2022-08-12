@@ -80,7 +80,6 @@ public class Player {
         this.date = date;
         this.rating = rating;
         this.upvote = upvote;
-        this.sqlTime = sqlTime;
         this.events = events;
         this.games = games;
         this.event = event;
@@ -97,7 +96,6 @@ public class Player {
         this.date = date;
         this.rating = rating;
         this.upvote = upvote;
-        this.sqlTime = sqlTime;
         this.events = events;
         this.games = games;
         this.event = event;
