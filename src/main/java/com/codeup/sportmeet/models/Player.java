@@ -1,6 +1,7 @@
 package com.codeup.sportmeet.models;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -40,6 +41,16 @@ public class Player {
 
     @Basic
     private java.sql.Time sqlTime;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Event> events;
+
+    @ManyToMany(mappedBy = "players")
+    List<Event> games;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
 //
 //    @ManyToMany(mappedBy = "events")
 //    private List events;
@@ -54,6 +65,22 @@ public class Player {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, Time sqlTime, List<Event> events, List<Event> games, Event event) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.date = date;
+        this.rating = rating;
+        this.upvote = upvote;
+        this.sqlTime = sqlTime;
+        this.events = events;
+        this.games = games;
+        this.event = event;
     }
 
     public long getId() {
@@ -135,4 +162,29 @@ public class Player {
     public void setUpvote(long upvote) {
         this.upvote = upvote;
     }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Event> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Event> games) {
+        this.games = games;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
 }
