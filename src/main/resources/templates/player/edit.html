@@ -1,33 +1,31 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/partials :: head('edit post page')" />
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Post Edit')" />
 <body>
 <nav th:replace="fragments/partials :: navbar" />
-
-
-<h1>Edit Post Page</h1>
-<hr>
 <div class="container">
+    <h1>Edit Player Page</h1>
     <div class="row">
-        <div class="card">
-            <form th:action="'/posts/' + ${post.id} + '/edit' " method ="post">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" th:value="${post.title}">
-                <label for="body">Body</label>
-                <input type="text" id="body" name="body" th:value="${post.body}">
-                <label class="form-label" for="tagid">Tags:</label>
-                <ul>
-                    <li th:text="${tag.name}" th:each="tag: ${post.tags}"></li>
-                </ul>
-                <select class="form-control" name="tagid" id="tagid">
-                    <option th:value="${tag.id}" th:text="${tag.name}" th:each="tag: ${tags}"></option>
-                </select>
-                <input type="hidden" id="id" name="id" th:value="${post.id}">
-                <input type="submit">
+        <div class="col-12">
+            <form th:action="@{/player/create}" th:method="post" th:object="${player}">
+<!--                <label class="form-label">id:</label>-->
+                <input type="hidden" th:field="*{id}"/>
+                <label class="form-label">username:</label>
+                <input class="form-control" th:field="*{username}" />
+                <label class="form-label">password:</label>
+                <input class="form-control" th:field="*{password}" />
+                <label class="form-label">email:</label>
+                <input class="form-control" th:field="*{email}" />
+                <label class="form-label">First Name:</label>
+                <input class="form-control" th:field="*{firstName}" />
+                <label class="form-label">Last Name:</label>
+                <input class="form-control" th:field="*{lastName}" />
 
+
+
+                <input type="submit" />
             </form>
-        </div>
 
+        </div>
     </div>
 </div>
 

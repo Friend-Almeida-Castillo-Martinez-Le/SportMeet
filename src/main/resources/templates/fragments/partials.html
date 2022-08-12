@@ -12,7 +12,7 @@
 <nav th:fragment="navbar">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">FierNav</a>
+            <a class="navbar-brand" href="#">ReadyUp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,47 +21,8 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Post
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/index">Post Index</a></li>
-                            <li><a class="dropdown-item" href="/posts/create">Create Post</a></li>
-<!--                            <li><a class="dropdown-item" href="/show">Show Single Post</a></li>-->
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ads
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/ads">Ads Index</a></li>
-                            <li><a class="dropdown-item" href="/ads/create">Create Ad</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Books
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/books">Books Index</a></li>
-                            <li><a class="dropdown-item" href="/books/edit">Edit book</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Products
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/products">Products Index</a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users">UserIndex</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/roll-dice">Dice Game</a>
+                        <a class="nav-link active" aria-current="page" href="/players">Players</a>
                     </li>
                     <li>
                         <form th:action="@{/logout}" th:method="post">
