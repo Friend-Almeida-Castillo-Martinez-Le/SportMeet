@@ -6,7 +6,9 @@ import com.codeup.sportmeet.repositories.PlayerRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PlayerController {
@@ -24,8 +26,14 @@ public class PlayerController {
     }
 
     @GetMapping("player/create")
-    public String playerCreate(Model model) {
-        playerDao.save(new Player("player1", "pass", "emailmeplayer", "Leeroy", "Jenkins"));
+    public String showCreateForm(Model model) {
+        model.addAttribute("player", new Player());
+        return "/player/create";
+    }
+
+    @PostMapping("player/create")
+    public String playerCreate(@ModelAttribute Player player) {
+        playerDao.save(player);
         return "redirect:/players";
     }
 
@@ -34,5 +42,8 @@ public class PlayerController {
         model.addAttribute("player", playerDao.getById(id));
         return "/player/show";
     }
+
+
+
 
 }
