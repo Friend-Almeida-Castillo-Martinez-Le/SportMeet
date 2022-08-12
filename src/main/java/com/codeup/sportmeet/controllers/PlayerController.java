@@ -38,10 +38,22 @@ public class PlayerController {
         return "redirect:/players";
     }
 
+    @GetMapping("/player/{id}/show")
+    public String showPlayer(@PathVariable long id, Model model){
+        model.addAttribute("player", playerDao.getById(id));
+        return ("/player/show");
+    }
+
     @GetMapping("player/{id}/edit")
     public String playerEdit(Model model, @PathVariable long id){
         model.addAttribute("player", playerDao.getById(id));
-        return "/player/show";
+        return "/player/edit";
+    }
+
+    @GetMapping("player/{id}/delete")
+    public String playerDelete(@PathVariable long id){
+        playerDao.deleteById(id);
+        return "redirect:/players";
     }
 
 }

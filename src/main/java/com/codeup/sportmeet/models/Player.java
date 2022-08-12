@@ -38,10 +38,7 @@ public class Player {
 
     @Column
     private long upvote;
-
-    @Basic
-    private java.sql.Time sqlTime;
-
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Event> events;
 
@@ -51,10 +48,6 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Event event;
-//
-//    @ManyToMany(mappedBy = "events")
-//    private List events;
-
 
     public Player() {
     }
@@ -66,8 +59,35 @@ public class Player {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, Time sqlTime, List<Event> events, List<Event> games, Event event) {
+    
+    
+    public Player(long id, String username, String password, String email, String firstName, String lastName) {
+       this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
+    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> games, Event event) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.date = date;
+        this.rating = rating;
+        this.upvote = upvote;
+        this.sqlTime = sqlTime;
+        this.events = events;
+        this.games = games;
+        this.event = event;
+    }
+    
+    public Player(long id, String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> games, Event event) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
