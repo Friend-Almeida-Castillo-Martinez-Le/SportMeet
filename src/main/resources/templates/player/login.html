@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Log In</title>
-</head>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Login page')" />
 <body>
+<nav th:replace="fragments/partials :: navbar" />
 <h1>Log In</h1>
 <div th:if="${param.error}">
     Invalid Username and Password.
