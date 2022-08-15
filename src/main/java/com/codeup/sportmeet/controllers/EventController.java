@@ -80,14 +80,17 @@ public class EventController {
         else {
             playerDao.getById(currentPlayer.getId()).getAttendingEvents().add(event);
         }
+
+        Event ev = eventsDao.getById(event.getId());
         if (eventsDao.getById(event.getId()).getPlayers() == null) {
             List<Player> players = new ArrayList<>();
             players.add(currentPlayer);
-            eventsDao.getById(event.getId()).setPlayers(players);
+            ev.setPlayers(players);
         }
         else {
-            eventsDao.getById(event.getId()).getPlayers().add(currentPlayer);
+            ev.getPlayers().add(currentPlayer);
         }
+        eventsDao.save(ev);
         System.out.println(currentPlayer.getEvents());
         return "redirect:/events";
     }
