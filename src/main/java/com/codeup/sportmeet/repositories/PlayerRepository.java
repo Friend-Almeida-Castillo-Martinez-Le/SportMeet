@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PlayerRepository extends JpaRepository<Player, Long> {
-    @Query("from Player p where p.firstName like %:term%")
+    @Query("from Player p where p.username like %:term%")
     List<Player> searchByPlayerLike(@Param("term") String term);
 }
