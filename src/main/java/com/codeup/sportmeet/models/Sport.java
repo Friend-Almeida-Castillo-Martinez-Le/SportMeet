@@ -20,6 +20,10 @@ public class Sport {
     public Sport() {
     }
 
+    public Sport(String name) {
+        this.name = name;
+    }
+
     public Sport(long id, String name, List<Event> events) {
         this.id = id;
         this.name = name;
