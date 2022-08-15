@@ -28,10 +28,10 @@
         </div>
         <div>
             <label for="date"></label>
-            <input type="text" id="date" placeholder="date" th:field="*{date}">
+            <input type="text" id="date" placeholder="Date" th:field="*{date}">
         </div>
         <div>
-            <select name="sport" id="sport">
+            <select name="sport" id="sport" th:field="*{sport}">
                 <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
             </select>
         </div>

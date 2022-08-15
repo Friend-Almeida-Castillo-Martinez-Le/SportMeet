@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-//    @Transactional
-//    @Modifying
-//    @Query("update Event event set event.title = :title, event.description = :description, event.date = :date, event.startTime = :startTime, event.endTime = :endTIme, event.location = :location, event.sport = :sport where event.id = :id")
-//    void updateEvent(@Param("id") long id, @Param("title") String title, @Param("description") String description, @Param("date") long date, @Param("startTime") String startTime, @Param("endTime") String endTime, @Param("location") String location, @Param("sport")Sport sport);
+    @Transactional
+    @Modifying
+    @Query("update Event event set event.title = :title, event.description = :description, event.location = :location, event.startTime = :startTime, event.endTime = :endTime, event.date = :date, event.sport = :sport where event.id = :id")
+    void updateEvent(@Param("id") Long id, @Param("title") String title, @Param("description") String description, @Param("location") String location, @Param("startTime") String startTime, @Param("endTime") String endTime, @Param("date") Long date, @Param("sport") Sport sport);
 }

@@ -66,7 +66,7 @@ public class EventController {
     @PostMapping(value = "event/{id}/edit")
     public String editEvent(@ModelAttribute("event") Event event, HttpSession session) {
         Long id = (Long) session.getAttribute("id");
-//        eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getDate(), event.getStartTime(), event.getEndTime(), event.getLocation(), event.getSport());
+        eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getEndTime(), event.getDate(), event.getSport());
         return "redirect:/events";
     }
 }
