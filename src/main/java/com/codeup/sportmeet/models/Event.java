@@ -31,13 +31,13 @@ public class Event {
     private long date;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private Player owner;
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "game_player",
-            joinColumns = {@JoinColumn(name = "game_id")},
+            name = "event_player",
+            joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "player_id")}
     )
     private List<Player> players;
@@ -49,7 +49,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player owner, List<Player> players, Sport sport) {
+    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -57,19 +57,19 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.date = date;
-        this.owner = owner;
+        this.player = player;
         this.players = players;
         this.sport = sport;
     }
 
-    public Event(String title, String description, String location, String startTime, String endTime, long date, Player owner, List<Player> players, Sport sport) {
+    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
         this.date = date;
-        this.owner = owner;
+        this.player = player;
         this.players = players;
         this.sport = sport;
     }
@@ -140,12 +140,12 @@ public class Event {
         this.date = date;
     }
 
-    public Player getOwner() {
-        return owner;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public List<Player> getPlayers() {

@@ -13,5 +13,13 @@
     <p th:text="${event.date}"></p>
     <span th:text="${event.startTime}"></span> - <span th:text="${event.endTime}"></span>
 </div>
+<br>
+<form th:action="@{/event/{id} (id = ${event.id})}" th:method="post" th:object="${event}">
+    <div>
+        <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
+        <label for="attending">Want to attend event?</label><br>
+        <button type="submit">Attend</button>
+    </div>
+</form>
 </body>
 </html>

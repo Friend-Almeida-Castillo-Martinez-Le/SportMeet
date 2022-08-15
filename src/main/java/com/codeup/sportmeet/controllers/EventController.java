@@ -1,9 +1,12 @@
 package com.codeup.sportmeet.controllers;
 
 import com.codeup.sportmeet.models.Event;
+import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.models.Sport;
 import com.codeup.sportmeet.repositories.EventRepository;
+import com.codeup.sportmeet.repositories.PlayerRepository;
 import com.codeup.sportmeet.repositories.SportRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class EventController {
 
     private EventRepository eventsDao;
     private SportRepository sportsDao;
+    private PlayerRepository playerDao;
 
-    public EventController(EventRepository eventsDao, SportRepository sportsDao) {
+    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao) {
+        this.playerDao = playerDao;
         this.eventsDao = eventsDao;
         this.sportsDao = sportsDao;
     }
@@ -39,7 +46,17 @@ public class EventController {
 
     @PostMapping("event/create")
     public String createEvent(@ModelAttribute Event event) {
-        eventsDao.save(event);
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        event.setPlayer(currentPlayer);
+        Event event2 = eventsDao.save(event);
+        if (playerDao.getById(currentPlayer.getId()).getEvents() == null) {
+            playerDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+            playerDao.getById(currentPlayer.getId()).getEvents().add(event2);
+            System.out.println("EVENTS HERE ---> " + playerDao.getById(currentPlayer.getId()).getEvents());
+        } else {
+          playerDao.getById(currentPlayer.getId()).getEvents().add(event2);
+          System.out.println("EVENTS HERE ---> " + playerDao.getById(currentPlayer.getId()).getEvents());
+        }
         return "redirect:/events";
     }
 
@@ -47,6 +64,32 @@ public class EventController {
     public String showEvent(Model model, @PathVariable long id) {
         model.addAttribute("event", eventsDao.getById(id));
         return "event/show";
+    }
+
+    @PostMapping("event/{id}")
+    public String attendEvent(@ModelAttribute("event") Event event) {
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("HERE");
+        System.out.println(currentPlayer);
+        System.out.println(event);
+        if (playerDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
+            List<Event> events = new ArrayList<>();
+            events.add(event);
+            playerDao.getById(currentPlayer.getId()).setAttendingEvents(events);
+        }
+        else {
+            playerDao.getById(currentPlayer.getId()).getAttendingEvents().add(event);
+        }
+        if (eventsDao.getById(event.getId()).getPlayers() == null) {
+            List<Player> players = new ArrayList<>();
+            players.add(currentPlayer);
+            eventsDao.getById(event.getId()).setPlayers(players);
+        }
+        else {
+            eventsDao.getById(event.getId()).getPlayers().add(currentPlayer);
+        }
+        System.out.println(currentPlayer.getEvents());
+        return "redirect:/events";
     }
 
     @GetMapping(value = "/event/{id}/delete")

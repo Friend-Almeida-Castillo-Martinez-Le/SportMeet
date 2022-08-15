@@ -39,15 +39,11 @@ public class Player {
     @Column
     private long upvote;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<Event> events;
 
     @ManyToMany(mappedBy = "players")
-    List<Event> games;
-
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
+    List<Event> attendingEvents;
 
     public Player() {
     }
@@ -79,7 +75,7 @@ public class Player {
         this.lastName = lastName;
     }
     
-    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> games, Event event) {
+    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -90,11 +86,10 @@ public class Player {
         this.rating = rating;
         this.upvote = upvote;
         this.events = events;
-        this.games = games;
-        this.event = event;
+        this.attendingEvents = attendingEvents;
     }
     
-    public Player(long id, String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> games, Event event) {
+    public Player(long id, String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -106,8 +101,7 @@ public class Player {
         this.rating = rating;
         this.upvote = upvote;
         this.events = events;
-        this.games = games;
-        this.event = event;
+        this.attendingEvents = attendingEvents;
     }
 
     public long getId() {
@@ -198,20 +192,11 @@ public class Player {
         this.events = events;
     }
 
-    public List<Event> getGames() {
-        return games;
+    public List<Event> getAttendingEvents() {
+        return attendingEvents;
     }
 
-    public void setGames(List<Event> games) {
-        this.games = games;
+    public void setAttendingEvents(List<Event> attendingEvents) {
+        this.attendingEvents = attendingEvents;
     }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
 }

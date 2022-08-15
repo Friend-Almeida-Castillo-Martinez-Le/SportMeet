@@ -20,9 +20,8 @@ public class PlayerDetailsLoader implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Player player = players.findByUsername(username);
         if (player == null) {
-            throw new UsernameNotFoundException("No user found for " + username);
+            throw new UsernameNotFoundException("No player found for" + username);
         }
-
         return new PlayerWithRoles(player);
     }
 }
