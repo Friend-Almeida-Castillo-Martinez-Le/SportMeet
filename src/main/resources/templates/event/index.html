@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Event Index')" />
 <body>
+<nav th:replace="fragments/partials :: navbar" />
     <div th:each="event: ${events}">
         <h3 th:text="${event.title}"></h3>
         <p th:text="${event.sport.name}"></p>
