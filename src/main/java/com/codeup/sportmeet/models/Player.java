@@ -15,7 +15,7 @@ public class Player {
     @Column(nullable = false, length = 50, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
@@ -50,6 +50,15 @@ public class Player {
     private Event event;
 
     public Player() {
+    }
+
+    public Player(Player copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
     }
 
     public Player(String username, String password, String email, String firstName, String lastName) {

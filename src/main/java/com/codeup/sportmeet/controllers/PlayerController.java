@@ -4,6 +4,7 @@ package com.codeup.sportmeet.controllers;
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class PlayerController {
 
     private PlayerRepository playerDao;
+    private PasswordEncoder passwordEncoder;
 
-    public PlayerController(PlayerRepository playerDao) {
+    public PlayerController(PlayerRepository playerDao, PasswordEncoder passwordEncoder) {
         this.playerDao = playerDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/players")
@@ -34,7 +37,10 @@ public class PlayerController {
 
     @PostMapping("player/create")
     public String playerCreate(@ModelAttribute Player player) {
+        String hash = passwordEncoder.encode(player.getPassword());
+        player.setPassword(hash);
         playerDao.save(player);
+
         return "redirect:/players";
     }
 
@@ -60,6 +66,20 @@ public class PlayerController {
     public String findPlayerByName(@PathVariable String name, Model model){
         model.addAttribute("players", playerDao.searchByPlayerLike(name));
         return "/player/index";
+    }
+
+    @GetMapping("/sign-up")
+    public String showSignupForm(Model model){
+        model.addAttribute("player", new Player());
+        return "player/create";
+    }
+
+    @PostMapping("/sign-up")
+    public String saveUser(@ModelAttribute Player player){
+        String hash = passwordEncoder.encode(player.getPassword());
+        player.setPassword(hash);
+        playerDao.save(player);
+        return "redirect:/login";
     }
 
 
