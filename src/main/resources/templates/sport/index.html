@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Sport Index')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+<div class="container">
+    <div class="row">
+        <div class="col-3 card border border-dark mx-2 my-2" th:each="sport: ${sports}">
+            <h3>ID: <span th:text="${sport.id}"></span></h3>
+            <p>
+                Sport:<span th:text="${sport.name}"></span><br>
+
+            </p>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap Bundle with Popper -->
+
+<!--Personal custom JS script-->
+
+</body>
+</html>
+
