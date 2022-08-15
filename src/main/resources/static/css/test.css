@@ -1,0 +1,42 @@
+:root {
+    --primary: hsl(305, 87%, 46%, 0.65);
+    --secondary: hsl(181, 89%, 52%, 0.65);
+}
+
+
+body {
+
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)),
+    url("../img/pexels-binyamin-mellish-140039.jpg") no-repeat center center / cover;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    color: #FFFFFF;
+    font-size: xxx-large;
+    font-family: 'Montserrat', sans-serif;
+}
+.sub-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+}
+.logo-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+.card{
+    padding: 1em;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
