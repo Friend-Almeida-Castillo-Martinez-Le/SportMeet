@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class EventController {
 
@@ -41,8 +43,8 @@ public class EventController {
         return "redirect:/events";
     }
 
-    @GetMapping("event/{id}/edit")
-    public String editEvent(Model model, @PathVariable long id) {
+    @GetMapping("event/{id}")
+    public String showEvent(Model model, @PathVariable long id) {
         model.addAttribute("event", eventsDao.getById(id));
         return "event/show";
     }
@@ -50,6 +52,21 @@ public class EventController {
     @GetMapping(value = "/event/{id}/delete")
     public String deleteEvent(@ModelAttribute("event") Event event) {
         eventsDao.delete(event);
+        return "redirect:/events";
+    }
+
+    @GetMapping(value = "/event/{id}/edit")
+    public String showEditEvent(@PathVariable long id, Model model, HttpSession session) {
+        session.setAttribute("id", id);
+        model.addAttribute("sports", sportsDao.findAll());
+        model.addAttribute("event", eventsDao.getById(id));
+        return "event/edit";
+    }
+
+    @PostMapping(value = "event/{id}/edit")
+    public String editEvent(@ModelAttribute("event") Event event, HttpSession session) {
+        Long id = (Long) session.getAttribute("id");
+        eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getEndTime(), event.getDate(), event.getSport());
         return "redirect:/events";
     }
 }

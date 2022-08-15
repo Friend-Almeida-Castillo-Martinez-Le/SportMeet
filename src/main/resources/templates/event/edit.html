@@ -5,6 +5,37 @@
     <title>Title</title>
 </head>
 <body>
-
+<form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}">
+    <div>
+        <label for="title"></label>
+        <input type="text" id="title" placeholder="title" th:field="*{title}">
+    </div>
+    <div>
+        <label for="description"></label>
+        <input type="text" id="description" placeholder="description" th:field="*{description}">
+    </div>
+    <div>
+        <label for="location"></label>
+        <input type="text" id="location" placeholder="location" th:field="*{location}">
+    </div>
+    <div>
+        <label for="startTime"></label>
+        <input type="text" id="startTime" placeholder="Start Time" th:field="*{startTime}">
+    </div>
+    <div>
+        <label for="endTime"></label>
+        <input type="text" id="endTime" placeholder="End Time" th:field="*{endTime}">
+    </div>
+    <div>
+        <label for="date"></label>
+        <input type="text" id="date" placeholder="Date" th:field="*{date}">
+    </div>
+    <div>
+        <select name="sport" id="sport" th:field="*{sport}">
+            <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
+        </select>
+    </div>
+    <button type="submit" th:value="${event.id}" name="id">Edit</button>
+</form>
 </body>
 </html>

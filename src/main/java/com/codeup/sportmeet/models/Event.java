@@ -74,6 +74,16 @@ public class Event {
         this.sport = sport;
     }
 
+    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        this.sport = sport;
+    }
+
     public long getId() {
         return id;
     }

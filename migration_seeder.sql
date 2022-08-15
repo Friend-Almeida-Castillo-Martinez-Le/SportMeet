@@ -1,4 +1,4 @@
-use readyup;
+use readyup_db;
 
 insert into sports (name)
 values ('Tennis'),
