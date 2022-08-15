@@ -56,4 +56,10 @@ public class PlayerController {
         return "redirect:/players";
     }
 
+    @GetMapping("player/search/{name}")
+    public String findPlayerByName(@PathVariable String name, Model model){
+        model.addAttribute("players", playerDao.searchByPlayerLike(name));
+        return "/player/index";
+    }
+
 }
