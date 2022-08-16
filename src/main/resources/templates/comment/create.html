@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Comment Create')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+    <form th:action="@{/comment/create}" th:method="post" th:object="${comment}">
+        <div>
+            <label for="title">Description: </label>
+            <input type="text" id="title" placeholder="title" th:field="*{description}">
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

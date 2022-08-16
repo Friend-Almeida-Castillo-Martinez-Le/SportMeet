@@ -1,0 +1,11 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Comment Index')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+    <div th:each="comment: ${comments}">
+        <h3 th:text="${comment.getPlayer().getUsername()}"></h3>
+        <p th:text="${comment.description}"></p>
+    </div>
+</body>
+</html>
