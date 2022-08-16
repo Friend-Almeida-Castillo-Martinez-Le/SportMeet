@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="" th:href="@{/css/register.css}">
+
+</head>
+<body>
+<div class="sign-container">
+    <div class="sign-logo">
+        <img  src="" th:src="@{img/black-back.png}" height="400" width="500" alt="logo">
+    </div>
+    <div class="sign-text">
+        <h1>Register An Account</h1>
+    </div>
+</div>
+<form class="register-form">
+    <div class="register-container">
+        <div class="email-label">
+            <label for="email">Email</label>
+            <div class="email-input">
+                <span class="envelope-icon"><i class="fa-regular fa-envelope"></i></span>
+                <input id="email" name="email" type="text" placeholder="Enter Email" class="input-form">
+            </div>
+            <hr>
+        </div>
+        <div class="username-label">
+            <label for="username">Username</label>
+            <div class="email-input">
+                <span class="user-icon"><i class="fa-regular fa-user"></i></span>
+                <input id="username" name="username" type="text" placeholder="Enter Username" class="input-form">
+            </div>
+            <hr>
+        </div>
+        <div class="password-label">
+            <label for="password">Password</label>
+            <div class="password-input">
+                <span class="lock-icon"><i class="fa-regular fa-id-card"></i></span>
+                <input id="password" name="password" type="password" placeholder="Enter Password" class="input-form">
+            </div>
+            <hr>
+        </div>
+        <div class="password-label">
+            <label for="con-password">Confirm Password</label>
+            <div class="password-input">
+                <span class="lock-icon"><i class="fa-regular fa-circle-check"></i></span>
+                <input id="con-password" name="con-password" type="password" placeholder="Confirm Password"
+                       class="input-form">
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="button-container">
+        <div>
+            <button type="button" class="login-btn">Ready Up</button>
+        </div>
+        <div class="account-link">
+            <a class="anchor-link">Already Have An Account?</a>
+        </div>
+    </div>
+</form>
+</body>
+</html>
