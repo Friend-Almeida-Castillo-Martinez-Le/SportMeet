@@ -3,7 +3,7 @@ package com.codeup.sportmeet.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="tables")
+@Table(name="comments")
 public class Comment {
 
     @Id

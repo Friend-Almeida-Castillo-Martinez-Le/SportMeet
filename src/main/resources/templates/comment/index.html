@@ -4,7 +4,7 @@
 <body>
 <nav th:replace="fragments/partials :: navbar" />
     <div th:each="comment: ${comments}">
-        <h3 th:text="${comment.getPlayer().getUsername()}"></h3>
+        <h3 th:text="${comment.player.username}"></h3>
         <p th:text="${comment.description}"></p>
     </div>
 </body>
