@@ -13,6 +13,11 @@
     <p th:text="${event.date}"></p>
     <span th:text="${event.startTime}"></span> - <span th:text="${event.endTime}"></span>
 </div>
+<div  th:object="${event}">
+    <div th:each="player: ${event.getPlayers()}">
+        <h5 th:text="${player.username}"></h5>
+    </div>
+</div>
 <br>
 <form th:action="@{/event/{id} (id = ${event.id})}" th:method="post" th:object="${event}">
     <div>
