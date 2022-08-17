@@ -30,6 +30,9 @@ public class Event {
     @Column(nullable = false, length = 8)
     private long date;
 
+    @Column(nullable = true)
+    private long playersAttending;
+
     @ManyToOne
     @JoinColumn(name = "player_id")
     private Player player;
@@ -49,7 +52,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
+    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -60,9 +63,10 @@ public class Event {
         this.player = player;
         this.players = players;
         this.sport = sport;
+        this.playersAttending = playersAttending;
     }
 
-    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
+    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -72,9 +76,10 @@ public class Event {
         this.player = player;
         this.players = players;
         this.sport = sport;
+        this.playersAttending = playersAttending;
     }
 
-    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport) {
+    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport, long playersAttending) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -82,6 +87,7 @@ public class Event {
         this.endTime = endTime;
         this.location = location;
         this.sport = sport;
+        this.playersAttending = playersAttending;
     }
 
     public long getId() {
@@ -162,5 +168,13 @@ public class Event {
 
     public void setSport(Sport sport) {
         this.sport = sport;
+    }
+
+    public long getPlayersAttending() {
+        return playersAttending;
+    }
+
+    public void setPlayersAttending(long playersAttending) {
+        this.playersAttending = playersAttending;
     }
 }

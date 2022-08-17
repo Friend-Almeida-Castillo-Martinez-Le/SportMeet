@@ -72,6 +72,7 @@ public class EventController {
         System.out.println("HERE");
         System.out.println(currentPlayer);
         System.out.println(event);
+        long bucket = 0;
         Player pl = playersDao.getById(currentPlayer.getId());
         if (playersDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
             List<Event> events = new ArrayList<>();
@@ -87,9 +88,12 @@ public class EventController {
             List<Player> players = new ArrayList<>();
             players.add(currentPlayer);
             ev.setPlayers(players);
+            ev.setPlayersAttending(bucket);
+            ev.setPlayersAttending(bucket + 1);
         }
         else {
             ev.getPlayers().add(currentPlayer);
+            ev.setPlayersAttending(+ 1);
         }
         eventsDao.save(ev);
         System.out.println(currentPlayer.getEvents());
