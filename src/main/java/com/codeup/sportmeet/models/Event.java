@@ -1,5 +1,7 @@
 package com.codeup.sportmeet.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +51,7 @@ public class Event {
     @JoinColumn(name = "sport_id")
     private Sport sport;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
     private List<Comment> comments;
 
     public Event() {
@@ -190,5 +192,23 @@ public class Event {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", date=" + date +
+                ", playersAttending=" + playersAttending +
+                ", player=" + player +
+                ", players=" + players +
+                ", sport=" + sport +
+                ", comments=" + comments +
+                '}';
     }
 }

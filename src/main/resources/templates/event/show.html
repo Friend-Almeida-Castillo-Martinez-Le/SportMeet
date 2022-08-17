@@ -21,13 +21,26 @@
         <h5 th:text="${player.username}"></h5>
     </div>
 </div>
-<br>
-<form th:action="@{/event/{id} (id = ${event.id})}" th:method="post" th:object="${event}">
-    <div>
-        <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
-        <label for="attending">Want to attend event?</label><br>
-        <button type="submit">Attend</button>
-    </div>
-</form>
+<div>
+    <form th:action="@{/event/{id}/attend (id = ${event.id})}" th:method="post" th:object="${event}">
+        <div>
+            <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
+            <label for="attending">Want to attend event?</label><br>
+        </div>
+            <button type="submit">Attend</button>
+    </form>
+</div>
+<div>
+    <form th:action="@{/event/{id}/comment (id = ${event.id})}" th:method="post" th:object="${comment}">
+        <div>
+            <textarea placeholder="Comment" id="comment" th:field="*{description}"></textarea>
+        </div>
+            <button type="submit">Comment</button>
+    </form>
+</div>
+<div th:each="comment: ${comments}">
+    <h6 th:text="${comment.player.username}"></h6>
+    <p th:text="${comment.description}"></p>
+</div>
 </body>
 </html>

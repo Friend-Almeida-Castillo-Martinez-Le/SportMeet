@@ -48,8 +48,6 @@ public class Player {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<Comment> comments;
 
-
-
     public Player() {
     }
 
@@ -62,25 +60,27 @@ public class Player {
         lastName = copy.lastName;
     }
 
-    public Player(String username, String password, String email, String firstName, String lastName) {
+    public Player(String username, String password, String email, String firstName, String lastName, List<Comment> comments) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.comments = comments;
     }
     
     
-    public Player(long id, String username, String password, String email, String firstName, String lastName) {
+    public Player(long id, String username, String password, String email, String firstName, String lastName, List<Comment> comments) {
        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.comments = comments;
     }
     
-    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents) {
+    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents, List<Comment> comments) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -92,9 +92,10 @@ public class Player {
         this.upvote = upvote;
         this.events = events;
         this.attendingEvents = attendingEvents;
+        this.comments = comments;
     }
     
-    public Player(long id, String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents) {
+    public Player(long id, String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents, List<Comment> comments) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -107,6 +108,7 @@ public class Player {
         this.upvote = upvote;
         this.events = events;
         this.attendingEvents = attendingEvents;
+        this.comments = comments;
     }
 
     public long getId() {
@@ -203,5 +205,13 @@ public class Player {
 
     public void setAttendingEvents(List<Event> attendingEvents) {
         this.attendingEvents = attendingEvents;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
