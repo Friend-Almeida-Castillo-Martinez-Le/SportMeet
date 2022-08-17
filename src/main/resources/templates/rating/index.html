@@ -1,0 +1,12 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Rating Index')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+    <div th:each="rating: ${ratings}">
+        <h3 th:text="${rating.rater.username}"></h3>
+        <p th:text="${rating.ratee.username}"></p>
+        <p th:text="${rating.rating}"></p>
+    </div>
+</body>
+</html>
