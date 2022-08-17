@@ -14,8 +14,8 @@
     <span th:text="${event.startTime}"></span> - <span th:text="${event.endTime}"></span>
 </div>
 
-<h3>Host: <span th:text="${event.player.username}"></span></h3>
-<h3>Attending: <span th:text="${event.getPlayersAttending()}"></span> </h3>
+<h3>Event Host: <span th:text="${event.player.username}"></span></h3>
+<h3>Players Attending: <span th:text="${event.getPlayersAttending()}"></span> </h3>
 <div  th:object="${event}">
     <div th:each="player: ${event.getPlayers()}">
         <h5 th:text="${player.username}"></h5>
