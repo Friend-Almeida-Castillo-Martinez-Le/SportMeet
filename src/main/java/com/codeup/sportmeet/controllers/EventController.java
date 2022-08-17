@@ -75,7 +75,6 @@ public class EventController {
     @PostMapping("event/{id}/attend")
     public String attendEvent(@ModelAttribute("event") Event event) {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long bucket = 0;
         Player pl = playersDao.getById(currentPlayer.getId());
         if (playersDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
             List<Event> events = new ArrayList<>();
@@ -91,12 +90,11 @@ public class EventController {
             List<Player> players = new ArrayList<>();
             players.add(currentPlayer);
             ev.setPlayers(players);
-            ev.setPlayersAttending(bucket);
-            ev.setPlayersAttending(bucket + 1);
+            ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
         }
         else {
             ev.getPlayers().add(currentPlayer);
-            ev.setPlayersAttending(+ 1);
+            ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
         }
         eventsDao.save(ev);
         System.out.println(currentPlayer.getEvents());
@@ -120,6 +118,7 @@ public class EventController {
             comment.setEvent(ev);
             ev.getComments().add(comment);
         }
+        commentsDao.save(comment);
         eventsDao.save(ev);
         return "redirect:/event/" + ev.getId();
     }
