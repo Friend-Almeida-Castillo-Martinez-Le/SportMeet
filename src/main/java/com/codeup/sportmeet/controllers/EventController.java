@@ -23,10 +23,10 @@ public class EventController {
 
     private EventRepository eventsDao;
     private SportRepository sportsDao;
-    private PlayerRepository playerDao;
+    private PlayerRepository playersDao;
 
     public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao) {
-        this.playerDao = playerDao;
+        this.playersDao = playerDao;
         this.eventsDao = eventsDao;
         this.sportsDao = sportsDao;
     }
@@ -49,13 +49,13 @@ public class EventController {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         event.setPlayer(currentPlayer);
         Event event2 = eventsDao.save(event);
-        if (playerDao.getById(currentPlayer.getId()).getEvents() == null) {
-            playerDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
-            playerDao.getById(currentPlayer.getId()).getEvents().add(event2);
-            System.out.println("EVENTS HERE ---> " + playerDao.getById(currentPlayer.getId()).getEvents());
+        if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
+            playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
         } else {
-          playerDao.getById(currentPlayer.getId()).getEvents().add(event2);
-          System.out.println("EVENTS HERE ---> " + playerDao.getById(currentPlayer.getId()).getEvents());
+          playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+          System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
         }
         return "redirect:/events";
     }
@@ -72,15 +72,16 @@ public class EventController {
         System.out.println("HERE");
         System.out.println(currentPlayer);
         System.out.println(event);
-        if (playerDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
+        Player pl = playersDao.getById(currentPlayer.getId());
+        if (playersDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
             List<Event> events = new ArrayList<>();
             events.add(event);
-            playerDao.getById(currentPlayer.getId()).setAttendingEvents(events);
+            pl.setAttendingEvents(events);
         }
         else {
-            playerDao.getById(currentPlayer.getId()).getAttendingEvents().add(event);
+            pl.getAttendingEvents().add(event);
         }
-
+        playersDao.save(pl);
         Event ev = eventsDao.getById(event.getId());
         if (eventsDao.getById(event.getId()).getPlayers() == null) {
             List<Player> players = new ArrayList<>();
