@@ -103,6 +103,12 @@ public class EventController {
 
     @GetMapping(value = "/event/{id}/delete")
     public String deleteEvent(@ModelAttribute("event") Event event) {
+        for (Comment comment : commentsDao.findAll()) {
+            long commentEventID = comment.getEvent().getId();
+            if (commentEventID == event.getId()) {
+                commentsDao.delete(comment);
+            }
+        }
         eventsDao.delete(event);
         return "redirect:/events";
     }
