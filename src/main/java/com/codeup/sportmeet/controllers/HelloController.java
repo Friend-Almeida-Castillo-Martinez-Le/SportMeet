@@ -29,4 +29,11 @@ class HelloController {
     public String signIn(){
         return "/signin";
     }
+
+    @GetMapping("/about")
+    public String showAbout(){
+        return "/about";
+    }
+
+
 }
