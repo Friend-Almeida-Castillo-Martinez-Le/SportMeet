@@ -101,28 +101,6 @@ public class EventController {
         return "redirect:/event/" + ev.getId();
     }
 
-    @PostMapping("event/{id}/comment")
-    public String postComment(@ModelAttribute("comment") Comment comment, @ModelAttribute("event") Event event) {
-        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(currentPlayer.getUsername());
-        Player pl = playersDao.getById(currentPlayer.getId());
-        Event ev = eventsDao.getById(event.getId());
-        if (ev.getComments() == null) {
-            List<Comment> comments = new ArrayList<>();
-            comment.setPlayer(pl);
-            comment.setEvent(ev);
-            comments.add(comment);
-            ev.setComments(comments);
-        }
-        else {
-            comment.setPlayer(pl);
-            comment.setEvent(ev);
-            ev.getComments().add(comment);
-        }
-        commentsDao.save(comment);
-        return "redirect:/event/" + ev.getId();
-    }
-
     @GetMapping(value = "/event/{id}/delete")
     public String deleteEvent(@ModelAttribute("event") Event event) {
         eventsDao.delete(event);
