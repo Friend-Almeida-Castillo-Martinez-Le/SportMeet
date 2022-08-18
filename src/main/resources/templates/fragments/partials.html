@@ -20,30 +20,36 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-<!--                Player dropdown-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Player
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/players">Player Index</a></li>
-                        <li><a class="dropdown-item" href="/player/create">Register Player</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+<!--                Player link-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/player">Player</a>
                 </li>
-<!--                sport dropdown -->
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Player-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/players">Player Index</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/player/create">Register Player</a></li>-->
+<!--                        <li><hr class="dropdown-divider"></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                sports link -->
                 <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
 <!--                event dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Events
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/events">Events List</a></li>
-                        <li><a class="dropdown-item" href="/event/create">Create Event</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/events">Events</a>
                 </li>
+
+<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Events-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/events">Events List</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/event/create">Create Event</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
 <!--                About Us  -->
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About Us</a>
@@ -62,7 +68,7 @@
                 </li>
 
             </ul>
-            <form class="d-flex" role="search">
+            <form sec:authorize="isAuthenticated()" class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>

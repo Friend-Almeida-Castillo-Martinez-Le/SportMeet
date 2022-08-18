@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,9 +43,19 @@ public class EventController {
     @GetMapping("/events")
     public String eventsIndex(Model model) throws ParseException {
         model.addAttribute("events", eventsDao.findAll());
-        SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
-        Date parsedDate = date.parse("08-19-2022");
-        System.err.println(parsedDate);
+        for (Event event : eventsDao.findAll()) {
+            String eventDate = event.getDate();
+            String year = eventDate.substring(0,4);
+            String month = eventDate.substring(4,6);
+            String day = eventDate.substring(6,8);
+            if (month.split("")[0].equals("0")) {
+                month = month.split("")[1];
+                month.join("");
+            }
+            LocalDate date = LocalDate.of(Integer.parseInt(year),Integer.parseInt(month), Integer.parseInt(day));
+            model.addAttribute("date", String.format("%s %d, %d",date.getMonth(), date.getDayOfMonth(), date.getYear()));
+
+        }
         return "event/index";
     }
 

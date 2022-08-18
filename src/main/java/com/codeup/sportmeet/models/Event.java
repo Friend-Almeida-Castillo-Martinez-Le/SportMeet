@@ -30,7 +30,7 @@ public class Event {
     private String endTime;
 
     @Column(nullable = false, length = 8)
-    private long date;
+    private String date;
 
     @Column(nullable = true)
     private long playersAttending;
@@ -57,7 +57,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(long id, String title, String description, String location, String startTime, String endTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -72,7 +72,7 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String location, String startTime, String endTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -86,7 +86,7 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String date, String startTime, String endTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -146,11 +146,11 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
