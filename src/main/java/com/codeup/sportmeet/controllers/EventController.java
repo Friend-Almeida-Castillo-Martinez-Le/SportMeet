@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -37,8 +40,11 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public String eventsIndex(Model model) {
+    public String eventsIndex(Model model) throws ParseException {
         model.addAttribute("events", eventsDao.findAll());
+        SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
+        Date parsedDate = date.parse("08-19-2022");
+        System.err.println(parsedDate);
         return "event/index";
     }
 
