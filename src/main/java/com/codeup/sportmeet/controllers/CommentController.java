@@ -8,10 +8,7 @@ import com.codeup.sportmeet.repositories.EventRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CommentController {
@@ -39,10 +36,12 @@ public class CommentController {
 
     @PostMapping("/comment/{id}/create")
     public String createCommentPart2(@ModelAttribute Comment comment, @ModelAttribute("event") Event event){
-        comment.setPlayer((Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        System.out.println(event.getId());
+        Comment newComment = new Comment();
+        newComment.setPlayer((Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        newComment.setDescription(comment.getDescription());
+        newComment.setEvent(eventsDao.getById(event.getId()));
         comment.setEvent(eventsDao.getById(event.getId()));
-        commentDao.save(comment);
+        commentDao.save(newComment);
         return "redirect:/event/" + event.getId();
     }
 }
