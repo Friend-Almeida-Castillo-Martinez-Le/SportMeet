@@ -58,6 +58,9 @@ public class Player {
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        events = copy.events;
+        attendingEvents = copy.attendingEvents;
+        comments = copy.comments;
     }
 
     public Player(String username, String password, String email, String firstName, String lastName, List<Comment> comments) {
