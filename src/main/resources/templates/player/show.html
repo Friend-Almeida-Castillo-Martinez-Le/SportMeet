@@ -12,7 +12,11 @@
             <h6 th:text="${player.firstName}"></h6>
             <h6 th:text="${player.lastName}"></h6>
         </div>
-
+        <div th:object="${player}">
+            <div th:each="event: ${player.getAttendingEvents()}">
+                <h5 th:text="${event.title}"></h5>
+            </div>
+        </div>
 
 <!-- Bootstrap Bundle with Popper -->
 

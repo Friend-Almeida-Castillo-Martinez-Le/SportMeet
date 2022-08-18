@@ -1,5 +1,7 @@
 package com.codeup.sportmeet.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,9 @@ public class Event {
     @Column(nullable = false, length = 8)
     private long date;
 
+    @Column(nullable = true)
+    private long playersAttending;
+
     @ManyToOne
     @JoinColumn(name = "player_id")
     private Player player;
@@ -46,10 +51,13 @@ public class Event {
     @JoinColumn(name = "sport_id")
     private Sport sport;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
+    private List<Comment> comments;
+
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
+    public Event(long id, String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -60,9 +68,11 @@ public class Event {
         this.player = player;
         this.players = players;
         this.sport = sport;
+        this.playersAttending = playersAttending;
+        this.comments = comments;
     }
 
-    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport) {
+    public Event(String title, String description, String location, String startTime, String endTime, long date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -72,9 +82,11 @@ public class Event {
         this.player = player;
         this.players = players;
         this.sport = sport;
+        this.playersAttending = playersAttending;
+        this.comments = comments;
     }
 
-    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport) {
+    public Event(String title, String description, long date, String startTime, String endTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -82,6 +94,8 @@ public class Event {
         this.endTime = endTime;
         this.location = location;
         this.sport = sport;
+        this.playersAttending = playersAttending;
+        this.comments = comments;
     }
 
     public long getId() {
@@ -162,5 +176,39 @@ public class Event {
 
     public void setSport(Sport sport) {
         this.sport = sport;
+    }
+
+    public long getPlayersAttending() {
+        return playersAttending;
+    }
+
+    public void setPlayersAttending(long playersAttending) {
+        this.playersAttending = playersAttending;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", date=" + date +
+                ", playersAttending=" + playersAttending +
+                ", player=" + player +
+                ", players=" + players +
+                ", sport=" + sport +
+                ", comments=" + comments +
+                '}';
     }
 }

@@ -1,8 +1,10 @@
 package com.codeup.sportmeet.controllers;
 
+import com.codeup.sportmeet.models.Comment;
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.models.Sport;
+import com.codeup.sportmeet.repositories.CommentRepository;
 import com.codeup.sportmeet.repositories.EventRepository;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import com.codeup.sportmeet.repositories.SportRepository;
@@ -24,11 +26,13 @@ public class EventController {
     private EventRepository eventsDao;
     private SportRepository sportsDao;
     private PlayerRepository playersDao;
+    private CommentRepository commentsDao;
 
-    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao) {
+    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao, CommentRepository commentsDao) {
         this.playersDao = playerDao;
         this.eventsDao = eventsDao;
         this.sportsDao = sportsDao;
+        this.commentsDao = commentsDao;
     }
 
     @GetMapping("/events")
@@ -63,15 +67,14 @@ public class EventController {
     @GetMapping("event/{id}")
     public String showEvent(Model model, @PathVariable long id) {
         model.addAttribute("event", eventsDao.getById(id));
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", eventsDao.getById(id).getComments());
         return "event/show";
     }
 
-    @PostMapping("event/{id}")
+    @PostMapping("event/{id}/attend")
     public String attendEvent(@ModelAttribute("event") Event event) {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("HERE");
-        System.out.println(currentPlayer);
-        System.out.println(event);
         Player pl = playersDao.getById(currentPlayer.getId());
         if (playersDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
             List<Event> events = new ArrayList<>();
@@ -87,13 +90,36 @@ public class EventController {
             List<Player> players = new ArrayList<>();
             players.add(currentPlayer);
             ev.setPlayers(players);
+            ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
         }
         else {
             ev.getPlayers().add(currentPlayer);
+            ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
         }
         eventsDao.save(ev);
         System.out.println(currentPlayer.getEvents());
-        return "redirect:/events";
+        return "redirect:/event/" + ev.getId();
+    }
+
+    @PostMapping("event/{id}/comment")
+    public String postComment(@ModelAttribute("comment") Comment comment, @ModelAttribute("event") Event event) {
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Player pl = playersDao.getById(currentPlayer.getId());
+        Event ev = eventsDao.getById(event.getId());
+        if (ev.getComments() == null) {
+            List<Comment> comments = new ArrayList<>();
+            comment.setPlayer(pl);
+            comment.setEvent(ev);
+            comments.add(comment);
+            ev.setComments(comments);
+        }
+        else {
+            comment.setPlayer(pl);
+            comment.setEvent(ev);
+            ev.getComments().add(comment);
+        }
+        commentsDao.save(comment);
+        return "redirect:/event/" + ev.getId();
     }
 
     @GetMapping(value = "/event/{id}/delete")
