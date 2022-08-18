@@ -41,7 +41,7 @@ public class PlayerController {
         player.setPassword(hash);
         playerDao.save(player);
 
-        return "redirect:/players";
+        return "redirect:/login";
     }
 
     @GetMapping("/player/{id}/show")
