@@ -51,7 +51,7 @@ public class Event {
     @JoinColumn(name = "sport_id")
     private Sport sport;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
     private List<Comment> comments;
 
     public Event() {

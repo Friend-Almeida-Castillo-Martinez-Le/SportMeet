@@ -45,7 +45,7 @@ public class Player {
     @ManyToMany(mappedBy = "players")
     List<Event> attendingEvents;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "player")
     private List<Comment> comments;
 
     public Player() {
