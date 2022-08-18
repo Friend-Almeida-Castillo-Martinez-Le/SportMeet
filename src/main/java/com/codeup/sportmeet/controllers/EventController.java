@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,9 +74,10 @@ public class EventController {
     }
 
     @PostMapping("event/{id}/attend")
-    public String attendEvent(@ModelAttribute("event") Event event) {
+    public String attendEvent(@ModelAttribute("event") Event event, Model model) throws Exception {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Player pl = playersDao.getById(currentPlayer.getId());
+        Event ev = eventsDao.getById(event.getId());
         if (playersDao.getById(currentPlayer.getId()).getAttendingEvents() == null) {
             List<Event> events = new ArrayList<>();
             events.add(event);
@@ -85,7 +87,7 @@ public class EventController {
             pl.getAttendingEvents().add(event);
         }
         playersDao.save(pl);
-        Event ev = eventsDao.getById(event.getId());
+
         if (eventsDao.getById(event.getId()).getPlayers() == null) {
             List<Player> players = new ArrayList<>();
             players.add(currentPlayer);
