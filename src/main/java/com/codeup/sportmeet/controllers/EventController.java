@@ -119,7 +119,6 @@ public class EventController {
             ev.getComments().add(comment);
         }
         commentsDao.save(comment);
-        eventsDao.save(ev);
         return "redirect:/event/" + ev.getId();
     }
 
