@@ -19,4 +19,14 @@ class HelloController {
         model.addAttribute("message", "welcome message test");
         return "/hello";
     }
+
+    @GetMapping("/register")
+    public String registerPlayer(){
+        return "/register";
+    }
+
+    @GetMapping("/signin")
+    public String signIn(){
+        return "/signin";
+    }
 }

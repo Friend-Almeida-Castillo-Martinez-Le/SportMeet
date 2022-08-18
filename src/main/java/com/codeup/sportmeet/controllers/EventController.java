@@ -104,6 +104,7 @@ public class EventController {
     @PostMapping("event/{id}/comment")
     public String postComment(@ModelAttribute("comment") Comment comment, @ModelAttribute("event") Event event) {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(currentPlayer.getUsername());
         Player pl = playersDao.getById(currentPlayer.getId());
         Event ev = eventsDao.getById(event.getId());
         if (ev.getComments() == null) {
