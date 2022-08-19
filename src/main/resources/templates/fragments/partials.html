@@ -18,12 +18,68 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 column justify-content-evenly">
 
 <!--                Player link-->
                 <li class="nav-item">
                     <a class="nav-link" href="/players">Player</a>
                 </li>
+
+<!--                sports link -->
+                <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
+
+<!--                event link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/events">Events</a>
+                </li>
+
+<!--                About Us  -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                </li>
+<!--                login-->
+                <li sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/login}" th:method="get">
+                        <button class="btn btn-outline-secondary" style="margin-top: 8px">Login</button>
+                    </form>
+                </li>
+
+<!--                logout -->
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                    </form>
+                </li>
+
+<!--                sign up button -->
+                <li sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/register}" th:method="post">
+                        <button class="btn btn-outline-secondary" style="margin-top: 8px">Sign Up!</button>
+                    </form>
+                </li>
+
+                About Us  -->
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                </li>
+
+            </ul>
+            <form sec:authorize="isAuthenticated()" class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Events-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/events">Events List</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/event/create">Create Event</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
 <!--                <li class="nav-item dropdown">-->
 <!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
 <!--                        Player-->
@@ -35,45 +91,6 @@
 <!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
 <!--                    </ul>-->
 <!--                </li>-->
-<!--                sports link -->
-                <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
-<!--                event dropdown -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/events">Events</a>
-                </li>
 
-<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                        Events-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a class="dropdown-item" href="/events">Events List</a></li>-->
-<!--                        <li><a class="dropdown-item" href="/event/create">Create Event</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                About Us  -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
-                </li>
-<!--                login-->
-                <li sec:authorize="!isAuthenticated()">
-                    <form th:action="@{/login}" th:method="get">
-                        <button class="btn btn-outline-secondary" style="margin-top: 8px">Login</button>
-                    </form>
-                </li>
-<!--                logout -->
-                <li sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-                    </form>
-                </li>
-
-            </ul>
-            <form sec:authorize="isAuthenticated()" class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
 </body>
 </html>
