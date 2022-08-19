@@ -27,9 +27,6 @@ public class Event {
     private String startTime;
 
     @Column(nullable = false)
-    private String endTime;
-
-    @Column(nullable = false, length = 8)
     private String date;
 
     @Column(nullable = true)
@@ -57,13 +54,12 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String endTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(long id, String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.location = location;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.date = date;
         this.player = player;
         this.players = players;
@@ -72,12 +68,11 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String title, String description, String location, String startTime, String endTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.date = date;
         this.player = player;
         this.players = players;
@@ -86,12 +81,11 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String title, String description, String date, String startTime, String endTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String date, String startTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.location = location;
         this.sport = sport;
         this.playersAttending = playersAttending;
@@ -136,14 +130,6 @@ public class Event {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getDate() {
@@ -202,7 +188,6 @@ public class Event {
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' +
                 ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
                 ", date=" + date +
                 ", playersAttending=" + playersAttending +
                 ", player=" + player +

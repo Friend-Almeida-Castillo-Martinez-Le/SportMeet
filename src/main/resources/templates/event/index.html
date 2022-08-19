@@ -8,8 +8,8 @@
         <p th:text="${event.sport.name}"></p>
         <p th:text="${event.description}"></p>
         <p th:text="${event.location}"></p>
-        <p th:text="${date}"></p>
-        <span th:text="${event.startTime}"></span> - <span th:text="${event.endTime}"></span><br>
+        <p th:text="${event.date}"></p>
+        <p th:text="${event.startTime}"></p>
         <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View</a>
         <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button" th:name="edit">Edit</a>
         <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button" th:name="delete">Delete</a>
