@@ -1,0 +1,255 @@
+
+:root {
+    --primary: hsla(0, 8%, 13%, 0.37);
+    --secondary: hsla(0, 0%, 0%, 0.36);
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+}
+::placeholder{
+    color: lightgrey;
+}
+
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary)),
+    url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    color: #FFFFFF;
+    font-size: xxx-large;
+    font-family: 'Montserrat', sans-serif;
+}
+.sub-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -100px;
+}
+
+.sign-text {
+
+    font-size: xx-large;
+    color: lightgray;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.register-form {
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.register-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    color: lightgray;
+    font-size: xxx-large;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+.email-label {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+}
+
+.username-label {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+}
+
+.password-label {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.title{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.title-input{
+
+}
+
+.checkbox-form{
+    height: 20px;
+    width: 20px;
+}
+
+.sign-lower{
+    display: flex;
+    justify-content: space-between;
+    font-size: 35px;
+    color: lightgrey;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+
+}
+
+.forgot-pass{
+    border-bottom: 1px solid lightgrey ;
+}
+
+.input-form {
+    border: none;
+    background: none;
+    text-align: right;
+    font-size: 30px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-weight: bold;
+    color:lightgrey;
+    width: 90%;
+}
+
+hr {
+    height: 12px;
+    background: white;
+    width: 100%;
+}
+
+.button-container{
+    margin-top: 6em;
+    width: 100%;
+}
+
+.login-btn{
+    display: block;
+    width: 100%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 15px 20px;
+    font-size: 80px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+.email-input{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top:20px;
+}
+
+.password-input {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 20px;
+}
+
+.account-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00FBFFD1;
+    font-size: xx-large;
+    margin-top: 2em;
+}
+
+.anchor-link {
+    border-bottom: 1px solid #00FBFFD1;
+}
+
+.text-title{
+    color: lightgray;
+}
+
+select{
+    border: none;
+    color: lightgray;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: xx-large;
+    direction: rtl;
+    background: transparent;
+}
+
+.label-check{
+    font-size: x-large;
+}
+
+.time-input{
+    display: flex;
+    justify-content: end;
+    top: 20px;
+    position: relative;
+}
+
+.upload-text{
+    display: flex;
+    color: lightgray;
+    margin-top: 1em;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: 50px
+}
+
+.upload-box{
+    display: flex;
+    border: 1px solid white;
+    background-color: whitesmoke;
+    opacity: 20%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 4em;
+    border-radius: 30px;
+
+}
+
+.upload-icon{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.ready-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.file{
+    display: none;
+}
+
+.upload-label{
+    cursor: pointer;
+}
+.upload-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: grey;
+    font-size: xx-large;
+}
+.ready-btn{
+    display: block;
+    width: 100%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 15px 20px;
+    font-size: 80px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 50px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
