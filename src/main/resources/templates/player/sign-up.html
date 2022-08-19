@@ -1,13 +1,13 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/partials :: head('Post Create')" />
+<head th:replace="fragments/partials :: head('Player Create')" />
 <body>
 <nav th:replace="fragments/partials :: navbar" />
 <div class="container">
-    <h1>Create Player Page</h1>
+    <h1>Sign Up</h1>
     <div class="row">
         <div class="col-12">
-            <form th:action="@{/player/create}" th:method="post" th:object="${player}">
+            <form th:action="@{/sign-up}" th:method="post" th:object="${player}">
                 <label class="form-label">username:</label>
                 <input class="form-control" th:field="*{username}" />
                 <label class="form-label">password:</label>

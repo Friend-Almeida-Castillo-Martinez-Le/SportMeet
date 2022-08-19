@@ -4,6 +4,7 @@ package com.codeup.sportmeet.controllers;
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +30,13 @@ public class PlayerController {
         return "/player/index";
     }
 
-    @GetMapping("player/create")
+    @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
         model.addAttribute("player", new Player());
-        return "/player/create";
+        return "/player/sign-up";
     }
 
-    @PostMapping("player/create")
+    @PostMapping("/sign-up")
     public String playerCreate(@ModelAttribute Player player) {
         String hash = passwordEncoder.encode(player.getPassword());
         player.setPassword(hash);
@@ -46,7 +47,9 @@ public class PlayerController {
 
     @GetMapping("/player/{id}/show")
     public String showPlayer(@PathVariable long id, Model model){
-        model.addAttribute("player", playerDao.getById(id));
+//        model.addAttribute("player", playerDao.getById(id));
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
         return ("/player/show");
     }
 
@@ -68,19 +71,19 @@ public class PlayerController {
         return "/player/index";
     }
 
-    @GetMapping("/sign-up")
-    public String showSignupForm(Model model){
-        model.addAttribute("player", new Player());
-        return "player/create";
-    }
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute Player player){
-        String hash = passwordEncoder.encode(player.getPassword());
-        player.setPassword(hash);
-        playerDao.save(player);
-        return "redirect:/login";
-    }
+//    @GetMapping("/sign-up")
+//    public String showSignupForm(Model model){
+//        model.addAttribute("player", new Player());
+//        return "player/create";
+//    }
+//
+//    @PostMapping("/sign-up")
+//    public String saveUser(@ModelAttribute Player player){
+//        String hash = passwordEncoder.encode(player.getPassword());
+//        player.setPassword(hash);
+//        playerDao.save(player);
+//        return "redirect:/login";
+//    }
 
 
 }
