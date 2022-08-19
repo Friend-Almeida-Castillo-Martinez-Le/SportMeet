@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/partials :: head('create')">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form th:action="@{/event/create}" th:method="post" th:object="${event}">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" placeholder="Title" th:field="*{title}">
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <input type="text" id="description" placeholder="Description" th:field="*{description}">
-        </div>
-        <div>
-            <label for="location">Location</label>
-            <input type="text" id="location" placeholder="City, State" th:field="*{location}">
-        </div>
-        <div>
-            <label for="startTime">Start Time</label>
-            <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
-        </div>
-        <div>
-            <label for="date">Date</label>
-            <input type="date" id="date" th:field="*{date}">
-        </div>
-        <div>
-            <select name="sport" id="sport" th:field="*{sport}">
-                <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
-            </select>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+<nav th:replace="fragments/partials :: navbar"></nav>
+        <form th:action="@{/event/create}" th:method="post" th:object="${event}">
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Title" th:field="*{title}">
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <input type="text" id="description" placeholder="Description" th:field="*{description}">
+            </div>
+            <div>
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="City, State" th:field="*{location}">
+            </div>
+            <div>
+                <label for="startTime">Start Time</label>
+                <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
+            </div>
+            <div>
+                <label for="date">Date</label>
+                <input type="date" id="date" th:field="*{date}">
+            </div>
+            <div>
+                <select name="sport" id="sport" th:field="*{sport}">
+                    <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
 </body>
 </html>

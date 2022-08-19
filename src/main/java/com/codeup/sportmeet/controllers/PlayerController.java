@@ -30,7 +30,7 @@ public class PlayerController {
         return "/player/index";
     }
 
-    @GetMapping("player/sign-up")
+    @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
         model.addAttribute("player", new Player());
         return "/player/sign-up";
