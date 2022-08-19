@@ -8,6 +8,7 @@ import com.codeup.sportmeet.repositories.CommentRepository;
 import com.codeup.sportmeet.repositories.EventRepository;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import com.codeup.sportmeet.repositories.SportRepository;
+import org.hibernate.type.LocalTimeType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,21 +44,8 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public String eventsIndex(Model model) throws ParseException {
+    public String eventsIndex(Model model) {
         model.addAttribute("events", eventsDao.findAll());
-        for (Event event : eventsDao.findAll()) {
-            String eventDate = event.getDate();
-            String year = eventDate.substring(0,4);
-            String month = eventDate.substring(4,6);
-            String day = eventDate.substring(6,8);
-            if (month.split("")[0].equals("0")) {
-                month = month.split("")[1];
-                month.join("");
-            }
-            LocalDate date = LocalDate.of(Integer.parseInt(year),Integer.parseInt(month), Integer.parseInt(day));
-            model.addAttribute("date", String.format("%s %d, %d",date.getMonth(), date.getDayOfMonth(), date.getYear()));
-
-        }
         return "event/index";
     }
 
@@ -143,7 +133,7 @@ public class EventController {
     @PostMapping(value = "event/{id}/edit")
     public String editEvent(@ModelAttribute("event") Event event, HttpSession session) {
         Long id = (Long) session.getAttribute("id");
-        eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getEndTime(), event.getDate(), event.getSport());
+        eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
         return "redirect:/events";
     }
 }
