@@ -11,7 +11,7 @@ class HelloController {
     @GetMapping("/")
     public String mainWelcome(Model model) {
         model.addAttribute("message", "Main Landing page.");
-        return "/newPassword";
+        return "/event/create";
     }
 
     @GetMapping("/hello")
