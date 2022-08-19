@@ -33,14 +33,10 @@
                     <a class="nav-link" href="/events">Events</a>
                 </li>
 
-<!--                About Us  -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
-                </li>
 <!--                login-->
                 <li sec:authorize="!isAuthenticated()">
                     <form th:action="@{/login}" th:method="get">
-                        <button class="btn btn-outline-secondary" style="margin-top: 8px">Login</button>
+                        <a class="nav-link" href="/login">Log In</a>
                     </form>
                 </li>
 
@@ -54,7 +50,7 @@
 <!--                sign up button -->
                 <li sec:authorize="!isAuthenticated()">
                     <form th:action="@{/register}" th:method="post">
-                        <button class="btn btn-outline-secondary" style="margin-top: 8px">Sign Up!</button>
+                        <a class="nav-link" href="/sign-up">Sign Up!</a>
                     </form>
                 </li>
 
