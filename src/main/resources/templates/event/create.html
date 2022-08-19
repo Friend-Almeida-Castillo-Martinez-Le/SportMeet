@@ -20,71 +20,33 @@
         </div>
     </div>
 </div>
-<form th:action="@{/event/create}" th:method="post" th:object="${event}" class="register-form">
-    <div class="register-container">
-        <div class="title-label">
-            <label for="title">Title</label>
-            <div class="email-input">
-                <span class="lock-icon"></span>
-                <input id="title" name="title" type="text" placeholder="Name of the Event" class="input-form" th:field="*{title}">
-            </div>
-            <hr>
-        </div>
-        <div class="email-label">
-            <label for="email">Location</label>
-            <div class="email-input">
-                <span class="checkbox">
-                    <input id="fee" name="remember" type="checkbox" class="checkbox-form">
-                     <label for="fee" class="label-check">Fee</label>
-                </span>
-                <input id="email" name="email" type="text" placeholder="Ex. Postal Code" class="input-form" th:field="*{location}">
-            </div>
-            <hr>
-        </div>
-        <div class="username-label">
-            <label for="sport">Sport</label>
-            <div class="email-input">
-                   <span class="checkbox">
-                    <input id="contact" name="remember" type="checkbox" class="checkbox-form">
-                     <label for="contact" class="label-check">Contact</label>
-                </span>
-
-                <select name="sport" id="sport" th:field="*{sport}">
-                    <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
-                </select>
-            </div>
-
-            <hr>
-        </div>
-        <div class="password-label">
-            <label for="title">Time Slot</label>
-            <div class="email-input">
-                <span class="lock-icon"></span>
-                <input id="time" name="title" type="text" placeholder="Ex. 2:30pm - 4pm" class="input-form">
-            </div>
-            <hr>
-        </div>
-    </div>
-    <div class="upload-container">
+    <form th:action="@{/event/create}" th:method="post" th:object="${event}">
         <div>
-            <h1 class="upload-text"> Upload an Image</h1>
-            <div class="upload-box">
-                <label for="file" class="upload-label">
-                    <div class="upload-content">
-                        <h1> Select File or Photo</h1>
-                        <i class="fa fa-2x fa-camera"></i>
-                        <input type="file" id="file" class="file">
-                        <div class="select-btn-div"> <h1 class="select-btn">Select File</h1> </div>
-                    </div>
-                </label>
-            </div>
+            <label for="title">Title</label>
+            <input type="text" id="title" placeholder="Title" th:field="*{title}">
         </div>
-    </div>
-    <div class="ready-btn-container">
-        <button class="ready-btn"> Ready Up</button>
-    </div>
-</form>
-
-
+        <div>
+            <label for="description">Description</label>
+            <input type="text" id="description" placeholder="Description" th:field="*{description}">
+        </div>
+        <div>
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="City, State" th:field="*{location}">
+        </div>
+        <div>
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
+        </div>
+        <div>
+            <label for="date">Date</label>
+            <input type="date" id="date" th:field="*{date}">
+        </div>
+        <div>
+            <select name="sport" id="sport" th:field="*{sport}">
+                <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
+            </select>
+        </div>
+        <button type="submit" th:value="${event.id}" name="id">Create</button>
+    </form>
 </body>
 </html>
