@@ -6,7 +6,7 @@
     <h1>Edit Player Page</h1>
     <div class="row">
         <div class="col-12">
-            <form th:action="@{/player/create}" th:method="post" th:object="${player}">
+            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}">
 <!--                <label class="form-label">id:</label>-->
                 <input type="hidden" th:field="*{id}"/>
                 <label class="form-label">username:</label>
