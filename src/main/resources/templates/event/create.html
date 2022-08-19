@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/partials :: head('create')">
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="title">
     <div class="container head1">
         <h1>Create An</h1>
@@ -47,10 +48,12 @@
                     <input id="contact" name="remember" type="checkbox" class="checkbox-form">
                      <label for="contact" class="label-check">Contact</label>
                 </span>
+
                 <select name="sport" id="sport" th:field="*{sport}">
                     <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
                 </select>
             </div>
+
             <hr>
         </div>
         <div class="password-label">
@@ -81,6 +84,7 @@
         <button class="ready-btn"> Ready Up</button>
     </div>
 </form>
+
 
 </body>
 </html>
