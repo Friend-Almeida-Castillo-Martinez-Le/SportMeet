@@ -36,7 +36,7 @@ public class PlayerController {
         return "/player/sign-up";
     }
 
-    @PostMapping("player/sign-up")
+    @PostMapping("/sign-up")
     public String playerCreate(@ModelAttribute Player player) {
         String hash = passwordEncoder.encode(player.getPassword());
         player.setPassword(hash);
