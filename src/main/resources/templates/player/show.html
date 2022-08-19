@@ -5,18 +5,23 @@
 <nav th:replace="fragments/partials :: navbar" />
 <h1>Player Profile</h1>
         <div>
-            <h6 th:text="${player.id}"></h6>
-            <h6 th:text="${player.username}"></h6>
-            <h6 th:text="${player.password}"></h6>
-            <h6 th:text="${player.email}"></h6>
-            <h6 th:text="${player.firstName}"></h6>
-            <h6 th:text="${player.lastName}"></h6>
+            <h6 th:text="'ID: ' + ${player.id}"></h6>
+            <h6 th:text="'Name: ' + ${player.firstName} + ' ' + ${player.lastName}"></h6>
+            <h6 th:text="'Username: ' + ${player.username}"></h6>
+<!--            <h6 th:text="${player.lastName}"></h6>-->
         </div>
-        <div th:object="${player}">
-            <div th:each="event: ${player.getAttendingEvents()}">
-                <h5 th:text="${event.title}"></h5>
-            </div>
-        </div>
+<h3 style="text-decoration: underline">Events Player Is Hosting:</h3>
+<div th:object="${player}">
+    <div th:each="event: ${player.getEvents()}">
+        <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}" style="text-decoration: none; color: black"></a>
+    </div>
+</div>
+<h3 style="text-decoration: underline">Events Player Is Attending:</h3>
+<div th:object="${player}">
+    <div th:each="event: ${player.getAttendingEvents()}">
+        <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}" style="text-decoration: none; color: black"></a>
+    </div>
+</div>
 
 <!-- Bootstrap Bundle with Popper -->
 

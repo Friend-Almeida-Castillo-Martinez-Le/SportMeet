@@ -45,7 +45,7 @@ public class PlayerController {
         return "redirect:/login";
     }
 
-    @GetMapping("/player/{id}/show")
+    @GetMapping("/player/{id}")
     public String showPlayer(@PathVariable long id, Model model){
 //        model.addAttribute("player", playerDao.getById(id));
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
