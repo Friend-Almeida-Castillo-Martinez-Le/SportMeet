@@ -136,4 +136,20 @@ public class EventController {
         eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
         return "redirect:/events";
     }
+
+    @GetMapping("event/{search}")
+    public String showSearchedEvents(Model model, @PathVariable String search) {
+        List<Event> searchedEvents = new ArrayList<>();
+        for (Event event : eventsDao.searchEventsByTitle(search)) {
+            searchedEvents.add(event);
+        }
+        for (Event event : eventsDao.searchEventsByDescription(search)) {
+            searchedEvents.add(event);
+        }
+        for (Event event : eventsDao.searchEventsBySportName(search)) {
+            searchedEvents.add(event);
+        }
+        model.addAttribute("events", searchedEvents);
+        return "event/search";
+    }
 }
