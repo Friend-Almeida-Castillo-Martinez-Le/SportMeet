@@ -60,7 +60,7 @@
 <!--                logout -->
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button type="button" class="btn btn-link">Logout</button>
+                        <button type="submit" class="btn btn-link">Logout</button>
                     </form>
                 </li>
 
