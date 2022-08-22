@@ -5,10 +5,8 @@
 <nav th:replace="fragments/partials :: navbar" />
 <h1>Player Profile</h1>
         <div>
-            <h6 th:text="'ID: ' + ${player.id}"></h6>
-            <h6 th:text="'Name: ' + ${player.firstName} + ' ' + ${player.lastName}"></h6>
-            <h6 th:text="'Username: ' + ${player.username}"></h6>
-<!--            <h6 th:text="${player.lastName}"></h6>-->
+            <h6 th:text="${player.firstName} + ' ' + ${player.lastName}"></h6>
+            <h6 th:text="'@' + ${player.username}"></h6>
         </div>
 <h3 style="text-decoration: underline">Events Player Is Hosting:</h3>
 <div th:object="${player}">

@@ -12,10 +12,7 @@ import org.hibernate.type.LocalTimeType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -135,5 +132,15 @@ public class EventController {
         Long id = (Long) session.getAttribute("id");
         eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
         return "redirect:/events";
+    }
+
+    @GetMapping("event/search")
+    public String showSearchedEvents(Model model, @RequestParam("search") String search) {
+        List<Event> searchedEvents = new ArrayList<>();
+        for (Event event : eventsDao.searchEvents(search)) {
+            searchedEvents.add(event);
+        }
+        model.addAttribute("events", searchedEvents);
+        return "event/search";
     }
 }

@@ -1,0 +1,16 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Search Results')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+<div th:each="event: ${events}">
+    <h3 th:text="${event.title}"></h3>
+    <p th:text="${event.sport.name}"></p>
+    <p th:text="${event.description}"></p>
+    <p th:text="${event.location}"></p>
+    <p th:text="${event.date}"></p>
+    <p th:text="${event.startTime}"></p>
+    <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View</a>
+</div>
+</body>
+</html>

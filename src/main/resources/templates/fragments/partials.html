@@ -66,34 +66,12 @@
 
 
             </ul>
-            <form sec:authorize="isAuthenticated()" class="d-flex" role="search">
-                <input class="form-control me-2 search btn-outline-secondary" type="search" placeholder="Search ReadyUp" aria-label="Search">
+            <form sec:authorize="isAuthenticated()" class="d-flex" role="search" th:method="get" th:action="@{/event/search}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
-
         </div>
     </div>
 </nav>
-<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                        Events-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a class="dropdown-item" href="/events">Events List</a></li>-->
-<!--                        <li><a class="dropdown-item" href="/event/create">Create Event</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                        Player-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu">-->
-<!--                        <li><a class="dropdown-item" href="/players">Player Index</a></li>-->
-<!--                        <li><a class="dropdown-item" href="/player/create">Register Player</a></li>-->
-<!--                        <li><hr class="dropdown-divider"></li>-->
-<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-
 </body>
 </html>
