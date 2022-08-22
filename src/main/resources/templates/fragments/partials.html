@@ -35,7 +35,9 @@
 
 <!--                event link -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/events">Events</a>
+                    <form th:action="@{/index}" th:method="get">
+                        <a class="nav-link" href="/events/index">Events</a>
+                    </form>
                 </li>
 
 <!--                login-->
@@ -60,14 +62,14 @@
 <!--                logout -->
                 <li sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button type="button" class="btn btn-link">Logout</button>
+                        <button type="button" class="btn btn-link" href="/login" >Logout</button>
                     </form>
                 </li>
 
 
             </ul>
             <form sec:authorize="isAuthenticated()" class="d-flex" role="search" th:method="get" th:action="@{/event/search}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <input class="form-control me-2 btn-outline-secondary" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
         </div>

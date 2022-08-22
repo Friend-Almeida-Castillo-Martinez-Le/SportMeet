@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/partials :: head('Event Index')" />
 <body>
-<nav th:replace="fragments/partials :: navbar" />
+<nav th:replace="fragments/partials :: navbar"></nav>
     <div th:each="event: ${events}">
         <h3 th:text="${event.title}"></h3>
         <p th:text="${event.sport.name}"></p>
@@ -14,5 +14,6 @@
         <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button" th:name="edit">Edit</a>
         <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button" th:name="delete">Delete</a>
     </div>
+
 </body>
 </html>

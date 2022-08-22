@@ -25,12 +25,14 @@
 }
 
 .search {
+    outline-color: var(--primary) !important;
     background-color: var(--primary) !important;
 }
 
 .btn-outline-secondary {
     color: var(--third) !important;
     background-color: var(--primary) !important;
+    outline-color: var(--primary) !important;
 }
 
 .no-padding {
