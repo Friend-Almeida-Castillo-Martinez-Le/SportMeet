@@ -13,7 +13,7 @@
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark no-padding">
     <div class="container-fluid navbar-custom ">
         <a class="navbar-brand" href="#">
-            <img src="" th:src="@{img/black-back.png}" alt="" th:width="75px" th:height="50px">
+            <img src="" th:src="@{/img/black-back.png}" alt="" th:width="75px" th:height="50px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,9 @@
                 <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
 
 <!--                event link -->
-                <li class="nav-item">
-                    <form th:action="@{/index}" th:method="get">
-                        <a class="nav-link" href="/events/index">Events</a>
+                <li class="nav-item" >
+                    <form th:action="@{/events}" th:method="get">
+                        <a class="nav-link" href="/events">Events</a>
                     </form>
                 </li>
 
