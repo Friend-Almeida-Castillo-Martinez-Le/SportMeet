@@ -1,4 +1,3 @@
-
 :root {
     --primary: hsla(0, 8%, 13%, 0.37);
     --secondary: hsla(0, 0%, 0%, 0.36);
@@ -9,12 +8,11 @@
     color: lightgrey;
 }
 
-
 body {
     min-height: 100vh;
     width: 100%;
     background: linear-gradient(45deg, var(--primary), var(--secondary)),
-    url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
+    url("../img/background.jpg") no-repeat center center / cover;
 }
 
 .title{
@@ -67,8 +65,8 @@ body {
 
 .username-label {
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
 
 }
 
@@ -177,7 +175,7 @@ select{
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-size: xx-large;
     direction: rtl;
-    background: transparent;
+
 }
 
 .label-check{
@@ -186,9 +184,36 @@ select{
 
 .time-input{
     display: flex;
-    justify-content: end;
-    top: 20px;
+    justify-content: space-between;
     position: relative;
+    top:20px;
+    font-size: x-large;
+    margin-top: 20px;
+}
+.time-input{
+    background: transparent;
+}
+.description-form{
+    background-color: transparent;
+    width: 98%;
+    height: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 1em;
+    padding-bottom: 50px;
+    font-size: 40px;
+    padding-left: 10px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    margin-top: 15px;
+}
+.image-title{
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: lightgrey;
+    font-size: x-large;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .upload-text{
@@ -253,3 +278,50 @@ select{
     border-radius: 50px;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
 }
+.sport-box{
+    width: 40%;
+}
+.time-slot{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.start-time{
+    display: flex;
+
+}
+.time-box{
+    width: 50%;
+}
+.location-input{
+    font-size: 48px;
+    top: 50px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: lightgrey;
+}
+.location-select{
+    width: 70%;
+    height: 50px;
+    font-size: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: lightgrey;
+}
+#sport{
+    background-color: transparent;
+}
+#sport ::after{
+    background-color: transparent;
+}
+#date{
+    background-color: transparent;
+    color: lightgrey;
+    border: none;
+}
+#date ::after{
+    background-color: transparent;
+}
+
