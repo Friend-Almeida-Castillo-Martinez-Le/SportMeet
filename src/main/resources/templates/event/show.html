@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,14 +21,17 @@
         <h5 th:text="${player.username}"></h5>
     </div>
 </div>
-<div>
-    <form th:action="@{/event/{id}/attend (id = ${event.id})}" th:method="post" th:object="${event}">
-        <div>
-            <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
-            <label for="attending">Want to attend event?</label><br>
-        </div>
+<div th:if="${event.player.id != #authentication.principal.id}">
+    <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+        <form th:action="@{/event/{id}/attend (id = ${event.id})}" th:method="post" th:object="${event}">
+            <div>
+                <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
+                <label for="attending">Want to attend event?</label><br>
+            </div>
             <button type="submit">Attend</button>
-    </form>
+        </form>
+    </div>
+    </div>
 </div>
 <div>
     <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
