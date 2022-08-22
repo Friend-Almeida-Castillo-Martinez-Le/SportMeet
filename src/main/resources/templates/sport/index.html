@@ -6,12 +6,10 @@
 <div class="container">
     <div class="row">
         <div class="col-3 card border border-dark mx-2 my-2" th:each="sport: ${sports}">
-            <h3>ID: <span th:text="${sport.id}"></span></h3>
-            <p>
-                Sport:<span th:text="${sport.name}"></span><br>
-
-            </p>
-
+            <h3>
+                <span th:text="${sport.name}"></span><br>
+            </h3>
+            <a th:href="@{/sport/{name} (name = ${sport.name})}" type="button" role="button">View</a>
         </div>
     </div>
 </div>
