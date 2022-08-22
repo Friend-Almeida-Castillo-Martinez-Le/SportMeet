@@ -7,12 +7,18 @@
         <h3 th:text="${event.title}"></h3>
         <p th:text="${event.sport.name}"></p>
         <p th:text="${event.description}"></p>
-        <p th:text="${event.location}"></p>
-        <p th:text="${event.date}"></p>
-        <p th:text="${event.startTime}"></p>
-        <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View</a>
-        <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button" th:name="edit">Edit</a>
-        <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button" th:name="delete">Delete</a>
+        <th:block sec:authorize="isAuthenticated()">
+            <p th:text="${event.location}"></p>
+            <p th:text="${event.date}"></p>
+            <p th:text="${event.startTime}"></p>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+            <div th:if="${event.player.id == #authentication.principal.id}">
+                <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View</a>
+                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button" th:name="edit">Edit</a>
+                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button" th:name="delete">Delete</a>
+            </div>
+        </th:block>
     </div>
 </body>
 </html>
