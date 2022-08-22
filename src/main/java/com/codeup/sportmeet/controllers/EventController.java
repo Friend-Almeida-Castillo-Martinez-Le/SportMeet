@@ -40,7 +40,7 @@ public class EventController {
         this.commentsDao = commentsDao;
     }
 
-    @GetMapping("/events")
+    @GetMapping("events")
     public String eventsIndex(Model model) {
         model.addAttribute("events", eventsDao.findAll());
         return "event/index";

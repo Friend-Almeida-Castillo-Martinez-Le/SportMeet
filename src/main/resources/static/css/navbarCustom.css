@@ -20,9 +20,22 @@
 
 .btn-link {
     font-size: 16px !important;
-    color: rgb(2, 0, 36) !important;
+    color: rgb(244, 21, 244) !important;
+    text-decoration: none !important;
 }
 
 .search {
+    outline-color: var(--primary) !important;
     background-color: var(--primary) !important;
+}
+
+.btn-outline-secondary {
+    color: var(--third) !important;
+    background-color: var(--primary) !important;
+    outline-color: var(--primary) !important;
+}
+
+.no-padding {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }

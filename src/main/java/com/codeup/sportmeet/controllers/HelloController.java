@@ -35,5 +35,4 @@ class HelloController {
         return "/about";
     }
 
-
 }
