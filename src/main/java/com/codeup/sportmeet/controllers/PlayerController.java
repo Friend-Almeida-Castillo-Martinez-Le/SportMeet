@@ -47,7 +47,6 @@ public class PlayerController {
 
     @GetMapping("/player/{id}")
     public String showPlayer(@PathVariable long id, Model model){
-//        model.addAttribute("player", playerDao.getById(id));
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
         return ("/player/show");
