@@ -80,6 +80,9 @@ body {
     color:lightgrey;
     width: 90%;
 }
+.input-form ::after{
+    background-color: transparent;
+}
 hr {
     height: 12px;
     background: white;

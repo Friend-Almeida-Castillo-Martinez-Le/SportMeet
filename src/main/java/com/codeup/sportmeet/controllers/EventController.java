@@ -74,6 +74,11 @@ public class EventController {
         model.addAttribute("event", eventsDao.getById(id));
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", eventsDao.getById(id).getComments());
+        List<String> eventPlayerUsernames = new ArrayList<>();
+        for (Player player : eventsDao.getById(id).getPlayers()) {
+            eventPlayerUsernames.add(player.getUsername());
+        }
+        model.addAttribute("eventPlayerUsernames", eventPlayerUsernames);
         return "event/show";
     }
 
