@@ -34,9 +34,4 @@ class HelloController {
     public String showAbout(){
         return "/about";
     }
-
-    @GetMapping("/logout")
-    public String logout() {return "/signin";}
-
-
 }
