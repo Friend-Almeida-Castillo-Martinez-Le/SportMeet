@@ -35,9 +35,14 @@
 
 <!--                event link -->
                 <li class="nav-item" >
-                    <form th:action="@{/events}" th:method="get">
-                        <a class="nav-link" href="/events">Events</a>
-                    </form>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<!--                    <form th:action="@{/events}" th:method="get">-->
+                        Events
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/events}">All Events</a></li>
+                        <li><a class="dropdown-item" th:href="@{/event/create}">Create an Event</a></li>
+                    </ul>
                 </li>
 
 <!--                login-->
