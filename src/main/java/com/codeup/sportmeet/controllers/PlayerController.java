@@ -91,5 +91,10 @@ public class PlayerController {
         playerDao.save(player);
         return "redirect:/player/" + currentPlayer.getId();
     }
+    
+    @GetMapping("password")
+    public String forgotPasswordForm(Model model) {
+        return "/player/forgotPassword";
+    }
 
 }
