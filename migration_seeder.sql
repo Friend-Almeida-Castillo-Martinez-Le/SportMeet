@@ -1,4 +1,4 @@
-use sportmeet_db;
+use readyup_db;
 
 insert into sports (name)
 values ('Tennis'),

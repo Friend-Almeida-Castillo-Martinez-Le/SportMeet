@@ -48,6 +48,9 @@ public class Player {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "player")
     private List<Comment> comments;
 
+    @Column
+    private String profilePicUrl;
+
     public Player() {
     }
 
@@ -112,6 +115,30 @@ public class Player {
         this.events = events;
         this.attendingEvents = attendingEvents;
         this.comments = comments;
+    }
+
+    public Player(String username, String password, String email, String firstName, String lastName, long age, long date, String rating, long upvote, List<Event> events, List<Event> attendingEvents, List<Comment> comments, String profilePicUrl) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.date = date;
+        this.rating = rating;
+        this.upvote = upvote;
+        this.events = events;
+        this.attendingEvents = attendingEvents;
+        this.comments = comments;
+        this.profilePicUrl = profilePicUrl;
+    }
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
     }
 
     public long getId() {
