@@ -70,6 +70,15 @@ public class PlayerController {
         return "/player/index";
     }
 
+    @GetMapping("password")
+    public String forgotPasswordForm(Model model) {
+        return "/player/forgotPassword";
+    }
+
+
+
+
+
 //    @GetMapping("/sign-up")
 //    public String showSignupForm(Model model){
 //        model.addAttribute("player", new Player());
