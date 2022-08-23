@@ -24,7 +24,10 @@
         </th:block>
 
     </div>
-    <div class="img-box"><img src="" th:src="@{../img/court.jpg}" class="img" alt="court" width="90%" height="550px"></div>
+<!--    <div class="img-box"><img src="" th:src="@{../img/court.jpg}" class="img" alt="court" width="90%" height="550px"></div>-->
+    <div class="img-box" th:if="${event.eventPicUrl != null}">
+        <img th:src="${event.eventPicUrl}" alt="event-image" style="height: 550px; width: 90%" class="img">
+    </div>
     <!--        Event information-->
     <div class="event-info">
         <!--        First Row-->

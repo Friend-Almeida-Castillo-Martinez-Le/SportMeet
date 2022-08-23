@@ -44,7 +44,8 @@ public class EventController {
 
     @GetMapping("events")
     public String eventsIndex(Model model) {
-        model.addAttribute("events", eventsDao.findAll());
+        List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(eventsDao.findAll());
+        model.addAttribute("events",  orderedByDateAndTime);
         return "event/index";
     }
 
