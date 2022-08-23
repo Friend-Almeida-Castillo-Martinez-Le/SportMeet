@@ -4,14 +4,15 @@ package com.codeup.sportmeet.controllers;
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
 
 @Controller
 public class PlayerController {
@@ -23,6 +24,9 @@ public class PlayerController {
         this.playerDao = playerDao;
         this.passwordEncoder = passwordEncoder;
     }
+
+    @Value("${FILESTACK_API}")
+    private String fsKey;
 
     @GetMapping("/players")
     public String playerIndex(Model model){
@@ -70,19 +74,22 @@ public class PlayerController {
         return "/player/index";
     }
 
-//    @GetMapping("/sign-up")
-//    public String showSignupForm(Model model){
-//        model.addAttribute("player", new Player());
-//        return "player/create";
-//    }
-//
-//    @PostMapping("/sign-up")
-//    public String saveUser(@ModelAttribute Player player){
-//        String hash = passwordEncoder.encode(player.getPassword());
-//        player.setPassword(hash);
-//        playerDao.save(player);
-//        return "redirect:/login";
-//    }
+    @GetMapping("/profile/{id}/upload")
+    public String viewAddProfilePhoto(@PathVariable long id, Model model, HttpSession session) {
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        session.setAttribute("id", currentPlayer.getId());
+        model.addAttribute("fsKey",fsKey);
+        model.addAttribute("player", playerDao.getById(id));
+        return "player/upload";
+    }
 
+    @PostMapping("/profile/{id}/upload")
+    public String savePhoto(@RequestParam(name="profile_img") String img, @PathVariable long id){
+        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Player player = playerDao.getById(id);
+        player.setProfilePicUrl(img);
+        playerDao.save(player);
+        return "redirect:/player/" + currentPlayer.getId();
+    }
 
 }

@@ -3,6 +3,7 @@ package com.codeup.sportmeet.models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class Event {
     @Column(nullable = false)
     private String date;
 
-    @Column(nullable = true)
+    @Column
     private long playersAttending;
 
     @ManyToOne
@@ -50,6 +51,9 @@ public class Event {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "event")
     private List<Comment> comments;
+
+    @Column
+    private String eventPicUrl;
 
     public Event() {
     }
@@ -90,6 +94,20 @@ public class Event {
         this.sport = sport;
         this.playersAttending = playersAttending;
         this.comments = comments;
+    }
+
+    public Event(String title, String description, String location, String startTime, String date, long playersAttending, Player player, List<Player> players, Sport sport, List<Comment> comments, String eventPicUrl) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.startTime = startTime;
+        this.date = date;
+        this.playersAttending = playersAttending;
+        this.player = player;
+        this.players = players;
+        this.sport = sport;
+        this.comments = comments;
+        this.eventPicUrl = eventPicUrl;
     }
 
     public long getId() {
@@ -178,6 +196,14 @@ public class Event {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getEventPicUrl() {
+        return eventPicUrl;
+    }
+
+    public void setEventPicUrl(String eventPicUrl) {
+        this.eventPicUrl = eventPicUrl;
     }
 
     @Override
