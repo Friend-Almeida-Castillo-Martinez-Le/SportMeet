@@ -9,6 +9,7 @@ import com.codeup.sportmeet.repositories.EventRepository;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import com.codeup.sportmeet.repositories.SportRepository;
 import org.hibernate.type.LocalTimeType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,9 @@ public class EventController {
         this.sportsDao = sportsDao;
         this.commentsDao = commentsDao;
     }
+
+    @Value("${FILESTACK_API}")
+    private String fsKey;
 
     @GetMapping("events")
     public String eventsIndex(Model model) {
@@ -145,5 +149,21 @@ public class EventController {
         }
         model.addAttribute("events", searchedEvents);
         return "event/search";
+    }
+
+    @GetMapping("/event/{id}/upload")
+    public String viewAddProfilePhoto(@PathVariable long id, Model model, HttpSession session) {
+        session.setAttribute("id", id);
+        model.addAttribute("fsKey",fsKey);
+        model.addAttribute("event", eventsDao.getById(id));
+        return "event/upload";
+    }
+
+    @PostMapping("/event/{id}/upload")
+    public String savePhoto(@RequestParam(name="profile_img") String img, @PathVariable long id){
+        Event event = eventsDao.getById(id);
+        event.setEventPicUrl(img);
+        eventsDao.save(event);
+        return "redirect:/event/" + id;
     }
 }
