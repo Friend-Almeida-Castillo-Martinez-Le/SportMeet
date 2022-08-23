@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+<div th:if="${event.eventPicUrl != null}">
+    <img th:src="${event.eventPicUrl}" alt="event-image" style="height: 35vh; width: 75vw">
+</div>
 <div>
     <h3 th:text="${event.title}"></h3>
     <p th:text="${event.sport.name}"></p>
