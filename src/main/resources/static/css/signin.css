@@ -67,7 +67,8 @@ body {
 
 }
 .forgot-pass{
-    border-bottom: 1px solid lightgrey ;
+    color: lightgrey;
+    /*border-bottom: 1px solid lightgrey;*/
 }
 
 .input-form {
