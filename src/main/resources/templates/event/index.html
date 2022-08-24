@@ -1,8 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/partials :: head('Event Index')">
-    <link rel="stylesheet" href="" th:href="@{../css/allEvents.css}">
+<head th:insert="fragments/partials :: head('Event Index')">
 </head>
+
+<!--<style>-->
+<!--    @import "/css/allEvents.css";-->
+<!--</style>-->
 <body>
     <nav th:replace="fragments/partials :: navbar"></nav>
     <div th:each="event: ${events}" class="card">
