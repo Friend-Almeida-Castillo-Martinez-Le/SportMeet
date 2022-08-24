@@ -43,6 +43,7 @@ public class PlayerController {
     @PostMapping("/sign-up")
     public String playerCreate(@ModelAttribute Player player) {
         String hash = passwordEncoder.encode(player.getPassword());
+        player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
         player.setPassword(hash);
         playerDao.save(player);
 

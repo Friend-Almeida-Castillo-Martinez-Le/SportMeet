@@ -9,11 +9,11 @@
             <h6 th:text="'@' + ${player.username}"></h6>
         </div>
 <div th:if="${player.profilePicUrl != null}">
-    <img th:src="${player.profilePicUrl}" alt="profile-picture" style="height: 100px;width: 100px;border-radius: 100%">
+    <img th:src="${player.profilePicUrl}" alt="profile-picture" style="height: 100px;width: 100px;border-radius: 100%;border: 2px solid black">
 </div>
 <th:block sec:authorize="isAuthenticated()">
     <div th:if="${player.id == #authentication.principal.id}">
-        <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button" th:name="upload">Upload Profile Picture</a>
+        <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button" th:name="upload">Change Profile Picture</a>
     </div>
 </th:block>
 <h3 style="text-decoration: underline">Events Player Is Hosting:</h3>

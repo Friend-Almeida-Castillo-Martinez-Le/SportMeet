@@ -20,6 +20,7 @@
                         th:name="edit">Edit </a></h3>
                 <h3> <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
                         th:name="delete"> Delete</a></h3>
+                <h3><a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button" th:name="upload">Upload Event Image</a></h3>
             </div>
         </th:block>
 
@@ -90,6 +91,9 @@
                     <h3 th:text="${comment.player.username}"> </h3>
                     <h4 th:text="${comment.description}"></h4>
                     <hr>
+                    <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
+                            <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get" th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
