@@ -14,7 +14,7 @@
             <h6 th:text="${event.sport.name}" class="card-text">Game: </h6>
             <p th:text="${event.description}" class="card-text">Description: </p>
             <th:block sec:authorize="isAuthenticated()">
-                <p th:text="${event.location}" class="card-text">Location: </p>
+                <p th:text="${event.location}" class="card-text">Address: </p>
                 <p th:text="${event.date}" class="card-text">Date: ></p>
                 <p th:text="${event.startTime}" class="card-text">Time: ></p>
                 <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View Event</a>
