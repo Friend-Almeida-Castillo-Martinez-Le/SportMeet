@@ -4,6 +4,7 @@ package com.codeup.sportmeet.controllers;
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
 import com.codeup.sportmeet.repositories.PlayerRepository;
+import com.codeup.sportmeet.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ public class PlayerController {
 
     private PlayerRepository playerDao;
     private PasswordEncoder passwordEncoder;
+    private RatingRepository ratingDao;
 
     public PlayerController(PlayerRepository playerDao, PasswordEncoder passwordEncoder) {
         this.playerDao = playerDao;
