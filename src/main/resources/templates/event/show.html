@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
           rel="stylesheet">
     <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="" th:href="@{../css/SingleEvent.css}">
+    <link type="text/css" href="" th:href="@{../css/SingleEvent.css}">
 </head>
 <body>
 
@@ -34,8 +34,8 @@
         <!--        First Row-->
         <div class="host-row">
             <div>
-                <h1> Location:  <span th:text="${event.location}"></span></h1>
-                <h2 Date : ><span th:text="${event.date}"></span></h2>
+                <h1><span th:text="${event.location}"></span></h1>
+                <h2><span th:text="${event.date}"></span></h2>
             </div>
             <div>
                 <h1> Host: <span th:text="${event.player.username}"></span></h1>
@@ -48,10 +48,10 @@
         <!--        Second Row-->
         <div class="sport-row">
             <div>
-                <h1> Sport: <span th:text="${event.sport.name}"></span></h1>
+                <h1><span th:text="${event.sport.name}"></span></h1>
             </div>
             <div>
-                <h1> Time: <span th:text="${event.startTime}"></span></h1>
+                <h1> Start: <span th:text="${event.startTime}"></span></h1>
             </div>
         </div>
         <h2><i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span></h2>
@@ -62,7 +62,6 @@
         </div>
         <!--        Description-->
         <div>
-            <label for="description" class="desc-label"><h1>Description: </h1></label>
             <h3 th:text="${event.description}" id="description" class="desc-box"></h3>
         </div>
         <div th:if="${event.player.id != #authentication.principal.id}">

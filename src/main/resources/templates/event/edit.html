@@ -3,35 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="" th:href="@{/css/eventsEdit.css}">
+    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}">
-    <div>
-        <label for="title">New Title</label>
-        <input type="text" id="title" placeholder="Title" th:field="*{title}">
-    </div>
-    <div>
-        <label for="description">New Description</label>
-        <input type="text" id="description" placeholder="Description" th:field="*{description}">
-    </div>
-    <div>
-        <label for="location">New Location</label>
-        <input type="text" id="location" placeholder="City, State" th:field="*{location}">
-    </div>
-    <div>
-        <label for="startTime">New Start Time</label>
-        <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
-    </div>
-    <div>
-        <label for="date">New Date</label>
-        <input type="date" id="date" th:field="*{date}">
-    </div>
-    <div>
-        <select name="sport" id="sport" th:field="*{sport}">
-            <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
-        </select>
-    </div>
-    <button type="submit" th:value="${event.id}" name="id">Edit</button>
-</form>
+<div class="edit-title">
+    <h1>Enter New Information</h1>
+</div>
+<div class="edit-container">
+    <form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}" class="edit-form">
+        <div class="edit-label">
+            <label for="title">New Title</label>
+            <input type="text" id="title" placeholder="Title" th:field="*{title}">
+        </div>
+        <div class="edit-label">
+            <label for="description">New Description</label>
+            <input type="text" id="description" placeholder="Description" th:field="*{description}">
+        </div>
+        <div class="edit-label">
+            <label for="location">New Location</label>
+            <input type="text" id="location" placeholder="City, State" th:field="*{location}">
+        </div>
+        <div class="edit-label">
+            <label for="startTime">New Start Time</label>
+            <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
+        </div>
+        <div class="edit-label">
+            <label for="date">New Date</label>
+            <input type="date" id="date" th:field="*{date}">
+        </div>
+        <div class="edit-label">
+            <label for="sport">Sport</label>
+            <select name="sport" id="sport" th:field="*{sport}">
+                <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
+            </select>
+        </div>
+        <button type="submit" th:value="${event.id}" name="id" class="edit-btn">Edit</button>
+    </form>
+</div>
 </body>
 </html>
