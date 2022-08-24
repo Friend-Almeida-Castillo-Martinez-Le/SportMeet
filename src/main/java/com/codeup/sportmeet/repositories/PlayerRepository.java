@@ -12,4 +12,6 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     List<Player> searchByPlayerLike(@Param("term") String term);
 
     Player findByUsername(String username);
+
+    Player findByUsernameAndEmail(String username, String email);
 }
