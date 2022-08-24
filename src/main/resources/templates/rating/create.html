@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Rating Create')" />
+<body>
+<nav th:replace="fragments/partials :: navbar" />
+<!--public Rating(Player rater, Player ratee, Event event, long rating)-->
+    <form th:action="@{/rating/create}" th:method="post" th:object="${rating}">
+        <div>
+            <label for="rater" class="form-label">Rater: </label>
+            <input type="text" id="rater" placeholder="rater" class="form-control" th:field="*{rater}">
+        </div>
+        <div class="mb-3">
+            <label for="Ratee" class="form-label">Ratee</label>
+            <input type="text" class="form-control" id="Ratee">
+        </div>
+        <div class="mb-3">
+            <label for="event" class="form-label">event</label>
+            <input type="text" class="form-control" id="event">
+        </div>
+        <div class="mb-3">
+            <label for="rating" class="form-label">rating</label>
+            <input type="text" class="form-control" id="rating">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
