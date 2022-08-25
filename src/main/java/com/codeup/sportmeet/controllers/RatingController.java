@@ -21,13 +21,13 @@ public class RatingController {
     @GetMapping("/ratings")
     public String showRatingIndex(Model model){
         model.addAttribute("ratings", ratingDao.findAll());
-        return "/rating/index";
+        return "rating/index";
     }
 
     @GetMapping("/rating/create")
     public String createRating(Model model){
         model.addAttribute("rating", new Rating());
-        return "/rating/create";
+        return "rating/create";
     }
 
     @PostMapping("/rating/create")
