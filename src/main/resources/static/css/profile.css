@@ -10,6 +10,14 @@
     background: linear-gradient(35deg, var(--primary), var(--secondary));
     /*url("../img/pexels-binyamin-mellish-140039.jpg") no-repeat center center / cover;*/
 }
+#card-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
 
 #card-1{
     display: flex;
@@ -17,8 +25,13 @@
     align-items: center;
     flex-direction: column;
     border: 1px solid white;
-    width: 80%;
-    background: rgba(128, 128, 128, 0.3);
+    margin-top: 5em;
+    color: lightgrey;
+    background: rgba(128, 128, 128, 0.44);
+    padding: 2em;
+    border-radius: 10px;
+    width: 35%;
+    height: 40%;
 }
 
 #img{
@@ -30,4 +43,8 @@
 }
 #container2{
     background-color: red;
+}
+
+#fonts{
+    font-weight: bold;
 }

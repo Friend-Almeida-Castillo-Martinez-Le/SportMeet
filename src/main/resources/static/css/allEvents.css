@@ -4,6 +4,8 @@
     --third: hsla(181, 100%, 50%, 0.82) !important;
     --fourth: hsla(305, 100%, 59%, 0.78) !important;
     background-image: url("../img/field-background.jpg") !important;
+    background-size: 100%;
+
 }
 
 .card-body {

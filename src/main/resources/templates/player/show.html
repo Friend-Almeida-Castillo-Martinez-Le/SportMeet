@@ -6,36 +6,40 @@
 </head>
 <body id="body">
 <nav th:replace="fragments/partials :: navbar"/>
+<div id="card-2">
+    <div id="card-1">
+        <h1 id="title"></h1>
+        <div>
+            <div th:if="${player.profilePicUrl != null}">
+                <img th:src="${player.profilePicUrl}" alt="profile-picture"
+                     style="height: 100px;width: 100px;border-radius: 100%">
+                <br>
+            </div>
+            <br>
+            <div id="container">
+                <h6 th:text="${player.firstName} + ' ' + ${player.lastName}"></h6>
+                <h6 th:text="'@' + ${player.username}"></h6>
+            </div>
 
-<div id="card-1">
-    <h1 id="title">Player Profile</h1>
-    <div>
-        <div id="container">
-            <h6 th:text="${player.firstName} + ' ' + ${player.lastName}"></h6>
-            <h6 th:text="'@' + ${player.username}"></h6>
-        </div>
-        <div th:if="${player.profilePicUrl != null}">
-            <img th:src="${player.profilePicUrl}" alt="profile-picture"
-                 style="height: 100px;width: 100px;border-radius: 100%">
-        </div>
-        <th:block sec:authorize="isAuthenticated()">
-            <div th:if="${player.id == #authentication.principal.id}">
-                <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button"
-                   th:name="upload">Upload Profile Picture</a>
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:if="${player.id == #authentication.principal.id}">
+                    <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button"
+                       th:name="upload">Upload Profile Picture</a>
+                </div>
+            </th:block>
+            <h3 style="text-decoration: underline">Hosting:</h3>
+            <div id="fonts" th:object="${player}">
+                <div th:each="event: ${player.getEvents()}">
+                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
+                       style="text-decoration: none; color: black"></a>
+                </div>
             </div>
-        </th:block>
-        <h3 style="text-decoration: underline">Events Player Is Hosting:</h3>
-        <div th:object="${player}">
-            <div th:each="event: ${player.getEvents()}">
-                <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                   style="text-decoration: none; color: black"></a>
-            </div>
-        </div>
-        <h3 style="text-decoration: underline">Events Player Is Attending:</h3>
-        <div th:object="${player}">
-            <div th:each="event: ${player.getAttendingEvents()}">
-                <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                   style="text-decoration: none; color: black"></a>
+            <h3 style="text-decoration: underline">Attending:</h3>
+            <div th:object="${player}">
+                <div th:each="event: ${player.getAttendingEvents()}">
+                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
+                       style="text-decoration: none; color: black"></a>
+                </div>
             </div>
         </div>
     </div>
