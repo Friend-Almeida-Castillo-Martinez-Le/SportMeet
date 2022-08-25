@@ -27,14 +27,14 @@ public class CommentController {
     @GetMapping("/comments")
     public String showComments(Model model){
         model.addAttribute("comments", commentDao.findAll());
-        return "/comment/index";
+        return "comment/index";
     }
 
     @GetMapping("/comment/{id}/create")
     public String createComment(Model model, @PathVariable long id){
         model.addAttribute("comment", new Comment());
         model.addAttribute("event", eventsDao.getById(id));
-        return "/comment/create";
+        return "comment/create";
     }
 
     @PostMapping("/comment/{id}/create")

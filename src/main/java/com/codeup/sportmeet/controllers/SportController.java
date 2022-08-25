@@ -26,7 +26,7 @@ public class SportController {
     @GetMapping("/sports")
     public String displaySports(Model model){
         model.addAttribute("sports", sportDao.findAll());
-        return "/sport/index";
+        return "sport/index";
     }
 
     @GetMapping("/sports/create/{name}")

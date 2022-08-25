@@ -148,7 +148,8 @@ public class EventController {
         for (Event event : eventsDao.searchEvents(search)) {
             searchedEvents.add(event);
         }
-        model.addAttribute("events", searchedEvents);
+        List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(searchedEvents);
+        model.addAttribute("events", orderedByDateAndTime);
         return "event/search";
     }
 
