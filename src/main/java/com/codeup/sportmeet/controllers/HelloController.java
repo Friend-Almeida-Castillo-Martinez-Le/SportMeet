@@ -11,28 +11,28 @@ class HelloController {
     @GetMapping("/")
     public String mainWelcome(Model model) {
       model.addAttribute("message", "Main Landing page.");
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/hello")
     public String hello(Model model) {
         model.addAttribute("message", "welcome message test");
-        return "/hello";
+        return "hello";
     }
 
     @GetMapping("/register")
     public String registerPlayer(){
-        return "/register";
+        return "register";
     }
 
     @GetMapping("/signin")
     public String signIn(){
-        return "/signin";
+        return "signin";
     }
 
     @GetMapping("/about")
     public String showAbout(){
-        return "/about";
+        return "about";
     }
 
 }

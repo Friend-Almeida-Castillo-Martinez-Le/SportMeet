@@ -17,6 +17,6 @@ public class RestrictionController {
     @GetMapping("/restrictions")
     public String showRestrictions(Model model){
          model.addAttribute("restrictions", restrictionDao.findAll());
-         return "/restriction/index";
+         return "restriction/index";
     }
 }
