@@ -125,7 +125,10 @@ public class PlayerController {
             String hash = passwordEncoder.encode(password);
             changePlayer.setPassword(hash);
             playerDao.save(changePlayer);
+            return "redirect:/login";
+        } else {
+            return "redirect:/set/" + changePlayer.getId() + "/password";
         }
-        return "redirect:/login";
+
     }
 }
