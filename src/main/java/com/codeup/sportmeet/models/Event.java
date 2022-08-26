@@ -55,10 +55,16 @@ public class Event {
     @Column
     private String eventPicUrl;
 
+    @Column
+    private boolean isStarted = false;
+
+    @Column
+    private boolean isConfirmed = false;
+
     public Event() {
     }
 
-    public Event(long id, String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(long id, String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments, boolean isStarted, boolean isConfirmed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -70,9 +76,11 @@ public class Event {
         this.sport = sport;
         this.playersAttending = playersAttending;
         this.comments = comments;
+        this.isStarted = isStarted;
+        this.isConfirmed = isConfirmed;
     }
 
-    public Event(String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String location, String startTime, String date, Player player, List<Player> players, Sport sport, long playersAttending, List<Comment> comments, boolean isStarted, boolean isConfirmed) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -83,9 +91,11 @@ public class Event {
         this.sport = sport;
         this.playersAttending = playersAttending;
         this.comments = comments;
+        this.isStarted = isStarted;
+        this.isConfirmed = isConfirmed;
     }
 
-    public Event(String title, String description, String date, String startTime, String location, Sport sport, long playersAttending, List<Comment> comments) {
+    public Event(String title, String description, String date, String startTime, String location, Sport sport, long playersAttending, List<Comment> comments, boolean isStarted, boolean isConfirmed) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -94,9 +104,11 @@ public class Event {
         this.sport = sport;
         this.playersAttending = playersAttending;
         this.comments = comments;
+        this.isStarted = isStarted;
+        this.isConfirmed = isConfirmed;
     }
 
-    public Event(String title, String description, String location, String startTime, String date, long playersAttending, Player player, List<Player> players, Sport sport, List<Comment> comments, String eventPicUrl) {
+    public Event(String title, String description, String location, String startTime, String date, long playersAttending, Player player, List<Player> players, Sport sport, List<Comment> comments, String eventPicUrl, boolean isStarted, boolean isConfirmed) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -108,6 +120,8 @@ public class Event {
         this.sport = sport;
         this.comments = comments;
         this.eventPicUrl = eventPicUrl;
+        this.isStarted = isStarted;
+        this.isConfirmed = isConfirmed;
     }
 
     public long getId() {
@@ -204,6 +218,22 @@ public class Event {
 
     public void setEventPicUrl(String eventPicUrl) {
         this.eventPicUrl = eventPicUrl;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
     }
 
     @Override

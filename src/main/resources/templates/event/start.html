@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Event</title>
+</head>
+<body>
+<form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="post">
+    <div th:each="player: ${players}">
+        <input type="checkbox" th:value="${player.id}" th:id="${player.username}">
+        <label th:for="${player.username}" th:text="${player.username}"></label>
+    </div>
+    <button type="submit">Confirm</button>
+</form>
+</body>
+</html>
