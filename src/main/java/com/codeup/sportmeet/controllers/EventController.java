@@ -21,6 +21,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -57,30 +58,76 @@ public class EventController {
     }
 
     @PostMapping("event/create")
-    public String createEvent(@ModelAttribute Event event) {
+    public String createEvent(@ModelAttribute Event event) throws ParseException {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        event.setPlayer(currentPlayer);
-        Event event2 = eventsDao.save(event);
-        if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
-            playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
-            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
-            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
-        } else {
-          playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
-          System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        if (format.parse(event.getDate()).before(todayAsDate)) {
+            return "redirect:/event/create";
+        }
+        else if (format.parse(event.getDate()).equals(todayAsDate)) {
+                LocalTime now = LocalTime.now();
+                System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
+                System.err.println(now.getHour());
+                if (Integer.parseInt(event.getStartTime().substring(0,2)) < now.getHour()) {
+                    System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
+                    System.err.println(now.getHour());
+                    return "redirect:/event/create";
+                }
+                else {
+                    if (Integer.parseInt(event.getStartTime().substring(3,5)) < now.getMinute()) {
+                        System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
+                        System.err.println(now.getHour());
+                        return "redirect:/event/create";
+                    }
+                    else {
+                        event.setPlayer(currentPlayer);
+                        Event event2 = eventsDao.save(event);
+                        if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
+                            playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+                            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                        } else {
+                            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                        }
+                    }
+                }
+            } else {
+            event.setPlayer(currentPlayer);
+            Event event2 = eventsDao.save(event);
+            if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
+                playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+            } else {
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+            }
         }
         return "redirect:/events";
     }
 
     @GetMapping("event/{id}")
-    public String showEvent(Model model, @PathVariable long id) {
-        model.addAttribute("event", eventsDao.getById(id));
-        model.addAttribute("comment", new Comment());
-        model.addAttribute("comments", eventsDao.getById(id).getComments());
+    public String showEvent(Model model, @PathVariable long id) throws ParseException {
+        Event event = eventsDao.getById(id);
         List<String> eventPlayerUsernames = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
+        if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0,2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3,5)) >= now.getMinute()) {
+            event.setStarted(true);
+            eventsDao.save(event);
+        }
         for (Player player : eventsDao.getById(id).getPlayers()) {
             eventPlayerUsernames.add(player.getUsername());
         }
+        model.addAttribute("event", event);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", eventsDao.getById(id).getComments());
         model.addAttribute("eventPlayerUsernames", eventPlayerUsernames);
         return "event/show";
     }
@@ -167,5 +214,25 @@ public class EventController {
         event.setEventPicUrl(img);
         eventsDao.save(event);
         return "redirect:/event/" + id;
+    }
+
+    @GetMapping("/event/{id}/start")
+    public String showStart(@PathVariable long id, Model model) {
+        Event event = eventsDao.getById(id);
+        model.addAttribute("event", event);
+        model.addAttribute("players", event.getPlayers());
+        return "event/start";
+    }
+
+    @PostMapping("/event/{id}/start")
+    public String submitStart(@ModelAttribute("event") Event event, @ModelAttribute("players") ArrayList<Player> players) {
+        Event event1 = eventsDao.getById(event.getId());
+        event1.setConfirmed(true);
+        for (Player player : players) {
+            event1.getPlayers().add(playersDao.getById(player.getId()));
+        }
+        event1.setPlayersAttending(eventsDao.getById(event1.getId()).getPlayers().size());
+        eventsDao.save(event1);
+        return "redirect:/event/" + event1.getId();
     }
 }

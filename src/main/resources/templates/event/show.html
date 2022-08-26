@@ -67,6 +67,7 @@
         </div>
         <div th:if="${event.player.id != #authentication.principal.id}">
             <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+                <div th:if="${event.started == false}">
                 <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
                       th:object="${event}">
                     <div class="attend-box">
@@ -77,6 +78,16 @@
                         <button type="submit" class="attend-btn">Attend</button>
                     </div>
                 </form>
+            </div>
+            </div>
+        </div>
+        <div th:if="${event.player.id == #authentication.principal.id}">
+            <div th:if="${event.started == true}">
+                <div th:if="${event.confirmed == false}">
+                <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
+                    <button type="submit">Start Event</button>
+                </form>
+                </div>
             </div>
         </div>
         <div class="comment-box">
