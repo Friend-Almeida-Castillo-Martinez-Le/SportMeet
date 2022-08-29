@@ -7,7 +7,7 @@
 <body>
 <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="post">
     <div th:each="player: ${players}">
-        <input type="checkbox" th:value="${player.id}" th:id="${player.username}">
+        <input type="checkbox" th:value="${player.id}" th:id="${player.username}" th:name="confirmedPlayers">
         <label th:for="${player.username}" th:text="${player.username}"></label>
     </div>
     <button type="submit">Confirm</button>

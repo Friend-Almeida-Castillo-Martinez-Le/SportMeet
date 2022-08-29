@@ -27,7 +27,7 @@
 </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    const file = /*[[${fsKey}]]*/ FILESTACK_API;
+    const file = /*[[${fsKey}]]*/ 'default';
     const client = filestack.init(file);
     const options = {
         onUploadDone: updateForm,
