@@ -5,16 +5,14 @@
     --fourth: hsla(305, 100%, 59%, 0.78)
 }
 ::placeholder{
-    color: lightgrey;
+    color: grey;
 }
 body {
-
     min-height: 100vh;
-    width: 100%;
     background: linear-gradient(135deg, var(--primary), var(--secondary)),
     url("../img/background.jpg") no-repeat center center / cover;
+    margin: 2em;
 }
-
 .sign-container {
     padding: 3em;
 }
@@ -64,11 +62,11 @@ body {
     font-size: 35px;
     color: lightgrey;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
+    margin-top: 1em;
 
 }
 .forgot-pass{
-    color: lightgrey;
-    /*border-bottom: 1px solid lightgrey;*/
+    border-bottom: 1px solid lightgrey ;
 }
 
 .input-form {
@@ -80,9 +78,6 @@ body {
     font-weight: bold;
     color:lightgrey;
     width: 90%;
-}
-.input-form ::after{
-    background-color: transparent;
 }
 hr {
     height: 12px;
@@ -128,4 +123,55 @@ hr {
     justify-content: space-between;
     position: relative;
     top:20px;
+}
+@media (min-width: 1025px){
+    .sign-container{
+        margin: 0;
+        padding: 0;
+    }
+    .sign-text{
+        margin: 0;
+    }
+    .signin-container{
+        margin: 0;
+    }
+    h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: larger;
+        margin: 0;
+    }
+    .signin-form{
+        margin: 1em;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2em;
+        border-radius: 10px;
+    }
+    .password-label{
+        margin: 0;
+    }
+    .button-container{
+        margin-top: 3em;
+    }
+    .email-label{
+        font-size: 37px;
+    }
+    .password-label{
+        font-size: 37px;
+    }
+    .sign-lower{
+        font-size: 30px;
+    }
+    hr{
+        height: 0;
+    }
+    .sign-logo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
 }
