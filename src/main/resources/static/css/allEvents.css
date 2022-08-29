@@ -1,4 +1,4 @@
-body {
+body#allEvents{
     background-image: url("../img/stadium-lights.jpg") !important;
     height: 100vh !important;
     background-repeat: no-repeat !important;
@@ -8,7 +8,6 @@ body {
     display: grid !important;
     place-items: start !important;
 }
-
 div.card {
     display: grid !important;
     place-items: center !important;
