@@ -1,16 +1,39 @@
-:root{
-    --primary: hsla(0, 8%, 13%, 0.37) !important;
-    --secondary: hsla(0, 0%, 0%, 0.36) !important;
-    --third: hsla(181, 100%, 50%, 0.82) !important;
-    --fourth: hsla(305, 100%, 59%, 0.78) !important;
-    background-image: url("../img/field-background.jpg") !important;
-    background-size: 100%;
+
+body#allEvents{
+    background-image: url("../img/stadium-lights.jpg") !important;
+    height: 100vh !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important;
+
+    display: grid !important;
+    place-items: start !important;
+}
+div.card {
+    display: grid !important;
+    place-items: center !important;
+    position: relative !important;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 5px 15px; rgba(0, 0, 0, 0.5) !important;
+    height: 250px !important;
+    width: 650px !important;
+    margin: 0 10em 0 2em !important;
+
 
 }
 
-.card-body {
-    margin-top: 20px !important;
-    background-color: var(--primary) !important;
+.card-title {
+    font-family: 'Rubik Distressed', cursive;
+    text-outline: var(--primary);
+    text-shadow: var(--third) 1px 0 10px;
+    color: rebeccapurple;
+}
 
+.card-text {
+    font-family: 'Roboto', sans-serif;
+    text-outline: var(--primary);
+    text-shadow: var(--third) 1px 0 10px;
+    color: rebeccapurple;
 
 }
+

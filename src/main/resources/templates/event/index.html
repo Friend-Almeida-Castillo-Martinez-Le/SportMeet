@@ -2,16 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="fragments/partials :: head('Event Index')">
 </head>
+<body id="allEvents">
 
-<!--<style>-->
-<!--    @import "/css/allEvents.css";-->
-<!--</style>-->
-<body>
     <nav th:replace="fragments/partials :: navbar"></nav>
-    <div th:each="event: ${events}" class="card">
-        <div class="card-body">
-            <h3 th:text="${event.title}" class="card-title"></h3>
-            <h6 th:text="${event.sport.name}" class="card-text">Game: </h6>
+
+    <div th:each="event: ${events}" class="card row">
+        <div class="info col">
+            <h1 th:text="${event.title}" class="card-title"></h1>
+            <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
             <p th:text="${event.description}" class="card-text">Description: </p>
             <th:block sec:authorize="isAuthenticated()">
                 <p th:text="${event.location}" class="card-text">Address: </p>
@@ -23,5 +21,6 @@
 <!--        <img class="card-img-bottom" src="" th:alt="@{../img/default-cardimg.jpg}" th:href="">-->
         </div>
     </div>
+
 </body>
 </html>
