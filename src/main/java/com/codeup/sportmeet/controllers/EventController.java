@@ -44,6 +44,12 @@ public class EventController {
     @Value("${FILESTACK_API}")
     private String fsKey;
 
+    @Value("${MAPBOX_API}")
+    private String mbKey;
+
+    @Value("${WEATHER_API}")
+    private String wKey;
+
     @GetMapping("events")
     public String eventsIndex(Model model) {
         List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(eventsDao.findAll());
@@ -132,6 +138,15 @@ public class EventController {
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", eventsDao.getById(id).getComments());
         model.addAttribute("eventPlayerUsernames", eventPlayerUsernames);
+        model.addAttribute("mbKey", mbKey);
+        model.addAttribute("wKey", wKey);
+        if (event.getLocation() == null) {
+            event.setLocation("San Antonio, TX");
+            model.addAttribute("geocodeLoc", event.getLocation());
+        } else {
+            model.addAttribute("geocodeLoc", event.getLocation());
+        }
+        model.addAttribute("eventDate", event.getDate());
         return "event/show";
     }
 

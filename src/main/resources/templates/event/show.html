@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
           rel="stylesheet">
     <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="" th:href="@{/css/SingleEvent.css}">
 </head>
 <body>
@@ -110,5 +113,27 @@
         </div>
     </div>
 </div>
+<div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
+<div id="weather" style="visibility: hidden">
+    <div class="card" id="day-1">
+        <div class="card-header">
+            Featured
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+            </li>
+            <li class="list-group-item">A second item</li>
+        </ul>
+    </div>
+</div>
+<script th:inline="javascript">
+    /*<! [CDATA[*/
+    const mapboxKey = /*[[${mbKey}]]*/ 'default';
+    const geocodeLoc = /*[[${geocodeLoc}]]*/ 'default';
+    const wKey = /*[[${wKey}]]*/ 'default';
+    const eventDate = /*[[${eventDate}]]*/ 'default';
+    /*]]>*/
+</script>
+<script th:src="@{/js/mapbox.js}"></script>
 </body>
 </html>
