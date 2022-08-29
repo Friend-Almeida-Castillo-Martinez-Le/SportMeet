@@ -8,8 +8,8 @@
 
     <div th:each="event: ${events}" class="card row">
         <div class="info col">
-            <h3 th:text="${event.title}" class="card-title"></h3>
-            <h6 th:text="${event.sport.name}" class="card-text">Game: </h6>
+            <h1 th:text="${event.title}" class="card-title"></h1>
+            <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
             <p th:text="${event.description}" class="card-text">Description: </p>
             <th:block sec:authorize="isAuthenticated()">
                 <p th:text="${event.location}" class="card-text">Location: </p>
