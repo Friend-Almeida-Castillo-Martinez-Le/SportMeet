@@ -23,12 +23,12 @@
                 <h3><a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button" th:name="upload">Upload Event Image</a></h3>
             </div>
         </th:block>
-
     </div>
-<!--    <div class="img-box"><img src="" th:src="@{../img/court.jpg}" class="img" alt="court" width="90%" height="550px"></div>-->
+
     <div class="img-box" th:if="${event.eventPicUrl != null}">
         <img th:src="${event.eventPicUrl}" alt="event-image" style="height: 550px; width: 90%" class="img">
     </div>
+
     <!--        Event information-->
     <div class="event-info">
         <!--        First Row-->
@@ -41,6 +41,7 @@
                 <h1> Host: <span th:text="${event.player.username}"></span></h1>
             </div>
         </div>
+
         <!--        Title-->
         <div class="game-title">
             <h1 th:text="${event.title}"></h1>
@@ -66,6 +67,7 @@
         </div>
         <div th:if="${event.player.id != #authentication.principal.id}">
             <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+                <div th:if="${event.started == false}">
                 <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
                       th:object="${event}">
                     <div class="attend-box">
@@ -76,6 +78,16 @@
                         <button type="submit" class="attend-btn">Attend</button>
                     </div>
                 </form>
+            </div>
+            </div>
+        </div>
+        <div th:if="${event.player.id == #authentication.principal.id}">
+            <div th:if="${event.started == true}">
+                <div th:if="${event.confirmed == false}">
+                <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
+                    <button type="submit">Start Event</button>
+                </form>
+                </div>
             </div>
         </div>
         <div class="comment-box">

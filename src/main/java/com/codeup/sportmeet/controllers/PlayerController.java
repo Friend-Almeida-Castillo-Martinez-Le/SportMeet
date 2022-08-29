@@ -34,13 +34,13 @@ public class PlayerController {
     @GetMapping("/players")
     public String playerIndex(Model model) {
         model.addAttribute("players", playerDao.findAll());
-        return "/player/index";
+        return "player/index";
     }
 
     @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
         model.addAttribute("player", new Player());
-        return "/player/sign-up";
+        return "player/sign-up";
     }
 
     @PostMapping("/sign-up")
@@ -57,13 +57,13 @@ public class PlayerController {
     public String showPlayer(@PathVariable long id, Model model) {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
-        return ("/player/show");
+        return ("player/show");
     }
 
     @GetMapping("player/{id}/edit")
     public String playerEdit(Model model, @PathVariable long id) {
         model.addAttribute("player", playerDao.getById(id));
-        return "/player/edit";
+        return "player/edit";
     }
 
     @GetMapping("player/{id}/delete")
@@ -75,7 +75,7 @@ public class PlayerController {
     @GetMapping("player/search/{name}")
     public String findPlayerByName(@PathVariable String name, Model model) {
         model.addAttribute("players", playerDao.searchByPlayerLike(name));
-        return "/player/index";
+        return "player/index";
     }
 
     @GetMapping("/profile/{id}/upload")
@@ -98,7 +98,7 @@ public class PlayerController {
 
     @GetMapping("/forgot-password")
     public String forgotPasswordForm(Model model) {
-        return "/player/forgotPassword";
+        return "player/forgotPassword";
     }
 
     @PostMapping("/forgot-password")
@@ -108,14 +108,14 @@ public class PlayerController {
             model.addAttribute("player", player);
             return "redirect:/set/" + player.getId() + "/password";
         } else {
-            return "/player/forgotPassword";
+            return "player/forgotPassword";
         }
     }
 
     @GetMapping("/set/{id}/password")
     public String showResetPassword(@PathVariable long id, Model model) {
         model.addAttribute("player", playerDao.getById(id));
-        return "/player/set-password";
+        return "player/set-password";
     }
 
     @PostMapping("/set/{id}/password")
@@ -125,7 +125,10 @@ public class PlayerController {
             String hash = passwordEncoder.encode(password);
             changePlayer.setPassword(hash);
             playerDao.save(changePlayer);
+            return "redirect:/login";
+        } else {
+            return "redirect:/set/" + changePlayer.getId() + "/password";
         }
-        return "redirect:/login";
+
     }
 }

@@ -1,0 +1,50 @@
+
+
+:root {
+    --primary: hsl(300, 49%, 78%);
+    --secondary: hsl(0, 0%, 1%);
+}
+#body {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(35deg, var(--primary), var(--secondary));
+    /*url("../img/pexels-binyamin-mellish-140039.jpg") no-repeat center center / cover;*/
+}
+#card-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+}
+
+#card-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid white;
+    margin-top: 5em;
+    color: lightgrey;
+    background: rgba(128, 128, 128, 0.44);
+    padding: 2em;
+    border-radius: 10px;
+    width: 35%;
+    height: 40%;
+}
+
+#img{
+    background-color: #eee;
+    display: flex;
+    height: 180px;
+    margin: 5px;
+    width: 260px;
+}
+#container2{
+    background-color: red;
+}
+
+#fonts{
+    font-weight: bold;
+}
