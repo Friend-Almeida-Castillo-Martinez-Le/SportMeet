@@ -14,10 +14,18 @@ public class Sport {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private String image;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sport")
     private List<Event> events;
 
     public Sport() {
+    }
+    public Sport(String name, String image, List<Event> events) {
+        this.name = name;
+        this.image = image;
+        this.events = events;
     }
 
     public Sport(String name) {
@@ -57,5 +65,13 @@ public class Sport {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
