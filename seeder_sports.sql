@@ -1,6 +1,6 @@
 use readyup_db;
 
-insert into sports (name)
+insert into sports (name ,image)
 values ('Tennis'),
        ('Basketball'),
        ('Football'),
