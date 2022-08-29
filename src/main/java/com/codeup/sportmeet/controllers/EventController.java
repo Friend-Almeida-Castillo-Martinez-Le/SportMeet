@@ -120,7 +120,7 @@ public class EventController {
         }
         return "redirect:/events";
     }
-
+//    comment
     @GetMapping("event/{id}")
     public String showEvent(Model model, @PathVariable long id) throws ParseException {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
