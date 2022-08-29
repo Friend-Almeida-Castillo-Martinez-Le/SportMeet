@@ -11,6 +11,7 @@ import com.codeup.sportmeet.repositories.SportRepository;
 import org.hibernate.type.LocalTimeType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -118,7 +119,9 @@ public class EventController {
         String today = format.format(new Date());
         Date todayAsDate = format.parse(today);
         LocalTime now = LocalTime.now();
-        if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0,2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3,5)) >= now.getMinute()) {
+        if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0,2)) <= now.getHour() && Integer.parseInt(event.getStartTime().substring(3,5)) <= now.getMinute()) {
+            System.err.println(Integer.parseInt(event.getStartTime().substring(3,5)));
+            System.err.println(now.getMinute());
             event.setStarted(true);
             eventsDao.save(event);
         }
@@ -225,12 +228,14 @@ public class EventController {
     }
 
     @PostMapping("/event/{id}/start")
-    public String submitStart(@ModelAttribute("event") Event event, @ModelAttribute("players") ArrayList<Player> players) {
+    public String submitStart(@ModelAttribute("event") Event event, @ModelAttribute("players") ArrayList<Player> players, @RequestParam("confirmedPlayers") List<Long> confirmedPlayers) {
         Event event1 = eventsDao.getById(event.getId());
         event1.setConfirmed(true);
-        for (Player player : players) {
-            event1.getPlayers().add(playersDao.getById(player.getId()));
+        List<Player> newPlayers = new ArrayList<>();
+        for (Long id : confirmedPlayers) {
+            newPlayers.add(playersDao.getById(id));
         }
+        event1.setPlayers(newPlayers);
         event1.setPlayersAttending(eventsDao.getById(event1.getId()).getPlayers().size());
         eventsDao.save(event1);
         return "redirect:/event/" + event1.getId();
