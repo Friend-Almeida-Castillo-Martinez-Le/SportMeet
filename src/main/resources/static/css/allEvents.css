@@ -17,19 +17,21 @@ div.card {
     box-shadow: 0 5px 15px; rgba(0, 0, 0, 0.5) !important;
     height: 250px !important;
     width: 650px !important;
-    margin: 5em !important;
+    margin: 0 10em 0 2em !important;
 
 }
 
 .card-title {
     font-family: 'Rubik Distressed', cursive;
     text-outline: var(--primary);
+    text-shadow: var(--third) 1px 0 10px;
     color: rebeccapurple;
 }
 
 .card-text {
     font-family: 'Roboto', sans-serif;
     text-outline: var(--primary);
+    text-shadow: var(--third) 1px 0 10px;
     color: rebeccapurple;
 
 }
