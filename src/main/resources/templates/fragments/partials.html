@@ -35,19 +35,23 @@
                     </li>
                 </th:block>
 
-<!--                sports link -->
-                <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
-
 <!--                event link -->
-                <li class="nav-item" >
+                <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Events
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/events}">All Events</a></li>
-                        <li><a class="dropdown-item" th:href="@{/event/create}">Create an Event</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" type="button" th:href="@{/events}">All Events</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" type="button" th:href="@{/event/create}">Create an Event</a>
+                        </li>
                     </ul>
                 </li>
+
+<!--                sports link -->
+                <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
 
 <!--                login-->
                 <li sec:authorize="!isAuthenticated()">

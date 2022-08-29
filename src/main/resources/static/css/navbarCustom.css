@@ -41,3 +41,13 @@
     padding-bottom: 0 !important;
 }
 
+.dropdown-menu {
+    background: rgb(2,0,36) !important;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 13%, rgba(221,44,206,1) 65%, rgba(221,44,206,1) 71%, rgba(29,6,57,1) 99%) !important;
+}
+
+.dropdown-item {
+    color: var(--third) !important;
+    text-emphasis-color: antiquewhite;
+    font-size: 16px;
+}

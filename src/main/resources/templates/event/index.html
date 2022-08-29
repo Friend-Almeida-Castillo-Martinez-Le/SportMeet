@@ -4,9 +4,7 @@
 </head>
 <body id="allEvents">
 
-    <div th:replace="fragments/partials :: navbar">
-
-    </div>
+    <nav th:replace="fragments/partials :: navbar"></nav>
 
     <div th:each="event: ${events}" class="card row">
         <div class="info col">
