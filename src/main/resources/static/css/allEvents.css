@@ -3,6 +3,7 @@
     --secondary: hsla(0, 0%, 0%, 0.36) !important;
     --third: hsla(181, 100%, 50%, 0.82) !important;
     --fourth: hsla(305, 100%, 59%, 0.78) !important;
+    background-color: #000 !important;
 }
 ::placeholder {
     color: var(--third) !important;
@@ -58,7 +59,7 @@
 
 /* ALL EVENTS styling Start */
 body#allEvents{
-    background-image: url("../img/stadium-lights.jpg") !important;
+    background-image: url("../img/stadium-lights.png") !important;
     height: 100vh !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -70,17 +71,24 @@ body#allEvents{
 div.card {
     display: grid !important;
     place-items: center !important;
-    position: relative !important;
-    background-color: rgba(0, 0, 0, 0.6) !important;
+    position: static !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
     box-shadow: 0 6px 15px; rgba(112, 76, 142, 0.5) !important;
     backdrop-filter: blur(4px) !important;
-    height: 250px !important;
-    width: 650px !important;
-    margin: 0 10em 0 2em !important;
+    height: 200px !important;
+    width: 750px !important;
+    margin: 1em 10em 0 10em !important;
 }
 
-div.card a {
+div.grid-container a {
     text-decoration: none !important;
+}
+
+div.grid-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
 }
 
 .card-title {
@@ -93,7 +101,7 @@ div.card a {
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
     color: blanchedalmond;
-
+    margin-bottom: 0;
 }
 /*************************** ALL EVENTS styling... END*/
 
@@ -101,7 +109,7 @@ div.card a {
 
 body#aboutus {
 
-    background-image: url("../img/aboutus-lights.jpeg");
+    background-image: url("../img/aboutus-lights.png");
     height: 100vh;
     background-position: center;
     background-size: cover;

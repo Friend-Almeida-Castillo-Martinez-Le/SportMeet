@@ -5,22 +5,21 @@
 <body id="allEvents">
 
     <nav th:replace="fragments/partials :: navbar"></nav>
-    <div class="grid-container">
-        <div th:each="event: ${events}" class="card">
-            <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
-            <div class="info col">
+    <div class="grid-container" >
+        <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
+            <div class="card col-12">
                 <h1 th:text="${event.title}" class="card-title"></h1>
                 <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
                 <p th:text="${event.description}" class="card-text">Description: </p>
                 <th:block sec:authorize="isAuthenticated()">
-                    <p th:text="${event.location}" class="card-text">Address: </p>
-                    <p th:text="${event.date}" class="card-text">Date: ></p>
-                    <p th:text="${event.startTime}" class="card-text">Time: ></p>
+                    <span th:text="${event.location}" class="card-text">Address: </span>
+                    <span th:text="${event.date}" class="card-text">Date: ></span>
+                    <span th:text="${event.startTime}" class="card-text">Time: ></span>
                 </th:block>
             </div>
-            </a>
-        </div>
+        </a>
     </div>
+
 
 </body>
 </html>
