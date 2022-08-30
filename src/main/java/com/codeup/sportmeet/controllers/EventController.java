@@ -96,7 +96,7 @@ public class EventController {
                     }
                     else {
                         event.setPlayer(currentPlayer);
-                        if (url != null) {
+                        if (!url.equals("")) {
                             event.setEventPicUrl(url);
                         }
                         Event event2 = eventsDao.save(event);
@@ -112,7 +112,7 @@ public class EventController {
                 }
             } else {
             event.setPlayer(currentPlayer);
-            if (url != null) {
+            if (!url.equals("")) {
                 event.setEventPicUrl(url);
             }
             Event event2 = eventsDao.save(event);

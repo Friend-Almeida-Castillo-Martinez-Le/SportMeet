@@ -47,7 +47,7 @@ public class PlayerController {
     @PostMapping("/sign-up")
     public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url) {
         String hash = passwordEncoder.encode(player.getPassword());
-        if (url != null) {
+        if (!url.equals("")) {
             player.setProfilePicUrl(url);
         } else {
             player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
