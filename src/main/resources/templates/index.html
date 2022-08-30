@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="" th:href="@{/css/welcome.css}">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/partials :: head('Player Profile')">
 </head>
-<body>
-<div class="card">
-    <div class="logo-title">
+<body class="welcome-body">
+<nav th:replace="fragments/partials :: navbar"/>
+<div class="welcome-card">
+    <div class="welcome-title">
         <img th:src="@{img/black-back.png}" height="350px" width="350px" alt="logo">
     </div>
-    <div class="start-btn">
-        <a href="/events" type="button" class="login-btn">Enter</a>
+    <div class="welcome-start-btn">
+        <a href="/events" type="button" class="welcome-login-btn">Enter</a>
     </div>
 </div>
 </body>
-</html>>
+</html>
