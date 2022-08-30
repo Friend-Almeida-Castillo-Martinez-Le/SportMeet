@@ -71,6 +71,7 @@
     align-items: center;
     justify-content:center;
     flex-direction: column;
+
 }
 
 .form_container{
@@ -78,16 +79,16 @@
     justify-content: center;
     align-items: center;
     background-color: black;
-    width:80%;
+    width:50%;
     margin-top: 2em;
-    font-family: sans-serif !important;
+
 }
 
 /*center log field vertically*/
 
 .login {
     width: 100%;
-    padding-top: 156px;
+    padding-top: 20px;
 }
 
 .login__input {
@@ -126,13 +127,12 @@
     background-color: black;
     width: 100%;
     padding: 16px 20px;
-
 }
 
 .login__submit {
     background: #D4D3E8;
     font-size: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 16px 20px;
     border-radius: 26px;
     border: 1px solid #D4D3E8;
@@ -167,7 +167,7 @@
     text-align: center;
     color: #FFFFFF;
     font-size: 45px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     font-style: initial;
 
 }
@@ -181,8 +181,8 @@
 .label-email{
     color: lightgrey;
     font-size: large;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
 }
 
