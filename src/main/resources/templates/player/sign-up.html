@@ -25,6 +25,7 @@
                             <input type="hidden" id="fileupload">
                             <button class=" btn btn-green" id="picker" type="button">Pick file</button>
                             <div id="thumbnail-container"></div>
+                            <input type="hidden" name="profile_img"  id="hidden-input">
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
     const options = {
         onUploadDone: updateForm,
         onUploadDone: (res) =>
-            $('#image').append(`<input type="hidden" name="profile_img"  value="https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}">`),
+            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`) ,
         maxSize: 10 * 1024 * 1024,
         accept: 'image/*',
         uploadInBackground: false,
