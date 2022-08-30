@@ -1,22 +1,15 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" th:href="@{css/signin.css}">
-    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/partials :: head('Player Profile')">
 </head>
-<body>
-<div class="sign-container">
-    <div class="sign-logo">
-        <img  src="" th:src="@{img/black-back.png}" height="120" width="120" alt="logo">
+<body class="body1">
+<nav th:replace="fragments/partials :: navbar"/>
+<div class="sign-container1">
+    <div class="sign-logo1">
+        <img src="" th:src="@{img/black-back.png}" height="120" width="120" alt="logo">
     </div>
-    <div class="sign-text">
+    <div class="sign-text1">
         <h1>Sign-in to play</h1>
     </div>
 </div>
@@ -26,41 +19,43 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post" class="signin-form">
-    <div class="signin-container">
-        <div class="email-label">
-            <label for="username">Username</label>
-            <div class="email-input">
-                <span class="envelope-icon"><i class="fa-regular fa-envelope"></i></span>
-                <input id="username" name="username" type="text" placeholder="Enter Username" class="input-form">
+<div class="form-container1">
+    <form th:action="@{/login}" method="post" class="signin-form1">
+        <div class="signin-container1">
+            <div class="email-label1">
+                <label for="username">Username</label>
+                <div class="email-input1">
+                    <span class="envelope-icon"><i class="fa-regular fa-envelope"></i></span>
+                    <input id="username" name="username" type="text" placeholder="Enter Username" class="input-form1">
+                </div>
+                <hr>
             </div>
-            <hr>
-        </div>
-        <div class="password-label">
-            <label for="password">Password</label>
-            <div class="password-input">
-                <span class="lock-icon"><i class="fa-regular fa-id-card"></i></span>
-                <input id="password" name="password" type="password" placeholder="Enter Password" class="input-form">
+            <div class="password-label1">
+                <label for="password">Password</label>
+                <div class="password-input1">
+                    <span class="lock-icon"><i class="fa-regular fa-id-card"></i></span>
+                    <input id="password" name="password" type="password" placeholder="Enter Password"
+                           class="input-form1">
+                </div>
+                <hr>
             </div>
-            <hr>
         </div>
-    </div>
-    <div class="sign-lower">
-        <div>
-            <input id="remember" name="remember" type="checkbox" class="checkbox-form">
-            <label for="remember">Remember me ?</label>
+        <div class="sign-lower1">
+            <div>
+                <a class="forgot-pass1" href="/sign-up">Need An Account?</a>
+            </div>
+            <div>
+                <a class="forgot-pass1" href="/forgot-password">Forgot Password?</a>
+            </div>
         </div>
-        <div>
-            <a class="forgot-pass" href="/forgot-password">Forgot Password?</a>
+        <div class="button-container1">
+            <div>
+                <button type="submit" class="login-btn1">Login</button>
+            </div>
+            <br>
+            <br>
         </div>
-    </div>
-    <div class="button-container">
-        <div>
-            <button type="submit" class="login-btn">Login</button>
-        </div>
-        <br>
-        <br>
-    </div>
-</form>
+    </form>
+</div>
 </body>
 </html>
