@@ -18,7 +18,17 @@
                 <input class="form-control" th:field="*{firstName}" />
                 <label class="form-label">Last Name:</label>
                 <input class="form-control" th:field="*{lastName}" />
-
+                <div class="black-trans-bg" style="height: 100vh">
+                    <div id="inline" class="card sand-bg offset-1 col-10 mt-5 p-5">
+                        <div id="image">
+                            <label for="fileupload">Select a file to upload</label>
+                            <input type="hidden" id="fileupload">
+                            <button class=" btn btn-green" id="picker" type="button">Pick file</button>
+                            <div id="thumbnail-container"></div>
+                            <input type="hidden" name="profile_img"  id="hidden-input">
+                        </div>
+                    </div>
+                </div>
                 <input type="submit" />
             </form>
 
@@ -27,6 +37,65 @@
 </div>
 
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const file = /*[[${fsKey}]]*/ 'default';
+    const client = filestack.init(file);
+    const options = {
+        onUploadDone: updateForm,
+        onUploadDone: (res) =>
+            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`) ,
+        maxSize: 10 * 1024 * 1024,
+        accept: 'image/*',
+        uploadInBackground: false,
+    };
+    const picker = client.picker(options);
 
+    const form = document.getElementById('pick-form');
+    const fileInput = document.getElementById('fileupload');
+    const btn = document.getElementById('picker');
+    const nameBox = document.getElementById('nameBox');
+    const urlBox = document.getElementById('urlBox');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        picker.open();
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Submitting: ' + fileInput.value);
+    });
+
+    function updateForm (result) {
+        const fileData = result.filesUploaded[0];
+        fileInput.value = fileData.url;
+
+        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
+            const container = document.getElementById('thumbnail-container');
+            const thumbnail = document.getElementById('thumbnail') || new Image();
+            thumbnail.id = 'thumbnail';
+            thumbnail.src = client.transform(fileData.handle, {
+                resize: {
+                    width: 200
+                }
+            });
+
+            if (!container.contains(thumbnail)) {
+                container.appendChild(thumbnail);
+            }
+        }
+
+        const name = document.createTextNode('Selected: ' + fileData.filename);
+        const url = document.createElement('a');
+        url.href = fileData.url;
+        url.appendChild(document.createTextNode(fileData.url));
+        nameBox.appendChild(name);
+        urlBox.appendChild(document.createTextNode('Uploaded to: '));
+        urlBox.appendChild(url);
+    };
+
+    /*]]>*/
+</script>
 </body>
 </html>

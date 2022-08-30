@@ -39,17 +39,21 @@ public class PlayerController {
 
     @GetMapping("/sign-up")
     public String showCreateForm(Model model) {
+        model.addAttribute("fsKey", fsKey);
         model.addAttribute("player", new Player());
         return "player/sign-up";
     }
 
     @PostMapping("/sign-up")
-    public String playerCreate(@ModelAttribute Player player) {
+    public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url) {
         String hash = passwordEncoder.encode(player.getPassword());
-        player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+        if (!url.equals("")) {
+            player.setProfilePicUrl(url);
+        } else {
+            player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+        }
         player.setPassword(hash);
         playerDao.save(player);
-
         return "redirect:/login";
     }
 
