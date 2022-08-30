@@ -24,7 +24,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <div th:if="${player.id == #authentication.principal.id}">
                     <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button"
-                       th:name="upload">Upload Profile Picture</a>
+                       th:name="upload">Change Profile Picture</a>
                 </div>
             </th:block>
             <h3 style="text-decoration: underline">Hosting:</h3>

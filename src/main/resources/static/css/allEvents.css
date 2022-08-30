@@ -73,7 +73,7 @@ div.card {
     place-items: center !important;
     position: static !important;
     background-color: rgba(0, 0, 0, 0.7) !important;
-    box-shadow: 0 6px 15px; rgba(112, 76, 142, 0.5) !important;
+    box-shadow: 0 6px 15px rgba(112, 76, 142, 0.5) !important;
     backdrop-filter: blur(4px) !important;
     height: 200px !important;
     width: 750px !important;
