@@ -5,20 +5,20 @@
 <body id="allEvents">
 
     <nav th:replace="fragments/partials :: navbar"></nav>
-
-    <div th:each="event: ${events}" class="card row">
-        <div class="info col">
-            <h1 th:text="${event.title}" class="card-title"></h1>
-            <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
-            <p th:text="${event.description}" class="card-text">Description: </p>
-            <th:block sec:authorize="isAuthenticated()">
-                <p th:text="${event.location}" class="card-text">Address: </p>
-                <p th:text="${event.date}" class="card-text">Date: ></p>
-                <p th:text="${event.startTime}" class="card-text">Time: ></p>
-                <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View Event</a>
-            </th:block>
-            <img src="" class="card-img-bottom" alt="">
-<!--        <img class="card-img-bottom" src="" th:alt="@{../img/default-cardimg.jpg}" th:href="">-->
+    <div class="grid-container">
+        <div th:each="event: ${events}" class="card">
+            <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
+            <div class="info col">
+                <h1 th:text="${event.title}" class="card-title"></h1>
+                <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
+                <p th:text="${event.description}" class="card-text">Description: </p>
+                <th:block sec:authorize="isAuthenticated()">
+                    <p th:text="${event.location}" class="card-text">Address: </p>
+                    <p th:text="${event.date}" class="card-text">Date: ></p>
+                    <p th:text="${event.startTime}" class="card-text">Time: ></p>
+                </th:block>
+            </div>
+            </a>
         </div>
     </div>
 
