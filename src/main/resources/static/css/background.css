@@ -1,5 +1,5 @@
  :root {
-    --primary: hsl(305, 87%, 46%, 0.65);
+    --primary: hsla(305, 33%, 40%, 0.65);
     --secondary: hsl(181, 89%, 52%, 0.65);
 }
 

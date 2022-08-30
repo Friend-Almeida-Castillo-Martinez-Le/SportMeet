@@ -3,6 +3,7 @@
     --secondary: hsla(0, 0%, 0%, 0.36) !important;
     --third: hsla(181, 100%, 50%, 0.82) !important;
     --fourth: hsla(305, 100%, 59%, 0.78) !important;
+    background-color: #000 !important;
 }
 ::placeholder {
     color: var(--third) !important;
@@ -45,20 +46,20 @@
 
 .dropdown-menu {
     background: rgb(2,0,36) !important;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 13%, rgba(221,44,206,1) 65%, rgba(221,44,206,1) 71%, rgba(29,6,57,1) 99%) !important;
+
 }
 
 .dropdown-item {
     color: var(--third) !important;
-    text-emphasis-color: antiquewhite;
     font-size: 16px;
+
 }
 
 /* NAVBAR Customizations... END*/
 
 /* ALL EVENTS styling Start */
 body#allEvents{
-    background-image: url("../img/stadium-lights.jpg") !important;
+    background-image: url("../img/stadium-lights.png") !important;
     height: 100vh !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -70,29 +71,37 @@ body#allEvents{
 div.card {
     display: grid !important;
     place-items: center !important;
-    position: relative !important;
-    background-color: rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 5px 15px; rgba(0, 0, 0, 0.5) !important;
-    height: 250px !important;
-    width: 650px !important;
-    margin: 0 10em 0 2em !important;
+    position: static !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    box-shadow: 0 6px 15px; rgba(112, 76, 142, 0.5) !important;
+    backdrop-filter: blur(4px) !important;
+    height: 200px !important;
+    width: 750px !important;
+    margin: 1em 10em 0 10em !important;
+}
 
+div.grid-container a {
+    text-decoration: none !important;
+}
 
+div.grid-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
 }
 
 .card-title {
-    font-family: 'Rubik Distressed', cursive;
-    text-outline: var(--primary);
-    text-shadow: var(--third) 1px 0 10px;
-    color: rebeccapurple;
+    font-family: 'Barlow', sans-serif;;
+    font-size: 2em;
+    color: blanchedalmond;
 }
 
 .card-text {
-    font-family: 'Roboto', sans-serif;
-    text-outline: var(--primary);
-    text-shadow: var(--third) 1px 0 10px;
-    color: rebeccapurple;
-
+    font-family: 'Barlow', sans-serif;
+    font-size: 20px;
+    color: blanchedalmond;
+    margin-bottom: 0;
 }
 /*************************** ALL EVENTS styling... END*/
 
@@ -100,7 +109,7 @@ div.card {
 
 body#aboutus {
 
-    background-image: url("../img/aboutus-lights.jpg");
+    background-image: url("../img/aboutus-lights.png");
     height: 100vh;
     background-position: center;
     background-size: cover;
