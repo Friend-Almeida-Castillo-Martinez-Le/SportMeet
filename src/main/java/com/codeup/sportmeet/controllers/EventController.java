@@ -65,12 +65,13 @@ public class EventController {
         } else {
             model.addAttribute("event", new Event());
             model.addAttribute("sports", sportsDao.findAll());
+            model.addAttribute("fsKey", fsKey);
             return "event/create";
         }
     }
 
     @PostMapping("event/create")
-    public String createEvent(@ModelAttribute Event event) throws ParseException {
+    public String createEvent(@ModelAttribute Event event, @RequestParam("profile_img") String url) throws ParseException {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String today = format.format(new Date());
@@ -95,6 +96,9 @@ public class EventController {
                     }
                     else {
                         event.setPlayer(currentPlayer);
+                        if (url != null) {
+                            event.setEventPicUrl(url);
+                        }
                         Event event2 = eventsDao.save(event);
                         if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
                             playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
@@ -108,6 +112,9 @@ public class EventController {
                 }
             } else {
             event.setPlayer(currentPlayer);
+            if (url != null) {
+                event.setEventPicUrl(url);
+            }
             Event event2 = eventsDao.save(event);
             if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
                 playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());

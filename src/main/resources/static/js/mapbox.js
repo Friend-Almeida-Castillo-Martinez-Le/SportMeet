@@ -77,12 +77,20 @@ function weatherDisplay(lat, lon) {
 }
 
 geocode(geocodeLoc, mapboxKey).then(function (data) {
-    const ll = new mapboxgl.LngLat(data[0], data[1]);
-    map.flyTo({center: [data[0], data[1]]})
+    mapboxgl.accessToken = mapboxKey;
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [data[0], data[1]], // starting position [lng, lat]
+        zoom: 12, // starting zoom
+        projection: 'globe' // display the map as a 3D globe
+    });
+    map.on('style.load', () => {
+        map.setFog({}); // Set the default atmosphere style
+    });
     const NewMARKER = new mapboxgl.Marker()
         .setLngLat([data[0], data[1]])
         .addTo(map);
-    weatherDisplay(data[1], data[0]);
 })
 
 
