@@ -111,6 +111,7 @@ body#aboutus {
 
     background-image: url("../img/aboutus-lights.png");
     height: 100vh;
+    min-height: available;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -120,7 +121,7 @@ body#aboutus {
 }
 
 body#aboutus * {
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 
 body#aboutus h3 {
@@ -140,22 +141,26 @@ body#aboutus p {
 .all-cards-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
+    width: 100%;
 }
 
 .top-cards-container {
     display: flex;
-    /*align-items: center;*/
+    margin: 1em;
+    align-items: center;
     justify-content: space-evenly;
     flex-direction: row;
+    width: 100%;
 }
 
 .bottom-cards-container {
     display: flex;
-    /*align-items: center;*/
-    justify-content: space-around;
+    align-items: center;
+    justify-content: space-evenly;
     flex-direction: row;
+    width: 100%;
 }
 
 
@@ -187,6 +192,9 @@ body#aboutus p {
     border: 1px solid #03BFCB;
     border-radius: 50%;
     padding: 7px;
+    background-position: center center;
+    background-size: contain;
+    /*object-fit: cover;*/
 }
 
 button.primary {
@@ -226,28 +234,4 @@ button.primary.ghost {
     padding: 7px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
 /*************************** ABOUT US styling... END*/
