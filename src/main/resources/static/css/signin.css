@@ -88,8 +88,8 @@
 }
 
 hr {
-    height: 3px;
-    background: white;
+    height: 3px !important;
+    background: white !important;
     width: 100%;
 }
 
@@ -144,7 +144,11 @@ hr {
 }
 
 .sign-text1 {
-    margin: 0;
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
 }
 
 .signin-container1 {
@@ -192,7 +196,7 @@ h1 {
 
 /************* END LOGIN CSS ***************/
 
-/************* WELCOME CSS ***************/
+/************* START WELCOME CSS ***************/
 
 
 .welcome-body {
@@ -233,3 +237,305 @@ h1 {
     text-decoration: none;
 }
 /************* END WELCOME CSS ***************/
+
+/************* START CREATE EVENT CSS ***************/
+
+
+
+.create-body {
+    --primary: hsl(0, 9%, 13%);
+    --secondary: hsla(0, 0%, 0%, 0.36);
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary)),
+    url("../img/background.jpg") no-repeat center center / cover;
+}
+.create-upload-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, 0.4);
+    margin-top: 1em;
+    padding: 1em;
+    color: white;
+    border-radius: 10px;
+}
+#picker{
+    color: lightgrey;
+
+}
+
+.create-title{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: x-large;
+    font-family: 'Montserrat', sans-serif;
+}
+.create-title-label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.create-title-div{
+    width: 40%;
+}
+.create-register-form {
+    margin-left: 5em;
+    margin-right: 5em;
+    font-size: x-large;
+}
+
+.create-register-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    color: lightgray;
+    font-size: xx-large;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+.create-email-label {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+}
+
+.create-username-label {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 1em;
+
+}
+
+.create-password-label {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.create-title{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.create-checkbox-form{
+    height: 20px;
+    width: 20px;
+}
+
+.create-sign-lower{
+    display: flex;
+    justify-content: space-between;
+    font-size: 35px;
+    color: lightgrey;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+
+}
+
+.create-forgot-pass{
+    border-bottom: 1px solid lightgrey ;
+}
+
+.create-input-form {
+    border: none;
+    background: none;
+    text-align: right;
+    font-size: 20px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-weight: bold;
+    color:lightgrey;
+    width: 100%;
+}
+
+hr {
+    height: 1px;
+    background: white;
+    width: 100%;
+}
+
+.create-button-container{
+    margin-top: 6em;
+    width: 100%;
+}
+
+.create-ready-btn{
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+    display: block;
+    width: 50%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 15px;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 50px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+.create-login-btn{
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+    display: block;
+    width: 100%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 15px 20px;
+    font-size: 80px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+.create-email-input{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top:20px;
+}
+
+.create-password-input {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 20px;
+}
+
+.create-account-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00FBFFD1;
+    font-size: xx-large;
+    margin-top: 2em;
+}
+
+.create-anchor-link {
+    border-bottom: 1px solid #00FBFFD1;
+}
+
+.create-text-title{
+    color: lightgray;
+}
+
+.create-select{
+    border: none;
+    color: lightgray;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: xx-large;
+    direction: rtl;
+    background: transparent;
+
+}
+#date{
+    background: transparent;
+    border: none;
+    color: lightgrey;
+}
+
+.create-label-check{
+    font-size: x-large;
+}
+
+.create-time-input{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top:20px;
+    font-size: x-large;
+    margin-top: 11px;
+}
+.create-time-input{
+    background: transparent;
+}
+.create-description-form{
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-weight: bold;
+    color:lightgrey;
+    width: 100%;
+    top: 20px;
+}
+.create-image-title{
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: lightgrey;
+    font-size: x-large;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.create-upload-icon{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.create-ready-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.create-file{
+    display: none;
+}
+
+.create-upload-label{
+    cursor: pointer;
+}
+.create-upload-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: grey;
+    font-size: xx-large;
+}
+.create-sport-box{
+    width: 40%;
+}
+.create-time-slot{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.create-start-time{
+    display: flex;
+
+}
+.create-time-box{
+    width: 50%;
+}
+.create-location-input{
+    font-size: 48px;
+    top: 50px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    color: lightgrey;
+}
+.create-location-select{
+    width: 70%;
+    height: 50px;
+    font-size: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: lightgrey;
+}
+
+/************* END CREATE EVENT CSS ***************/
