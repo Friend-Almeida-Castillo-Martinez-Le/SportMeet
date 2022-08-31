@@ -28,7 +28,7 @@
                 <div class="create-email-input">
                     <span class="lock-icon"></span>
                     <input type="text" placeholder="Where will you play?" class="create-input-form"
-                           th:field="*{location}">
+                           th:field="*{location}" id="location">
                 </div>
                 <hr>
             </div>
@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="create-ready-btn-container">
-        <button class="create-ready-btn" th:value="${event.id}"> Ready Up</button>
+        <button class="create-ready-btn" th:value="${event.id}" type="submit"> Ready Up</button>
     </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -105,7 +105,6 @@
     };
     const picker = client.picker(options);
 
-    const form = document.getElementById('pick-form');
     const fileInput = document.getElementById('fileupload');
     const btn = document.getElementById('picker');
     const nameBox = document.getElementById('nameBox');
@@ -116,10 +115,6 @@
         picker.open();
     });
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Submitting: ' + fileInput.value);
-    });
 
     function updateForm(result) {
         const fileData = result.filesUploaded[0];
