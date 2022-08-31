@@ -11,9 +11,12 @@
                 <label class="form-label">username:</label>
                 <input class="form-control" th:field="*{username}" required/>
                 <label class="form-label" for="password">password:</label>
-                <input id="password" type="password" class="form-control" th:field="*{password}" required />
+                <input name="password" id="password" type="password" class="form-control" th:field="*{password}" required />
                 <span id="message"></span>
                 <span id="message2"></span>
+                <label class="form-label" for="confirm-password">confirm password:</label>
+                <input name="confirm-password" id="confirm-password" type="password" class="form-control" required />
+                <span id="message3"></span>
                 <label class="form-label">email:</label>
                 <input type="email" class="form-control" th:field="*{email}" required/>
                 <label class="form-label">First Name:</label>
@@ -78,6 +81,15 @@
         }
         else {
             $('#message2').html('Password is strong.<br>').css('color', 'green');
+        }
+    })
+
+    $('#confirm-password').on('keyup', function () {
+        if ($('#password').val() !== $('#confirm-password').val()) {
+            $('#message3').html('* Passwords do not match.<br>').css('color', 'red');
+        }
+        else {
+            $('#message3').html('Passwords match.<br>').css('color', 'green');
         }
     })
 </script>
