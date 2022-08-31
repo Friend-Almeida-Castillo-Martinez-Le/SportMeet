@@ -74,7 +74,8 @@
             <hr>
         </div>
     </div>
-    <div class="upload-container">
+</form>
+    <div class="create-upload-container">
         <div class="black-trans-bg">
             <div id="inline" class="create-upload-image">
                 <div id="image">
@@ -90,7 +91,6 @@
     <div class="create-ready-btn-container">
         <button class="create-ready-btn" th:value="${event.id}"> Ready Up</button>
     </div>
-</form>
 <script th:inline="javascript">
     /*<![CDATA[*/
     const file = /*[[${fsKey}]]*/ 'default';
