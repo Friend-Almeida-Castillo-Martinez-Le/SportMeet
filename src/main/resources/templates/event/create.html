@@ -1,64 +1,63 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
-          rel="stylesheet">
-    <script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://static.filestackapi.com/v3/filestack.js"></script>
-    <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
-    <link rel="stylesheet" href="" th:href="@{../css/eventCreate.css}">
-    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/partials :: head('Player Profile')">
 </head>
+<nav th:replace="fragments/partials :: navbar"/>
 
-<div class="title">
-    <div class="container head1">
-        <h1>Create An</h1>
-        <div class="sub-title">
-            <h2>Event</h2>
-        </div>
+<body class="create-body">
+<div class="create-title">
+    <div class="create-container head1">
+        <h1>Create An Event</h1>
     </div>
 </div>
-<form th:action="@{/event/create}" th:method="post" th:object="${event}" class="register-form">
-    <div class="register-container">
-        <div class="title-label">
-            <label for="title">Title</label>
-            <div class="email-input">
-                <span class="lock-icon"></span>
-                <input id="title" name="title" type="text" placeholder="Name of the Event" class="input-form"
-                       th:field="*{title}">
+<form th:action="@{/event/create}" th:method="post" th:object="${event}" class="create-register-form">
+    <div class="create-register-container">
+        <div class="create-title-label">
+            <div class="create-title-div">
+                <label for="title">Title</label>
+                <div class="create-email-input">
+                    <span class="lock-icon"></span>
+                    <input id="title" name="title" type="text" placeholder="Name of the Event" class="create-input-form"
+                           th:field="*{title}">
+                </div>
+                <hr>
             </div>
-            <hr>
+            <div class="create-title-div">
+                <label for="location">Location</label>
+                <div class="create-email-input">
+                    <span class="lock-icon"></span>
+                    <input type="text" placeholder="Where will you play?" class="create-input-form"
+                           th:field="*{location}">
+                </div>
+                <hr>
+            </div>
         </div>
-        <div class="username-label">
-            <div class="sport-box">
+        <div class="create-username-label">
+            <div class="create-sport-box">
                 <label for="sport">Sport</label>
-                <div class="email-input">
-                   <span class="checkbox">
-                    <input id="contact" name="remember" type="checkbox" class="checkbox-form">
-                     <label for="contact" class="label-check">Contact</label>
+                <div class="create-email-input">
+                   <span class="create-checkbox">
+                    <input id="contact" name="remember" type="checkbox" class="create-checkbox-form">
+                     <label for="contact" class="create-label-check">Contact</label>
                 </span>
-                    <select name="sport" id="sport" th:field="*{sport}">
+                    <select name="sport" id="sport" th:field="*{sport}" class="create-select">
                         <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
                     </select>
                 </div>
                 <hr>
             </div>
-            <div class="time-box">
+            <div class="create-time-box">
                 <label for="date">Time Slot</label>
-                <div class="time-input">
-                    <div class="date">
+                <div class="create-time-input">
+                    <div class="create-date">
                         <label>Date:</label>
                         <input id="date" name="date" type="date" th:field="*{date}">
                     </div>
-                    <div class="time-slot">
-                        <div class="start-time">
-                            <label class="time-title" for="start-time">Start</label>
-                            <input id="start-time" name="title" type="time" class="input-form"
+                    <div class="create-time-slot">
+                        <div class="create-start-time">
+                            <label class="create-time-title" for="start-time"></label>
+                            <input id="start-time" name="title" type="time" class="create-input-form"
                                    th:field="*{startTime}">
                         </div>
                     </div>
@@ -66,23 +65,18 @@
                 <hr>
             </div>
         </div>
-        <div class="description-label">
+        <div class="create-description-label">
             <label for="description">Description</label>
-            <div class="description-input">
-                <span>
-                </span>
+            <div class="create-description-input">
                 <input id="description" type="text" placeholder="Describe the event"
-                       class="description-form" th:field="*{description}">
+                       class="create-description-form" th:field="*{description}">
             </div>
+            <hr>
         </div>
     </div>
     <div class="upload-container">
-        <div class="location-input">
-            <label for="location">Address : </label>
-            <input id="location" type="text" class="location-select" th:field="*{location}">
-        </div>
-        <div class="black-trans-bg" style="height: 100vh">
-            <div id="inline" class="card sand-bg offset-1 col-10 mt-5 p-5">
+        <div class="black-trans-bg">
+            <div id="inline" class="create-upload-image">
                 <div id="image">
                     <label for="fileupload">Select a file to upload</label>
                     <input type="hidden" id="fileupload">
@@ -93,8 +87,8 @@
             </div>
         </div>
     </div>
-    <div class="ready-btn-container">
-        <button class="ready-btn" th:value="${event.id}"> Ready Up</button>
+    <div class="create-ready-btn-container">
+        <button class="create-ready-btn" th:value="${event.id}"> Ready Up</button>
     </div>
 </form>
 <script th:inline="javascript">
@@ -127,7 +121,7 @@
         alert('Submitting: ' + fileInput.value);
     });
 
-    function updateForm (result) {
+    function updateForm(result) {
         const fileData = result.filesUploaded[0];
         fileInput.value = fileData.url;
 
@@ -153,9 +147,10 @@
         nameBox.appendChild(name);
         urlBox.appendChild(document.createTextNode('Uploaded to: '));
         urlBox.appendChild(url);
-    };
+    }
 
     /*]]>*/
 </script>
+</form>
 </body>
 </html>
