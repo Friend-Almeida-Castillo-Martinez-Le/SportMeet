@@ -115,26 +115,13 @@ body#aboutus {
     background-size: cover;
     background-repeat: no-repeat;
 
-    font-family: Montserrat, sans-serif;
+    font-family: Barlow, sans-serif;
 
 }
 
 body#aboutus * {
     box-sizing: border-box;
 }
-
-/*body {*/
-/*    background-color: #28223F;*/
-/*    font-family: Montserrat, sans-serif;*/
-
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    flex-direction: column;*/
-
-/*    min-height: 100vh;*/
-/*    margin: 0;*/
-/*}*/
 
 body#aboutus h3 {
     margin: 10px 0;
@@ -154,6 +141,20 @@ body#aboutus p {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.top-cards-container {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.bottom-cards-container {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-around;
     flex-direction: row;
 }
 
