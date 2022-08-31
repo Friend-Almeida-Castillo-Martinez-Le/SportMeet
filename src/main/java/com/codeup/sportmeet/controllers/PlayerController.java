@@ -47,7 +47,7 @@ public class PlayerController {
     }
 
     @PostMapping("/sign-up")
-    public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url) {
+    public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url, @RequestParam("password")String password1, @RequestParam("confirm-password") String confirmPassword) {
         String password = player.getPassword();
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
         Pattern pattern = Pattern.compile(regex);
@@ -55,15 +55,20 @@ public class PlayerController {
         if (!matcher.matches()) {
             return "redirect:/sign-up";
         } else {
-            String hash = passwordEncoder.encode(player.getPassword());
-            if (!url.equals("")) {
-                player.setProfilePicUrl(url);
-            } else {
-                player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+            if (password1.equals(confirmPassword)) {
+                String hash = passwordEncoder.encode(player.getPassword());
+                if (!url.equals("")) {
+                    player.setProfilePicUrl(url);
+                } else {
+                    player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+                }
+                player.setPassword(hash);
+                playerDao.save(player);
+                return "redirect:/login";
             }
-            player.setPassword(hash);
-            playerDao.save(player);
-            return "redirect:/login";
+            else {
+                return "redirect:/sign-up";
+            }
         }
     }
 
