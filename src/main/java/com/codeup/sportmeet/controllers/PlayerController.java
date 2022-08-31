@@ -74,21 +74,33 @@ public class PlayerController {
 
     @GetMapping("/player/{id}")
     public String showPlayer(@PathVariable long id, Model model) {
-        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
-        return ("player/show");
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
+            return ("player/show");
+        }
     }
 
     @GetMapping("player/{id}/edit")
     public String playerEdit(Model model, @PathVariable long id) {
-        model.addAttribute("player", playerDao.getById(id));
-        return "player/edit";
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("player", playerDao.getById(id));
+            return "player/edit";
+        }
     }
 
     @GetMapping("player/{id}/delete")
     public String playerDelete(@PathVariable long id) {
-        playerDao.deleteById(id);
-        return "redirect:/players";
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            playerDao.deleteById(id);
+            return "redirect:/players";
+        }
     }
 
     @GetMapping("player/search/{name}")
@@ -99,20 +111,28 @@ public class PlayerController {
 
     @GetMapping("/profile/{id}/upload")
     public String viewAddProfilePhoto(@PathVariable long id, Model model, HttpSession session) {
-        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("id", currentPlayer.getId());
-        model.addAttribute("fsKey", fsKey);
-        model.addAttribute("player", playerDao.getById(id));
-        return "player/upload";
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            session.setAttribute("id", currentPlayer.getId());
+            model.addAttribute("fsKey", fsKey);
+            model.addAttribute("player", playerDao.getById(id));
+            return "player/upload";
+        }
     }
 
     @PostMapping("/profile/{id}/upload")
     public String savePhoto(@RequestParam(name = "profile_img") String img, @PathVariable long id) {
-        Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Player player = playerDao.getById(id);
-        player.setProfilePicUrl(img);
-        playerDao.save(player);
-        return "redirect:/player/" + currentPlayer.getId();
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Player player = playerDao.getById(id);
+            player.setProfilePicUrl(img);
+            playerDao.save(player);
+            return "redirect:/player/" + currentPlayer.getId();
+        }
     }
 
     @GetMapping("/forgot-password")
