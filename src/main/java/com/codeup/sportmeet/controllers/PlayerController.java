@@ -135,14 +135,21 @@ public class PlayerController {
     @PostMapping("/set/{id}/password")
     public String submitResetPassword(@ModelAttribute Player player, @RequestParam(name = "password") String password, @RequestParam(name = "confirm-password") String confirmPassword) {
         Player changePlayer = playerDao.getById(player.getId());
-        if (password.equals(confirmPassword)) {
-            String hash = passwordEncoder.encode(password);
-            changePlayer.setPassword(hash);
-            playerDao.save(changePlayer);
-            return "redirect:/login";
-        } else {
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        if (!matcher.matches()) {
             return "redirect:/set/" + changePlayer.getId() + "/password";
         }
-
+        else {
+            if (password.equals(confirmPassword)) {
+                String hash = passwordEncoder.encode(password);
+                changePlayer.setPassword(hash);
+                playerDao.save(changePlayer);
+                return "redirect:/login";
+            } else {
+                return "redirect:/set/" + changePlayer.getId() + "/password";
+            }
+        }
     }
 }
