@@ -50,30 +50,11 @@ public class PlayerController {
     public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url) {
         String password = player.getPassword();
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
-//        String upperRegex = "[A-Z]";
-//        String numberRegex = "[0-9]";
-//        String specialRegex = "[-+_!@#$%^&*.,?]";
         Pattern pattern = Pattern.compile(regex);
-//        Pattern pattern1 = Pattern.compile(upperRegex);
-//        Pattern pattern2 = Pattern.compile(numberRegex);
-//        Pattern pattern3 = Pattern.compile(specialRegex);
         Matcher matcher = pattern.matcher(password);
-//        Matcher matcher1 = pattern1.matcher(password);
-//        Matcher matcher2 = pattern2.matcher(password);
-//        Matcher matcher3 = pattern3.matcher(password);
         if (!matcher.matches()) {
-            System.err.println(password);
-            System.err.println(matcher.matches());
             return "redirect:/sign-up";
-        }
-//        else if (!matcher.matches() || !matcher1.matches() || !matcher2.matches() || !matcher3.matches()) {
-//            System.err.println(matcher.matches());
-//            System.err.println(matcher1.matches());
-//            System.err.println(matcher2.matches());
-//            System.err.println(matcher3.matches());
-//            return "redirect:/sign-up";
-//        }
-        else {
+        } else {
             String hash = passwordEncoder.encode(player.getPassword());
             if (!url.equals("")) {
                 player.setProfilePicUrl(url);

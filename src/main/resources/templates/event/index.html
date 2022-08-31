@@ -9,7 +9,16 @@
         <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
             <div class="card col-12">
                 <h1 th:text="${event.title}" class="card-title"></h1>
-                <h5 th:text="${event.sport.name}" class="card-text">Game: </h5>
+               <th:block th:switch="${event.sport.name}">
+                   <span th:case="Football"><img src="/img/rugby-ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Basketball"><img src="/img/basketball-ball.png" alt="ball" style="height: 20px;width: 20px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Tennis"><img src="/img/ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Baseball"><img src="/img/baseball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Golf"><img src="/img/golf.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Soccer"><img src="/img/soccer-ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Bowling"><img src="/img/strike.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span th:case="Volleyball"><img src="/img/volleyball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+               </th:block>
                 <p th:text="${event.description}" class="card-text">Description: </p>
                 <th:block sec:authorize="isAuthenticated()">
                     <span th:text="${event.location}" class="card-text">Address: </span>
