@@ -9,15 +9,17 @@
         <div class="col-12">
             <form th:action="@{/sign-up}" th:method="post" th:object="${player}">
                 <label class="form-label">username:</label>
-                <input class="form-control" th:field="*{username}" />
-                <label class="form-label">password:</label>
-                <input type="password" class="form-control" th:field="*{password}" />
+                <input class="form-control" th:field="*{username}" required/>
+                <label class="form-label" for="password">password:</label>
+                <input id="password" type="password" class="form-control" th:field="*{password}" required />
+                <span id="message"></span>
+                <span id="message2"></span>
                 <label class="form-label">email:</label>
-                <input type="email" class="form-control" th:field="*{email}" />
+                <input type="email" class="form-control" th:field="*{email}" required/>
                 <label class="form-label">First Name:</label>
-                <input class="form-control" th:field="*{firstName}" />
+                <input class="form-control" th:field="*{firstName}" required/>
                 <label class="form-label">Last Name:</label>
-                <input class="form-control" th:field="*{lastName}" />
+                <input class="form-control" th:field="*{lastName}" required/>
                 <div class="black-trans-bg" style="height: 100vh">
                     <div id="inline" class="card sand-bg offset-1 col-10 mt-5 p-5">
                         <div id="image">
@@ -36,6 +38,49 @@
     </div>
 </div>
 
+<script>
+    function isAllPresent(str) {
+        // Regex to check if a string
+        // contains uppercase, lowercase
+        // special character & numeric value
+        let pattern = new RegExp(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
+        );
+
+        // If the string is empty
+        // then print No
+        if (!str || str.length === 0) {
+            return "No";
+        }
+
+        // Print Yes If the string matches
+        // with the Regex
+        if (pattern.test(str)) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    $('#password').on('keyup',function () {
+        console.log('hello');
+        if ($('#password').val().length < 8) {
+            $('#message').html('* Password is too short must be at least 8 characters.<br>').css('color', 'red');
+        }
+        else if ($('#password').val().length > 20) {
+            $('#message').html('* Password is too long must be 20 or fewer characters.<br>').css('color', 'red');
+        }
+        else {
+            $('#message').html('Password length is good.<br>').css('color', 'green');
+        }
+        if (isAllPresent($('#password').val()) === "No") {
+            $('#message2').html('* Must contain lowercase, uppercase, number, and special character.<br>').css('color', 'red');
+        }
+        else {
+            $('#message2').html('Password is strong.<br>').css('color', 'green');
+        }
+    })
+</script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -51,7 +96,6 @@
     };
     const picker = client.picker(options);
 
-    const form = document.getElementById('pick-form');
     const fileInput = document.getElementById('fileupload');
     const btn = document.getElementById('picker');
     const nameBox = document.getElementById('nameBox');
@@ -60,11 +104,6 @@
     btn.addEventListener('click', function (e) {
         e.preventDefault();
         picker.open();
-    });
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Submitting: ' + fileInput.value);
     });
 
     function updateForm (result) {
@@ -94,7 +133,6 @@
         urlBox.appendChild(document.createTextNode('Uploaded to: '));
         urlBox.appendChild(url);
     };
-
     /*]]>*/
 </script>
 </body>

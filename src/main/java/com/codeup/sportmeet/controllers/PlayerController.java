@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 public class PlayerController {
@@ -46,15 +48,42 @@ public class PlayerController {
 
     @PostMapping("/sign-up")
     public String playerCreate(@ModelAttribute Player player, @RequestParam("profile_img") String url) {
-        String hash = passwordEncoder.encode(player.getPassword());
-        if (!url.equals("")) {
-            player.setProfilePicUrl(url);
-        } else {
-            player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+        String password = player.getPassword();
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
+//        String upperRegex = "[A-Z]";
+//        String numberRegex = "[0-9]";
+//        String specialRegex = "[-+_!@#$%^&*.,?]";
+        Pattern pattern = Pattern.compile(regex);
+//        Pattern pattern1 = Pattern.compile(upperRegex);
+//        Pattern pattern2 = Pattern.compile(numberRegex);
+//        Pattern pattern3 = Pattern.compile(specialRegex);
+        Matcher matcher = pattern.matcher(password);
+//        Matcher matcher1 = pattern1.matcher(password);
+//        Matcher matcher2 = pattern2.matcher(password);
+//        Matcher matcher3 = pattern3.matcher(password);
+        if (!matcher.matches()) {
+            System.err.println(password);
+            System.err.println(matcher.matches());
+            return "redirect:/sign-up";
         }
-        player.setPassword(hash);
-        playerDao.save(player);
-        return "redirect:/login";
+//        else if (!matcher.matches() || !matcher1.matches() || !matcher2.matches() || !matcher3.matches()) {
+//            System.err.println(matcher.matches());
+//            System.err.println(matcher1.matches());
+//            System.err.println(matcher2.matches());
+//            System.err.println(matcher3.matches());
+//            return "redirect:/sign-up";
+//        }
+        else {
+            String hash = passwordEncoder.encode(player.getPassword());
+            if (!url.equals("")) {
+                player.setProfilePicUrl(url);
+            } else {
+                player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
+            }
+            player.setPassword(hash);
+            playerDao.save(player);
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/player/{id}")
