@@ -38,10 +38,8 @@ public class SportController {
     @GetMapping("/sport/{name}")
     public String viewSport(@PathVariable String name, Model model) {
         List<Event> eventsOnPage = new ArrayList<>();
-        for (Event event: eventsDao.findAll()) {
-            if (event.getSport().getName().equalsIgnoreCase(name)) {
+        for (Event event: eventsDao.searchBySportName(name)) {
                 eventsOnPage.add(event);
-            }
         }
         model.addAttribute("events", eventsOnPage);
         return "sport/show";

@@ -52,9 +52,25 @@ public class EventController {
     private String wKey;
 
     @GetMapping("events")
-    public String eventsIndex(Model model) {
+    public String eventsIndex(Model model) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
         List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(eventsDao.findAll());
-        model.addAttribute("events",  orderedByDateAndTime);
+        List<Event> eventsOrdered = new ArrayList<>();
+        for (Event event : orderedByDateAndTime) {
+            if (format.parse(event.getDate()).after(todayAsDate)) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+                eventsOrdered.add(event);
+            } else {
+                continue;
+            }
+        }
+        model.addAttribute("events", eventsOrdered);
         return "event/index";
     }
 
@@ -76,41 +92,8 @@ public class EventController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String today = format.format(new Date());
         Date todayAsDate = format.parse(today);
-        if (format.parse(event.getDate()).before(todayAsDate)) {
-            return "redirect:/event/create";
-        }
-        else if (format.parse(event.getDate()).equals(todayAsDate)) {
-                LocalTime now = LocalTime.now();
-                System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
-                System.err.println(now.getHour());
-                if (Integer.parseInt(event.getStartTime().substring(0,2)) < now.getHour()) {
-                    System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
-                    System.err.println(now.getHour());
-                    return "redirect:/event/create";
-                }
-                else {
-                    if (Integer.parseInt(event.getStartTime().substring(3,5)) < now.getMinute()) {
-                        System.err.println(Integer.parseInt(event.getStartTime().substring(0,2)));
-                        System.err.println(now.getHour());
-                        return "redirect:/event/create";
-                    }
-                    else {
-                        event.setPlayer(currentPlayer);
-                        if (!url.equals("")) {
-                            event.setEventPicUrl(url);
-                        }
-                        Event event2 = eventsDao.save(event);
-                        if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
-                            playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
-                            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
-                            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
-                        } else {
-                            playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
-                            System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
-                        }
-                    }
-                }
-            } else {
+        LocalTime now = LocalTime.now();
+        if (format.parse(event.getDate()).after(todayAsDate)) {
             event.setPlayer(currentPlayer);
             if (!url.equals("")) {
                 event.setEventPicUrl(url);
@@ -120,14 +103,49 @@ public class EventController {
                 playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
                 playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
                 System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
             } else {
                 playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
                 System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
             }
+        } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+            event.setPlayer(currentPlayer);
+            if (!url.equals("")) {
+                event.setEventPicUrl(url);
+            }
+            Event event2 = eventsDao.save(event);
+            if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
+                playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
+            } else {
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
+            }
+        } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+            event.setPlayer(currentPlayer);
+            if (!url.equals("")) {
+                event.setEventPicUrl(url);
+            }
+            Event event2 = eventsDao.save(event);
+            if (playersDao.getById(currentPlayer.getId()).getEvents() == null) {
+                playersDao.getById(currentPlayer.getId()).setEvents(new ArrayList<>());
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
+            } else {
+                playersDao.getById(currentPlayer.getId()).getEvents().add(event2);
+                System.out.println("EVENTS HERE ---> " + playersDao.getById(currentPlayer.getId()).getEvents());
+                return "redirect:/events";
+            }
+        } else {
+            return "redirect:/event/create";
         }
-        return "redirect:/events";
     }
-//    comment
+
     @GetMapping("event/{id}")
     public String showEvent(Model model, @PathVariable long id) throws ParseException {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
@@ -244,8 +262,7 @@ public class EventController {
         for (Event event : eventsDao.searchEvents(search)) {
             searchedEvents.add(event);
         }
-        List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(searchedEvents);
-        model.addAttribute("events", orderedByDateAndTime);
+        model.addAttribute("events", searchedEvents);
         return "event/search";
     }
 
@@ -262,7 +279,7 @@ public class EventController {
     }
 
     @PostMapping("/event/{id}/upload")
-    public String savePhoto(@RequestParam(name="profile_img") String img, @PathVariable long id){
+    public String savePhoto(@RequestParam(name = "profile_img") String img, @PathVariable long id) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
