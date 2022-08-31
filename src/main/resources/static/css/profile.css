@@ -105,6 +105,7 @@
     font-size: large;
     border-radius: 26px;
     padding: .5em;
+
 }
 .login__field {
     display: flex;
@@ -150,12 +151,22 @@
     text-align: center;
 
 }
+.req-message{
+    position: relative;
+    color: red;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
 .button {
     display: flex;
     justify-content: center;
     width: 100%;
-
+    flex-direction: column;
 }
+
 
 .login__submit:active,
 .login__submit:focus,
@@ -188,6 +199,8 @@
     margin-bottom: 10px;
 
 }
+
+
 
 
 
