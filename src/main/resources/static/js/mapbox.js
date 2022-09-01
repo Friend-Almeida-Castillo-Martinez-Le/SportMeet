@@ -91,6 +91,7 @@ geocode(geocodeLoc, mapboxKey).then(function (data) {
     const NewMARKER = new mapboxgl.Marker()
         .setLngLat([data[0], data[1]])
         .addTo(map);
+    weatherDisplay(data[1],data[0]);
 })
 
 
