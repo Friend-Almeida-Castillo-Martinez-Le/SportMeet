@@ -43,7 +43,20 @@
         <div class="host-row">
             <div>
                 <h1><span th:text="${event.location}"></span></h1>
-                <h2><span th:text="${event.date}"></span></h2>
+                <h2><th:block th:switch="${event.date.substring(5,7)}">
+                    <span th:case="01" th:text="${'JAN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="02" th:text="${'FEB' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="03" th:text="${'MAR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="04" th:text="${'APR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="05" th:text="${'MAY' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="06" th:text="${'JUN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="07" th:text="${'JUL' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="08" th:text="${'AUG' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="09" th:text="${'SEP' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="10" th:text="${'OCT' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="11" th:text="${'NOV' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:case="12" th:text="${'DEC' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
+                </th:block></h2>
             </div>
             <div>
                 <h1> Host: <span th:text="${event.player.username}"></span></h1>
