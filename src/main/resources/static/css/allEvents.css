@@ -140,18 +140,19 @@ body#aboutus p {
 
 .all-cards-container {
     display: flex;
+    margin: 5em 0 0 0;
     align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: row;
     width: 100%;
 }
 
 .top-cards-container {
     display: flex;
-    margin: 1em;
+    margin: 5em;
     align-items: center;
     justify-content: space-evenly;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -167,11 +168,11 @@ body#aboutus p {
 .card-container-about {
     background-color: #231E39;
     border-radius: 5px;
-    box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+    box-shadow: 0 6px 15px rgba(112, 76, 142, 0.5);
     color: #B3B8CD;
     padding-top: 30px;
     position: relative;
-    width: 350px;
+    width: 250px;
     max-width: 100%;
     text-align: center;
 }
@@ -192,9 +193,9 @@ body#aboutus p {
     border: 1px solid #03BFCB;
     border-radius: 50%;
     padding: 7px;
-    background-position: center center;
-    background-size: contain;
-    /*object-fit: cover;*/
+    /*background-position: center center;*/
+    /*background-size: contain;*/
+    object-fit: cover;
 }
 
 button.primary {
