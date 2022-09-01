@@ -59,8 +59,6 @@ public class EventController {
         LocalTime now = LocalTime.now();
         List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(eventsDao.findAll());
         List<Event> eventsOrdered = new ArrayList<>();
-        String timeDisplay;
-        int hour;
         for (Event event : orderedByDateAndTime) {
             if (format.parse(event.getDate()).after(todayAsDate)) {
                 eventsOrdered.add(event);
@@ -71,20 +69,6 @@ public class EventController {
             } else {
                 continue;
             }
-//            for (Event event1 : eventsOrdered) {
-//                if (Integer.parseInt(event1.getStartTime().substring(0, 2)) > 12) {
-//                    hour = Integer.parseInt(event1.getStartTime().substring(0, 2)) - 12;
-//                    timeDisplay = hour + ":" + event1.getStartTime().substring(3, 5) + " PM";
-//                } else if (Integer.parseInt(event1.getStartTime().substring(0, 2)) < 12) {
-//                    timeDisplay = event1.getStartTime().substring(0, 2) + ":" + event1.getStartTime().substring(3, 5) + " AM";
-//                } else if (Integer.parseInt(event1.getStartTime().substring(0, 2)) == 12) {
-//                    timeDisplay = event1.getStartTime().substring(0, 2) + ":" + event1.getStartTime().substring(3, 5) + " PM";
-//                }
-//                else {
-//                    continue;
-//                }
-//                model.addAttribute("timeDisplay", timeDisplay);
-//            }
         }
         model.addAttribute("events", eventsOrdered);
         return "event/index";
@@ -273,12 +257,28 @@ public class EventController {
     }
 
     @GetMapping("event/search")
-    public String showSearchedEvents(Model model, @RequestParam("search") String search) {
+    public String showSearchedEvents(Model model, @RequestParam("search") String search) throws ParseException {
         List<Event> searchedEvents = new ArrayList<>();
         for (Event event : eventsDao.searchEvents(search)) {
             searchedEvents.add(event);
         }
-        model.addAttribute("events", searchedEvents);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
+        List<Event> eventsOrdered = new ArrayList<>();
+        for (Event event : searchedEvents) {
+            if (format.parse(event.getDate()).after(todayAsDate)) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+                eventsOrdered.add(event);
+            } else {
+                continue;
+            }
+        }
+        model.addAttribute("events", eventsOrdered);
         return "event/search";
     }
 
