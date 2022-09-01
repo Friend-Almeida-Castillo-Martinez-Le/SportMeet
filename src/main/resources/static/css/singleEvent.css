@@ -36,11 +36,43 @@ body {
     height:500px;
     width:300px;
     margin-top: 2em;
-}
-.show-img-box{
     display: flex;
-    justify-content: start;
-    align-items: start;
+    flex-direction: column;
+}
+.show-edit{
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+}
+.show-content-1{
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: large;
+    color: #FFFFFF;
+    margin-top: 3em;
+    padding: 1em;
+}
+.show-content-2{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: large;
+    color: #FFFFFF;
+    margin-top: 3em;
+    padding: 1em;
+}
+.show-content-box{
+    display: flex;
+    padding: 1em;
+}
+.show-location{
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    color: white;
 }
 
 .host-row {
