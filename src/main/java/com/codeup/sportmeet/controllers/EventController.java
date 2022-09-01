@@ -59,6 +59,8 @@ public class EventController {
         LocalTime now = LocalTime.now();
         List<Event> orderedByDateAndTime = eventsDao.orderEventsByDateAndStartTime(eventsDao.findAll());
         List<Event> eventsOrdered = new ArrayList<>();
+        String timeDisplay;
+        int hour;
         for (Event event : orderedByDateAndTime) {
             if (format.parse(event.getDate()).after(todayAsDate)) {
                 eventsOrdered.add(event);
@@ -69,6 +71,20 @@ public class EventController {
             } else {
                 continue;
             }
+//            for (Event event1 : eventsOrdered) {
+//                if (Integer.parseInt(event1.getStartTime().substring(0, 2)) > 12) {
+//                    hour = Integer.parseInt(event1.getStartTime().substring(0, 2)) - 12;
+//                    timeDisplay = hour + ":" + event1.getStartTime().substring(3, 5) + " PM";
+//                } else if (Integer.parseInt(event1.getStartTime().substring(0, 2)) < 12) {
+//                    timeDisplay = event1.getStartTime().substring(0, 2) + ":" + event1.getStartTime().substring(3, 5) + " AM";
+//                } else if (Integer.parseInt(event1.getStartTime().substring(0, 2)) == 12) {
+//                    timeDisplay = event1.getStartTime().substring(0, 2) + ":" + event1.getStartTime().substring(3, 5) + " PM";
+//                }
+//                else {
+//                    continue;
+//                }
+//                model.addAttribute("timeDisplay", timeDisplay);
+//            }
         }
         model.addAttribute("events", eventsOrdered);
         return "event/index";
