@@ -37,28 +37,23 @@
             <div class="create-sport-box">
                 <label for="sport">Sport</label>
                 <div class="create-email-input">
-                   <span class="create-checkbox">
-                    <input id="contact" name="remember" type="checkbox" class="create-checkbox-form">
-                     <label for="contact" class="create-label-check">Contact</label>
-                </span>
-                    <select name="sport" id="sport" th:field="*{sport}" class="create-select">
+                    <select name="sport" id="sport" th:field="*{sport}" class="create-select" style="color: #03BFCB">
                         <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
                     </select>
                 </div>
                 <hr>
             </div>
             <div class="create-time-box">
-                <label for="date">Time Slot</label>
+                <label for="date">Date - Start Time</label>
                 <div class="create-time-input">
                     <div class="create-date">
-                        <label>Date:</label>
-                        <input id="date" name="date" type="date" th:field="*{date}">
+                        <input id="date" name="date" type="date" th:field="*{date}"  style="color-scheme: dark; color: #03BFCB">
                     </div>
                     <div class="create-time-slot">
                         <div class="create-start-time">
                             <label class="create-time-title" for="start-time"></label>
                             <input id="start-time" name="title" type="time" class="create-input-form"
-                                   th:field="*{startTime}">
+                                   th:field="*{startTime}" style="color-scheme: dark; color: #03BFCB">
                         </div>
                     </div>
                 </div>
@@ -76,9 +71,9 @@
     </div>
     <div class="create-upload-container">
         <div class="black-trans-bg">
-            <div id="inline" class="create-upload-image">
+            <div id="inline" class="create-upload-image" style="height: .2em; width: 15em; background-color: rgba(0,0,0,0%)">
                 <div id="image">
-                    <label for="fileupload">Select a file to upload</label>
+                    <label for="fileupload" style="font-size: .8em">Select a file to upload</label>
                     <input type="hidden" id="fileupload">
                     <button class=" btn btn-green" id="picker" type="button">Pick file</button>
                     <div id="thumbnail-container"></div>
