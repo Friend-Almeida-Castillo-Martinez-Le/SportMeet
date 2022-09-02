@@ -56,19 +56,30 @@
                 <span> Start:</span> <span th:text="${event.startTime}"></span>
             </div>
         </div>
-        <div>
+        <div class="sport-row">
             <i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span>
         </div>
-        <div th:object="${event}">
-            <div th:each="player: ${event.getPlayers()}">
-                <h5 th:text="${player.username}"></h5>
+    </div>
+    <div class="comment-box">
+        <div class="comment-submit">
+            <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
+                <input placeholder="Comment" id="comment" th:field="*{description}">
+                <button type="submit" class="comment-btn">Submit</button>
+            </form>
+        </div>
+        <div class="comment-display">
+            <div th:each="comment: ${event.comments}">
+                <span th:text="${comment.player.username}"></span>
+                <span th:text="${comment.description}"></span>
+                <hr>
+                <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
+                    <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
+                       th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div>
-        <h3 th:text="${event.description}" id="description" class="desc-box"></h3>
-    </div>
     <div th:if="${event.player.id != #authentication.principal.id}">
         <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
             <div th:if="${event.started == false}">
@@ -94,28 +105,16 @@
             </div>
         </div>
     </div>
-
-
-</div>
-<div class="comment-box">
-    <div class="comment-submit">
-        <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
-            <textarea placeholder="Comment" id="comment" th:field="*{description}"></textarea>
-            <button type="submit" class="comment-btn">Comment</button>
-        </form>
-    </div>
-    <div class="comment-display">
-        <div th:each="comment: ${event.comments}">
-            <h3 th:text="${comment.player.username}"></h3>
-            <h4 th:text="${comment.description}"></h4>
-            <hr>
-            <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
-                <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
-                   th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
-            </div>
+    <div th:object="${event}">
+        <div th:each="player: ${event.getPlayers()}">
+            <h5 th:text="${player.username}"></h5>
         </div>
     </div>
 </div>
+    <div>
+        <span th:text="${event.description}" id="description" class="desc-box"></span>
+    </div>
+
 </div>
 </div>
 <div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
