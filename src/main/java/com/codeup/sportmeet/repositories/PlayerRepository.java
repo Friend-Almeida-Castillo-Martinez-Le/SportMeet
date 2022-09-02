@@ -15,6 +15,8 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     Player findByUsername(String username);
 
+    Player findByEmail(String email);
+
     Player findByUsernameAndEmail(String username, String email);
 
     @Transactional
