@@ -8,16 +8,16 @@
     <div class="row">
         <div class="col-12">
             <form th:action="@{/sign-up}" th:method="post" th:object="${player}">
-                <label class="form-label">username:</label>
+                <label class="form-label">Username:</label>
                 <input class="form-control" th:field="*{username}" required/>
-                <label class="form-label" for="password">password:</label>
+                <label class="form-label" for="password">Password:</label>
                 <input name="password" id="password" type="password" class="form-control" th:field="*{password}" required />
                 <span id="message"></span>
                 <span id="message2"></span>
-                <label class="form-label" for="confirm-password">confirm password:</label>
+                <label class="form-label" for="confirm-password">Confirm Password:</label>
                 <input name="confirm-password" id="confirm-password" type="password" class="form-control" required />
                 <span id="message3"></span>
-                <label class="form-label">email:</label>
+                <label class="form-label">Email:</label>
                 <input type="email" class="form-control" th:field="*{email}" required/>
                 <label class="form-label">First Name:</label>
                 <input class="form-control" th:field="*{firstName}" required/>
