@@ -19,21 +19,22 @@
 <nav th:replace="fragments/partials :: navbar"/>
 <body>
 
-<div class="host-edit">
-    <th:block sec:authorize="isAuthenticated()">
-        <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
-            <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
-               th:name="edit">Edit </a>
-            <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
-               th:name="delete"> Delete</a>
-            <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
-               th:name="upload">Change Event Image</a>
-        </div>
-    </th:block>
-</div>
-<div class="show-img-box">
+<div class="show-content-box">
     <div class="img-box" th:if="${event.eventPicUrl != null}">
+        <div class="show-edit">
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
+                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="edit">Edit </a>
+                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="delete"> Delete</a>
+                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="upload">Change Event Image</a>
+                </div>
+            </th:block>
+        </div>
         <img th:src="${event.eventPicUrl}" alt="event-image" class="img">
+        <h1><span th:text="${event.location}" class="show-location"></span></h1>
     </div>
 </div>
 <div class="single-container">
@@ -63,11 +64,12 @@
             </div>
         </div>
 
-        <!--        Title-->
+    </div>
+
+    <div class="show-content-2">
         <div class="game-title">
-            <h1 th:text="${event.title}"></h1>
+            <span th:text="${event.title}"></span>
         </div>
-        <!--        Second Row-->
         <div class="sport-row">
             <div>
                 <h1><span th:text="${event.sport.name}"></span></h1>
@@ -101,61 +103,66 @@
                 </th:block></h1>
             </div>
         </div>
-        <h2><i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span></h2>
-        <div th:object="${event}">
-            <div th:each="player: ${event.getPlayers()}">
-                <h5 th:text="${player.username}"></h5>
-            </div>
+        <div class="sport-row">
+            <i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span>
         </div>
-        <!--        Description-->
-        <div>
-            <h3 th:text="${event.description}" id="description" class="desc-box"></h3>
+    </div>
+    <div class="comment-box">
+        <div class="comment-submit">
+            <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
+                <input placeholder="Comment" id="comment" th:field="*{description}">
+                <button type="submit" class="comment-btn">Submit</button>
+            </form>
         </div>
-        <div th:if="${event.player.id != #authentication.principal.id}">
-            <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
-                <div th:if="${event.started == false}">
-                    <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
-                          th:object="${event}">
-                        <div class="attend-box">
-                            <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
-                            <label for="attending"><h2>Want to attend event?</h2></label><br>
-                        </div>
-                        <div>
-                            <button type="submit" class="attend-btn">Attend</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div th:if="${event.player.id == #authentication.principal.id}">
-            <div th:if="${event.started == true}">
-                <div th:if="${event.confirmed == false}">
-                    <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
-                        <button type="submit">Start Event</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="comment-box">
-            <div class="comment-submit">
-                <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
-                    <textarea placeholder="Comment" id="comment" th:field="*{description}"></textarea>
-                    <button type="submit" class="comment-btn">Comment</button>
-                </form>
-            </div>
-            <div class="comment-display">
-                <div th:each="comment: ${event.comments}">
-                    <h3 th:text="${comment.player.username}"></h3>
-                    <h4 th:text="${comment.description}"></h4>
-                    <hr>
-                    <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
-                        <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
-                           th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
-                    </div>
+        <div class="comment-display">
+            <div th:each="comment: ${event.comments}">
+                <span th:text="${comment.player.username}"></span>
+                <span th:text="${comment.description}"></span>
+                <hr>
+                <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
+                    <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
+                       th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <div th:if="${event.player.id != #authentication.principal.id}">
+        <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+            <div th:if="${event.started == false}">
+                <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
+                      th:object="${event}">
+                    <div class="attend-box">
+                        <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
+                        <label for="attending"><h2>Want to attend event?</h2></label><br>
+                    </div>
+                    <div>
+                        <button type="submit" class="attend-btn">Attend</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:if="${event.player.id == #authentication.principal.id}">
+        <div th:if="${event.started == true}">
+            <div th:if="${event.confirmed == false}">
+                <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
+                    <button type="submit">Start Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:object="${event}">
+        <div th:each="player: ${event.getPlayers()}">
+            <h5 th:text="${player.username}"></h5>
+        </div>
+    </div>
+</div>
+    <div>
+        <span th:text="${event.description}" id="description" class="desc-box"></span>
+    </div>
+
+</div>
 </div>
 <div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
 <div id="weather" style="visibility: hidden">
