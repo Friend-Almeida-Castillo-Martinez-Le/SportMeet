@@ -63,8 +63,12 @@ public class PlayerController {
                     player.setProfilePicUrl("https://cdn.filestackcontent.com/lZzcLaMGTMa9KovP6nxh");
                 }
                 player.setPassword(hash);
-                playerDao.save(player);
-                return "redirect:/login";
+                if (playerDao.findByUsernameAndEmail(player.getUsername(), player.getEmail()) != null) {
+                    return "redirect:/sign-up";
+                } else {
+                    playerDao.save(player);
+                    return "redirect:/login";
+                }
             }
             else {
                 return "redirect:/sign-up";
@@ -90,6 +94,42 @@ public class PlayerController {
         } else {
             model.addAttribute("player", playerDao.getById(id));
             return "player/edit";
+        }
+    }
+
+    @PostMapping("player/{id}/edit")
+    public String submitPlayerEdit(@ModelAttribute Player player, @RequestParam(name = "password") String password, @RequestParam(name = "confirm-password") String confirmPassword) {
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            if (player.getUsername() != null) {
+                if (playerDao.findByUsernameAndEmail(player.getUsername(), player.getEmail()) != null) {
+                    return "redirect:/player/" + player.getId() + "/edit";
+                } else  {
+                    playerDao.updatePlayerUsername(player.getId(), player.getUsername());
+                }
+            }
+            if (password != null && confirmPassword != null && password.equals(confirmPassword)) {
+                String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(password);
+                if (!matcher.matches()) {
+                    return "redirect:/player/" + player.getId() + "/edit";
+                } else {
+                    String hash = passwordEncoder.encode(password);
+                    playerDao.updatePlayerPassword(player.getId(), hash);
+                }
+            }
+            if (player.getEmail() != null) {
+                playerDao.updatePlayerEmail(player.getId(), player.getEmail());
+            }
+            if (player.getFirstName() != null) {
+                playerDao.updatePlayerFirstName(player.getId(), player.getFirstName());
+            }
+            if (player.getLastName() != null) {
+                playerDao.updatePlayerLastName(player.getId(), player.getLastName());
+            }
+            return "redirect:/player/" + player.getId();
         }
     }
 

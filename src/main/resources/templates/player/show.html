@@ -27,6 +27,12 @@
                        th:name="upload">Change Profile Picture</a>
                 </div>
             </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:if="${player.id == #authentication.principal.id}">
+                    <a th:href="@{/player/{id}/edit (id = ${player.id})}" th:value="${player.id}" type="button"
+                       th:name="edit">Edit Profile</a>
+                </div>
+            </th:block>
             <h5 style="text-decoration: underline">Hosting:</h5>
             <div id="fonts" th:object="${player}">
                 <div th:each="event: ${player.getEvents()}">
