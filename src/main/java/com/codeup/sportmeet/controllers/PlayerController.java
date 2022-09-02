@@ -126,14 +126,15 @@ public class PlayerController {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
+            Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (player.getUsername() != null) {
-                if (playerDao.findByUsername(player.getUsername()) != null) {
+                if (playerDao.findByUsername(player.getUsername()) != null && !player.getUsername().equalsIgnoreCase(playerDao.getById(currentPlayer.getId()).getUsername())) {
                     return "redirect:/player/" + player.getId() + "/edit?usernameError=true";
                 } else  {
                     playerDao.updatePlayerUsername(player.getId(), player.getUsername());
                 }
             }
-            if (password != null && confirmPassword != null && password.equals(confirmPassword)) {
+            if (!password.isEmpty() && !confirmPassword.isEmpty() && password.equals(confirmPassword)) {
                 String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&-+=()])(?=\\S+$).{8,20}$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(password);
@@ -145,7 +146,7 @@ public class PlayerController {
                 }
             }
             if (player.getEmail() != null) {
-                if (playerDao.findByEmail(player.getEmail()) != null) {
+                if (playerDao.findByEmail(player.getEmail()) != null && !player.getEmail().equalsIgnoreCase(playerDao.getById(currentPlayer.getId()).getEmail())) {
                     return "redirect:/player/" + player.getId() + "/edit?emailError=true";
                 } else {
                     playerDao.updatePlayerEmail(player.getId(), player.getEmail());

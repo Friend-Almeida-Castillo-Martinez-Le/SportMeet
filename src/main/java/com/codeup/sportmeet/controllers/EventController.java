@@ -75,10 +75,13 @@ public class EventController {
     }
 
     @GetMapping("event/create")
-    public String showCreateEvent(Model model) {
+    public String showCreateEvent(Model model, @RequestParam(value = "timeError", required = false) boolean timeError) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
+            if (timeError) {
+                model.addAttribute("timeError", timeError);
+            }
             model.addAttribute("event", new Event());
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("fsKey", fsKey);
@@ -142,7 +145,7 @@ public class EventController {
                 return "redirect:/events";
             }
         } else {
-            return "redirect:/event/create";
+            return "redirect:/event/create?timeError=true";
         }
     }
 
@@ -236,10 +239,13 @@ public class EventController {
     }
 
     @GetMapping(value = "/event/{id}/edit")
-    public String showEditEvent(@PathVariable long id, Model model, HttpSession session) {
+    public String showEditEvent(@PathVariable long id, Model model, HttpSession session, @RequestParam(value = "timeError",required = false) boolean timeError) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
+            if (timeError) {
+                model.addAttribute("timeError", timeError);
+            }
             session.setAttribute("id", id);
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("event", eventsDao.getById(id));
@@ -264,7 +270,7 @@ public class EventController {
             } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
                 eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
             } else {
-                return "redirect:/event/" + event.getId() + "/edit";
+                return "redirect:/event/" + event.getId() + "/edit?timeError=true";
             }
             return "redirect:/events";
         }

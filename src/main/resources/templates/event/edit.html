@@ -16,6 +16,9 @@
 </div>
 <div class="edit-container">
     <form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}" class="edit-form">
+        <th:block th:if="${timeError}">
+            <span id="timeError" name="timeError" style="color: red; font-size: 20px">* Can not create an event in the past.</span><br>
+        </th:block>
         <div class="edit-label">
             <label for="title">New Title</label>
             <input type="text" id="title" placeholder="Title" th:field="*{title}">
