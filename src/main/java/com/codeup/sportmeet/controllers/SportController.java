@@ -9,7 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,12 +40,28 @@ public class SportController {
     }
 
     @GetMapping("/sport/{name}")
-    public String viewSport(@PathVariable String name, Model model) {
+    public String viewSport(@PathVariable String name, Model model) throws ParseException {
         List<Event> eventsOnPage = new ArrayList<>();
         for (Event event: eventsDao.searchBySportName(name)) {
                 eventsOnPage.add(event);
         }
-        model.addAttribute("events", eventsOnPage);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
+        List<Event> eventsOrdered = new ArrayList<>();
+        for (Event event : eventsOnPage) {
+            if (format.parse(event.getDate()).after(todayAsDate)) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+                eventsOrdered.add(event);
+            } else {
+                continue;
+            }
+        }
+        model.addAttribute("events", eventsOrdered);
         return "sport/show";
     }
 }

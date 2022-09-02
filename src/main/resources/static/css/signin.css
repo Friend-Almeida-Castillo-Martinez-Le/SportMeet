@@ -263,7 +263,7 @@ h1 {
     align-items: center;
     justify-content: center;
     border: 1px solid white;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0%);
     margin-top: 1em;
     padding: 2em 1em;
     color: white;
@@ -272,6 +272,11 @@ h1 {
 }
 #picker{
     color: lightgrey;
+
+}
+#picker:hover{
+    color: black;
+    background-color: lightgrey;
 
 }
 
@@ -361,7 +366,6 @@ h1 {
 .create-input-form {
     border: none;
     background: none;
-    text-align: right;
     font-size: 20px;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: bold;
@@ -450,6 +454,7 @@ hr {
     display: flex;
     justify-content: space-between;
     position: relative;
+
     top:20px;
     font-size: x-large;
     margin-top: 11px;
@@ -518,7 +523,7 @@ hr {
 
 }
 .create-time-box{
-    width: 50%;
+    width: 40%;
 }
 .create-location-input{
     font-size: 48px;

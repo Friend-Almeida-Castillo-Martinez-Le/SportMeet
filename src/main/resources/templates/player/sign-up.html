@@ -8,32 +8,28 @@
     <div class="row">
         <div class="col-12">
             <form th:action="@{/sign-up}" th:method="post" th:object="${player}">
-                <label class="form-label">username:</label>
+                <label class="form-label">Username:</label>
                 <input class="form-control" th:field="*{username}" required/>
-                <label class="form-label" for="password">password:</label>
+                <label class="form-label" for="password">Password:</label>
                 <input name="password" id="password" type="password" class="form-control" th:field="*{password}" required />
                 <span id="message"></span>
                 <span id="message2"></span>
-                <label class="form-label" for="confirm-password">confirm password:</label>
+                <label class="form-label" for="confirm-password">Confirm Password:</label>
                 <input name="confirm-password" id="confirm-password" type="password" class="form-control" required />
                 <span id="message3"></span>
-                <label class="form-label">email:</label>
+                <label class="form-label">Email:</label>
                 <input type="email" class="form-control" th:field="*{email}" required/>
                 <label class="form-label">First Name:</label>
                 <input class="form-control" th:field="*{firstName}" required/>
                 <label class="form-label">Last Name:</label>
                 <input class="form-control" th:field="*{lastName}" required/>
-                <div class="black-trans-bg" style="height: 100vh">
-                    <div id="inline" class="card sand-bg offset-1 col-10 mt-5 p-5">
                         <div id="image">
-                            <label for="fileupload">Select a file to upload</label>
+                            <label for="fileupload"></label>
                             <input type="hidden" id="fileupload">
-                            <button class=" btn btn-green" id="picker" type="button">Pick file</button>
+                            <button class=" btn btn-green" id="picker" type="button" style="width: 15%; height: 15%; justify-content: center; align-items: center; font-size: .8em; border: 1px solid white;border-radius: 2em; color: white; margin-top: 1em; margin-bottom: 1em; background-color: black"><img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload Profile Picture</button>
                             <div id="thumbnail-container"></div>
-                            <input type="hidden" name="profile_img"  id="hidden-input">
+                            <input type="hidden" name="profile_img" id="hidden-input">
                         </div>
-                    </div>
-                </div>
                 <input type="submit" />
             </form>
 

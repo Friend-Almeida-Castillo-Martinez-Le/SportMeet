@@ -159,11 +159,13 @@ public class EventController {
             String today = format.format(new Date());
             Date todayAsDate = format.parse(today);
             LocalTime now = LocalTime.now();
-            if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) <= now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) <= now.getMinute()) {
-                System.err.println(Integer.parseInt(event.getStartTime().substring(3, 5)));
-                System.err.println(now.getMinute());
-                event.setStarted(true);
-                eventsDao.save(event);
+            if (format.parse(event.getDate()).equals(todayAsDate) || format.parse(event.getDate()).after(todayAsDate)) {
+                if (Integer.parseInt(event.getStartTime().substring(0, 2)) <= now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) <= now.getMinute()) {
+                    System.err.println(Integer.parseInt(event.getStartTime().substring(3, 5)));
+                    System.err.println(now.getMinute());
+                    event.setStarted(true);
+                    eventsDao.save(event);
+                }
             }
             for (Player player : eventsDao.getById(id).getPlayers()) {
                 eventPlayerUsernames.add(player.getUsername());
@@ -246,23 +248,51 @@ public class EventController {
     }
 
     @PostMapping(value = "event/{id}/edit")
-    public String editEvent(@ModelAttribute("event") Event event, HttpSession session) {
+    public String editEvent(@ModelAttribute("event") Event event, HttpSession session) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
             Long id = (Long) session.getAttribute("id");
-            eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
+            if (format.parse(event.getDate()).after(todayAsDate)) {
+                eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+                eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+                eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
+            } else {
+                return "redirect:/event/" + event.getId() + "/edit";
+            }
             return "redirect:/events";
         }
     }
 
     @GetMapping("event/search")
-    public String showSearchedEvents(Model model, @RequestParam("search") String search) {
+    public String showSearchedEvents(Model model, @RequestParam("search") String search) throws ParseException {
         List<Event> searchedEvents = new ArrayList<>();
         for (Event event : eventsDao.searchEvents(search)) {
             searchedEvents.add(event);
         }
-        model.addAttribute("events", searchedEvents);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String today = format.format(new Date());
+        Date todayAsDate = format.parse(today);
+        LocalTime now = LocalTime.now();
+        List<Event> eventsOrdered = new ArrayList<>();
+        for (Event event : searchedEvents) {
+            if (format.parse(event.getDate()).after(todayAsDate)) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {
+                eventsOrdered.add(event);
+            } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
+                eventsOrdered.add(event);
+            } else {
+                continue;
+            }
+        }
+        model.addAttribute("events", eventsOrdered);
         return "event/search";
     }
 
