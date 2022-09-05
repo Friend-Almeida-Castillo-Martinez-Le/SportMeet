@@ -47,8 +47,10 @@
                 </div>
                 <hr>
             </div>
-            <span id="message"></span>
-            <span id="message2"></span>
+            <div class="password-error">
+                <span id="message"></span>
+                <span id="message2"></span>
+            </div>
             <div class="email-label1">
                 <label>Confirm Password</label>
                 <div class="email-input1">
@@ -57,12 +59,14 @@
                 </div>
                 <hr>
             </div>
-            <span id="message3"></span>
+            <div class="confirm-error">
+                <span id="message3"></span>
+            </div>
         </div>
         <div id="image">
             <label for="fileupload"></label>
             <input type="hidden" id="fileupload">
-            <button id="picker1" type="button" >
+            <button id="picker1" type="button">
                 <img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload
                 Profile
                 Picture
@@ -121,6 +125,12 @@
         } else {
             $('#message3').html('Passwords match.<br>').css('color', 'green');
         }
+    })
+    $('#password').on('keyup', function () {
+        $('.password-error').css('background', 'black');
+    })
+    $('#confirm-password').on('keyup', function () {
+        $('.confirm-error').css('background', 'black');
     })
 </script>
 
