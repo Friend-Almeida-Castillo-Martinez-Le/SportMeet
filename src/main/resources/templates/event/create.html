@@ -13,6 +13,9 @@
 </div>
 <form th:action="@{/event/create}" th:method="post" th:object="${event}" class="create-register-form">
     <div class="create-register-container">
+        <th:block th:if="${timeError}">
+            <span id="timeError" name="timeError" style="color: red; font-size: 20px">* Can not create an event in the past.</span><br>
+        </th:block>
         <div class="create-title-label">
             <div class="create-title-div">
                 <label for="title">Title</label>
