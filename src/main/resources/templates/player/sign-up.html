@@ -1,52 +1,78 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/partials :: head('Player Create')" />
-<body>
-<nav th:replace="fragments/partials :: navbar" />
-<div class="container">
-    <h1>Sign Up</h1>
-    <div class="row">
-        <div class="col-12">
-            <form th:action="@{/sign-up}" th:method="post" th:object="${player}">
-                <th:block th:if="${usernameError}">
-                    <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
-                </th:block>
-                <label class="form-label">Username:</label>
-                <input class="form-control" th:field="*{username}" required/>
-                <th:block th:if="${passwordError}">
-                    <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
-                </th:block>
-                <th:block th:if="${confirmError}">
-                    <span id="confirmError" name="confirmError" style="color: red; font-size: 20px">* Passwords did not match.</span><br>
-                </th:block>
-                <label class="form-label" for="password">Password:</label>
-                <input name="password" id="password" type="password" class="form-control" th:field="*{password}" required />
-                <span id="message"></span>
-                <span id="message2"></span>
-                <label class="form-label" for="confirm-password">Confirm Password:</label>
-                <input name="confirm-password" id="confirm-password" type="password" class="form-control" required />
-                <span id="message3"></span>
-                <th:block th:if="${emailError}">
-                    <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
-                </th:block>
-                <label class="form-label">Email:</label>
-                <input type="email" class="form-control" th:field="*{email}" required/>
-                <label class="form-label">First Name:</label>
-                <input class="form-control" th:field="*{firstName}" required/>
-                <label class="form-label">Last Name:</label>
-                <input class="form-control" th:field="*{lastName}" required/>
-                        <div id="image">
-                            <label for="fileupload"></label>
-                            <input type="hidden" id="fileupload">
-                            <button class=" btn btn-green" id="picker" type="button" style="width: 15%; height: 15%; justify-content: center; align-items: center; font-size: .8em; border: 1px solid white;border-radius: 2em; color: white; margin-top: 1em; margin-bottom: 1em; background-color: black"><img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload Profile Picture</button>
-                            <div id="thumbnail-container"></div>
-                            <input type="hidden" name="profile_img" id="hidden-input">
-                        </div>
-                <input type="submit" />
-            </form>
-
+<head th:replace="fragments/partials :: head('Player Create')"/>
+<body class="sign-in-body">
+<nav th:replace="fragments/partials :: navbar"/>
+<h1 class="sign-in-title">Make An Account</h1>
+<div class="form-container1">
+    <form th:action="@{/sign-up}" th:method="post" th:object="${player}" class="signin-form1">
+        <div class="signin-container1">
+            <div class="signin-email-username">
+                <div class="email-label1">
+                    <label>Email</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{email}" required/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="email-label1">
+                    <label>Username</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{username}" required/>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="signin-email-username">
+                <div class="email-label1">
+                    <label>First Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{firstName}" required/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="email-label1">
+                    <label>Last Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{lastName}" required/>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="email-label1">
+                <label>Password</label>
+                <div class="email-input1">
+                    <input name="password" id="password" type="password" th:field="*{password}" class="input-form2"
+                           required/>
+                </div>
+                <hr>
+            </div>
+            <span id="message"></span>
+            <span id="message2"></span>
+            <div class="email-label1">
+                <label>Confirm Password</label>
+                <div class="email-input1">
+                    <input name="confirm-password" id="confirm-password" type="password" class="input-form2"
+                           required/>
+                </div>
+                <hr>
+            </div>
+            <span id="message3"></span>
         </div>
-    </div>
+        <div id="image">
+            <label for="fileupload"></label>
+            <input type="hidden" id="fileupload">
+            <button id="picker1" type="button" >
+                <img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload
+                Profile
+                Picture
+            </button>
+            <div id="thumbnail-container"></div>
+            <input type="hidden" name="profile_img" id="hidden-input">
+        </div>
+        <input type="submit" class="sign-in-submit"/>
+    </form>
+</div>
 </div>
 
 <script>
@@ -73,21 +99,18 @@
         }
     }
 
-    $('#password').on('keyup',function () {
+    $('#password').on('keyup', function () {
         console.log('hello');
         if ($('#password').val().length < 8) {
             $('#message').html('* Password is too short must be at least 8 characters.<br>').css('color', 'red');
-        }
-        else if ($('#password').val().length > 20) {
+        } else if ($('#password').val().length > 20) {
             $('#message').html('* Password is too long must be 20 or fewer characters.<br>').css('color', 'red');
-        }
-        else {
+        } else {
             $('#message').html('Password length is good.<br>').css('color', 'green');
         }
         if (isAllPresent($('#password').val()) === "No") {
             $('#message2').html('* Must contain lowercase, uppercase, number, and special character.<br>').css('color', 'red');
-        }
-        else {
+        } else {
             $('#message2').html('Password is strong.<br>').css('color', 'green');
         }
     })
@@ -95,8 +118,7 @@
     $('#confirm-password').on('keyup', function () {
         if ($('#password').val() !== $('#confirm-password').val()) {
             $('#message3').html('* Passwords do not match.<br>').css('color', 'red');
-        }
-        else {
+        } else {
             $('#message3').html('Passwords match.<br>').css('color', 'green');
         }
     })
@@ -109,7 +131,7 @@
     const options = {
         onUploadDone: updateForm,
         onUploadDone: (res) =>
-            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`) ,
+            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`),
         maxSize: 10 * 1024 * 1024,
         accept: 'image/*',
         uploadInBackground: false,
@@ -126,7 +148,7 @@
         picker.open();
     });
 
-    function updateForm (result) {
+    function updateForm(result) {
         const fileData = result.filesUploaded[0];
         fileInput.value = fileData.url;
 
