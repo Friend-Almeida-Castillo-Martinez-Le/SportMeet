@@ -81,11 +81,12 @@ body {
     justify-content: space-between;
     flex-direction: row;
     margin-bottom: 2em;
+    font-size: large;
 }
 
 .event-info {
-    margin-left: 4em;
-    margin-right: 4em;
+    margin-left: 8em;
+    margin-right: 8em;
     width: 90%;
     color: lightgrey;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
