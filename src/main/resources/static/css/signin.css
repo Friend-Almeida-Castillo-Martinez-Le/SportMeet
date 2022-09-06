@@ -718,7 +718,7 @@ hr {
 
 /************* START SPORTS CSS ***************/
 .gallery {
-    --s: 50px; /* control the slanted part */
+    --s: 16px; /* control the slanted part */
     display: grid;
     height: 350px;
     gap: 8px;
@@ -779,5 +779,10 @@ hr {
     display: grid;
     align-content: center;
     background: url("../img/stadium-lights.png") no-repeat center center / cover;
+}
+.navbar-sport{
+    display: flex;
+    position: absolute;
+    width: 100%;
 }
 /************* END SPORTS CSS ***************/
