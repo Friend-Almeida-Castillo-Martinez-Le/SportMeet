@@ -51,6 +51,10 @@ public class Player {
     @Column
     private String profilePicUrl;
 
+    @Column
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "playerratings")
+    private List<Rating> ratings;
+
     public Player() {
     }
 
@@ -64,6 +68,8 @@ public class Player {
         events = copy.events;
         attendingEvents = copy.attendingEvents;
         comments = copy.comments;
+        rating = copy.rating;
+        ratings = copy.ratings;
     }
 
     public Player(String username, String password, String email, String firstName, String lastName, List<Comment> comments) {
@@ -243,5 +249,13 @@ public class Player {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }

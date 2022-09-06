@@ -45,6 +45,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    font-size: 30px;
 
 }
 
@@ -83,12 +84,21 @@
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: bold;
     color: lightgrey;
-    width: 80%;
+    width: 100%;
 
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: white !important;
 }
 
 hr {
-    height: 3px !important;
+    height: 1px !important;
     background: white !important;
     width: 100%;
 }
@@ -175,9 +185,7 @@ h1 {
     margin-top: 3em;
 }
 
-.email-label1 {
-    font-size: 30px;
-}
+
 
 .password-label1 {
     font-size: 30px;
@@ -188,7 +196,7 @@ h1 {
 }
 
 
-.sign-logo1{
+.sign-logo1 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,20 +216,22 @@ h1 {
     overflow-y: hidden;
 }
 
-.welcome-title{
+.welcome-title {
     display: flex;
     align-items: end;
-    justify-content:center;
+    justify-content: center;
     top: 90%;
     margin-top: 10em;
 }
-.welcome-start-btn{
+
+.welcome-start-btn {
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-.welcome-login-btn{
+
+.welcome-login-btn {
     --third: hsl(181, 100%, 50%);
     --fourth: hsl(305, 100%, 59%);
     margin-top: 2em;
@@ -236,13 +246,10 @@ h1 {
     width: 15%;
     text-decoration: none;
 }
+
 /************* END WELCOME CSS ***************/
 
 /************* START CREATE EVENT CSS ***************/
-
-
-
-
 
 
 .create-body {
@@ -253,12 +260,14 @@ h1 {
     background: linear-gradient(45deg, var(--primary), var(--secondary)),
     url("../img/background.jpg") no-repeat center center / cover;
 }
-.create-upload-container{
+
+.create-upload-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.create-upload-image{
+
+.create-upload-image {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,17 +279,19 @@ h1 {
     border-radius: 10px;
     width: 800px;
 }
-#picker{
+
+#picker {
     color: lightgrey;
 
 }
-#picker:hover{
+
+#picker:hover {
     color: black;
     background-color: lightgrey;
 
 }
 
-.create-title{
+.create-title {
     margin-top: 1em;
     display: flex;
     justify-content: center;
@@ -289,15 +300,18 @@ h1 {
     font-size: x-large;
     font-family: 'Montserrat', sans-serif;
 }
-.create-title-label{
+
+.create-title-label {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 }
-.create-title-div{
+
+.create-title-div {
     width: 40%;
 }
+
 .create-register-form {
     margin-left: 5em;
     margin-right: 5em;
@@ -339,18 +353,19 @@ h1 {
     justify-content: space-evenly;
     flex-direction: column;
 }
-.create-title{
+
+.create-title {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
 }
 
-.create-checkbox-form{
+.create-checkbox-form {
     height: 20px;
     width: 20px;
 }
 
-.create-sign-lower{
+.create-sign-lower {
     display: flex;
     justify-content: space-between;
     font-size: 35px;
@@ -359,8 +374,8 @@ h1 {
 
 }
 
-.create-forgot-pass{
-    border-bottom: 1px solid lightgrey ;
+.create-forgot-pass {
+    border-bottom: 1px solid lightgrey;
 }
 
 .create-input-form {
@@ -369,7 +384,7 @@ h1 {
     font-size: 20px;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: bold;
-    color:lightgrey;
+    color: lightgrey;
     width: 100%;
 }
 
@@ -379,12 +394,12 @@ hr {
     width: 100%;
 }
 
-.create-button-container{
+.create-button-container {
     margin-top: 3em;
     width: 100%;
 }
 
-.create-ready-btn{
+.create-ready-btn {
     --third: hsla(181, 100%, 50%, 0.82);
     --fourth: hsla(305, 100%, 59%, 0.78);
     display: block;
@@ -400,11 +415,11 @@ hr {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
 }
 
-.create-email-input{
+.create-email-input {
     display: flex;
     justify-content: space-between;
     position: relative;
-    top:20px;
+    top: 20px;
 }
 
 .create-password-input {
@@ -414,7 +429,7 @@ hr {
     top: 20px;
 }
 
-.create-account-link{
+.create-account-link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -427,11 +442,11 @@ hr {
     border-bottom: 1px solid #00FBFFD1;
 }
 
-.create-text-title{
+.create-text-title {
     color: lightgray;
 }
 
-.create-select{
+.create-select {
     border: none;
     color: lightgray;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
@@ -440,39 +455,43 @@ hr {
     background: transparent;
 
 }
-#date{
+
+#date {
     background: transparent;
     border: none;
     color: lightgrey;
 }
 
-.create-label-check{
+.create-label-check {
     font-size: x-large;
 }
 
-.create-time-input{
+.create-time-input {
     display: flex;
     justify-content: space-between;
     position: relative;
 
-    top:20px;
+    top: 20px;
     font-size: x-large;
     margin-top: 11px;
 }
-.create-time-input{
+
+.create-time-input {
     background: transparent;
 }
-.create-description-form{
+
+.create-description-form {
     border: none;
     background: none;
     font-size: 20px;
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     font-weight: bold;
-    color:lightgrey;
+    color: lightgrey;
     width: 100%;
     top: 20px;
 }
-.create-image-title{
+
+.create-image-title {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     color: lightgrey;
     font-size: x-large;
@@ -482,27 +501,28 @@ hr {
 }
 
 
-.create-upload-icon{
+.create-upload-icon {
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-.create-ready-btn-container{
+.create-ready-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1em;
 }
 
-.create-file{
+.create-file {
     display: none;
 }
 
-.create-upload-label{
+.create-upload-label {
     cursor: pointer;
 }
-.create-upload-content{
+
+.create-upload-content {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -510,22 +530,27 @@ hr {
     color: grey;
     font-size: xx-large;
 }
-.create-sport-box{
+
+.create-sport-box {
     width: 40%;
 }
-.create-time-slot{
+
+.create-time-slot {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.create-start-time{
+
+.create-start-time {
     display: flex;
 
 }
-.create-time-box{
+
+.create-time-box {
     width: 40%;
 }
-.create-location-input{
+
+.create-location-input {
     font-size: 48px;
     top: 50px;
     margin-top: 1em;
@@ -533,7 +558,8 @@ hr {
     font-family: 'Alumni Sans Pinstripe', sans-serif;
     color: lightgrey;
 }
-.create-location-select{
+
+.create-location-select {
     width: 70%;
     height: 50px;
     font-size: 40px;
@@ -545,3 +571,298 @@ hr {
 
 
 /************* END CREATE EVENT CSS ***************/
+/************* START SIGN-IN CSS ***************/
+
+
+.sign-in-body {
+    --primary: hsla(305, 96%, 59%, .30);
+    --secondary: hsla(182, 90%, 35%, 0.36);
+    min-height: 100vh;
+    background: linear-gradient(45deg, var(--primary), var(--secondary)),
+    url("../img/background.jpg") no-repeat center center / cover;
+    overflow-y: hidden;
+}
+
+.signin-email-username {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-form2 {
+    border: none;
+    background: none;
+    font-size: 18px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-weight: bold;
+    color: lightgrey;
+    width: 100%;
+}
+
+#picker1 {
+    width: 100%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    font-size: .8em;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 1em;
+    background-color: black;
+    padding: 2em;
+}
+
+.sign-in-submit {
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+    display: block;
+    width: 100%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 50px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+.sign-in-title {
+    margin-top: 1em;
+    color: white;
+}
+
+#usernameError{
+    color: red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#passwordError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#confirmError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#emailError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    top: -40px;
+    left: -150px;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+
+.password-error {
+    display: flex;
+    flex-direction: column;
+    border: red;
+    color: red;
+    padding: 5px;
+    position: absolute;
+    font-size: large;
+    transition: 2s;
+    top: 44%;
+    left: 62.5%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+}
+
+.confirm-error {
+    display: flex;
+    flex-direction: column;
+    border: red;
+    color: red;
+    padding: 5px;
+    position: absolute;
+    font-size: large;
+    transition: 2s;
+    top: 58.5%;
+    left: 62.5%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+}
+
+/************* END SIGN-IN CSS ***************/
+
+/************* START SPORTS CSS ***************/
+.gallery {
+    --s: 16px; /* control the slanted part */
+    display: grid;
+    height: 350px;
+    gap: 8px;
+    grid-auto-flow: column;
+    place-items: center;
+    left: 10px;
+}
+.gallery > a {
+    width: 0;
+    min-width: calc(100% + var(--s));
+    height: 0;
+    min-height: 100%;
+    object-fit: cover;
+    clip-path: polygon(var(--s) 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+    cursor: pointer;
+    transition: .5s;
+}
+.gallery > a:hover {
+    width: 15vw;
+}
+.gallery > a:first-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: start;
+    clip-path: polygon(0 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+}
+.gallery > a:last-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: end;
+    clip-path: polygon(var(--s) 0,100% 0,100% 100%,0 100%);
+}
+.gallery > a > img {
+    width: 0;
+    min-width: calc(100% + var(--s));
+    height: 0;
+    min-height: 100%;
+    object-fit: cover;
+    clip-path: polygon(var(--s) 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+    cursor: pointer;
+    transition: .5s;
+}
+.gallery > a >img:hover {
+    width: 15vw;
+}
+.gallery >  a >img:first-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: start;
+    clip-path: polygon(0 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+}
+.gallery > a > img:last-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: end;
+    clip-path: polygon(var(--s) 0,100% 0,100% 100%,0 100%);
+}
+
+.sports-body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    align-content: center;
+    background: url("../img/stadium-lights.png") no-repeat center center / cover;
+}
+.navbar-sport{
+    display: flex;
+    position: absolute;
+    width: 100%;
+}
+/************* END SPORTS CSS ***************/
+/************* START EDIT EVENT CSS ***************/
+
+
+
+.edit-event-body{
+    --primary: hsla(305, 96%, 32%, 0.37);
+    --secondary: hsla(182, 90%, 35%, 0.36);
+    min-height: 100vh;
+    background: linear-gradient(45deg, var(--primary), var(--secondary)),
+    url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
+}
+
+.edit-title{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid lightgrey;
+    padding: 2em;
+    width: 40%;
+    border-radius: 10px;
+    background: url(../img/pexels-kseniya-lapteva-9176068.jpg) no-repeat center center / cover;
+    font-size: larger;
+
+}
+.edit-label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: lightgrey;
+    font-size: 15px;
+}
+.edit-btn{
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+    display: block;
+    width: 50%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+
+.edit-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 600px;
+}
+.edit-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/************* END EDIT EVENT CSS ***************/
+
+

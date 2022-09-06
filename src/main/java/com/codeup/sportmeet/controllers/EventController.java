@@ -1,13 +1,7 @@
 package com.codeup.sportmeet.controllers;
 
-import com.codeup.sportmeet.models.Comment;
-import com.codeup.sportmeet.models.Event;
-import com.codeup.sportmeet.models.Player;
-import com.codeup.sportmeet.models.Sport;
-import com.codeup.sportmeet.repositories.CommentRepository;
-import com.codeup.sportmeet.repositories.EventRepository;
-import com.codeup.sportmeet.repositories.PlayerRepository;
-import com.codeup.sportmeet.repositories.SportRepository;
+import com.codeup.sportmeet.models.*;
+import com.codeup.sportmeet.repositories.*;
 import org.hibernate.type.LocalTimeType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -35,11 +29,14 @@ public class EventController {
     private PlayerRepository playersDao;
     private CommentRepository commentsDao;
 
-    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao, CommentRepository commentsDao) {
+    private RatingRepository ratingDao;
+
+    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao, CommentRepository commentsDao, RatingRepository ratingDao) {
         this.playersDao = playerDao;
         this.eventsDao = eventsDao;
         this.sportsDao = sportsDao;
         this.commentsDao = commentsDao;
+        this.ratingDao = ratingDao;
     }
 
     @Value("${FILESTACK_API}")
@@ -75,10 +72,13 @@ public class EventController {
     }
 
     @GetMapping("event/create")
-    public String showCreateEvent(Model model) {
+    public String showCreateEvent(Model model, @RequestParam(value = "timeError", required = false) boolean timeError) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
+            if (timeError) {
+                model.addAttribute("timeError", timeError);
+            }
             model.addAttribute("event", new Event());
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("fsKey", fsKey);
@@ -142,7 +142,7 @@ public class EventController {
                 return "redirect:/events";
             }
         } else {
-            return "redirect:/event/create";
+            return "redirect:/event/create?timeError=true";
         }
     }
 
@@ -214,6 +214,17 @@ public class EventController {
                 ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
             }
             eventsDao.save(ev);
+            //create ratings among fellow members
+            for(Player player: eventsDao.getById(ev.getId()).getPlayers()){
+                //don't make rating for oneself to onself
+                if(player.getId() != pl.getId()){
+                    //create rating for oneself to team member
+                    ratingDao.save(new Rating(playersDao.getById(player.getId()), playersDao.getById(pl.getId()), eventsDao.getById(ev.getId()),0));
+                    //create rating for team member to self
+                    ratingDao.save(new Rating(playersDao.getById(pl.getId()), playersDao.getById(player.getId()), eventsDao.getById(ev.getId()),0));
+                }
+
+            }
             System.out.println(currentPlayer.getEvents());
             return "redirect:/event/" + ev.getId();
         }
@@ -236,10 +247,13 @@ public class EventController {
     }
 
     @GetMapping(value = "/event/{id}/edit")
-    public String showEditEvent(@PathVariable long id, Model model, HttpSession session) {
+    public String showEditEvent(@PathVariable long id, Model model, HttpSession session, @RequestParam(value = "timeError",required = false) boolean timeError) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
+            if (timeError) {
+                model.addAttribute("timeError", timeError);
+            }
             session.setAttribute("id", id);
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("event", eventsDao.getById(id));
@@ -264,7 +278,7 @@ public class EventController {
             } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) == now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) > now.getMinute()) {
                 eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
             } else {
-                return "redirect:/event/" + event.getId() + "/edit";
+                return "redirect:/event/" + event.getId() + "/edit?timeError=true";
             }
             return "redirect:/events";
         }

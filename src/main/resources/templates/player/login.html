@@ -10,19 +10,19 @@
         <h1>Sign-in to play</h1>
     </div>
 </div>
-<div th:if="${param.error}">
-    Invalid Username and Password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
 <div class="form-container1">
     <form th:action="@{/login}" method="post" class="signin-form1">
         <div class="signin-container1">
+            <div th:if="${param.error}">
+                <span style="color: red; font-size: 20px">* Invalid username or password.</span>
+            </div>
+            <div th:if="${param.logout}">
+                <span style="color: red; font-size: 20px">* You have been logged out.</span>
+            </div>
             <div class="email-label1">
                 <label for="username">Username</label>
                 <div class="email-input1">
-                    <span class="envelope-icon"><i class="fa-regular fa-envelope"></i></span>
+                    <span class="envelope-icon"><i class="fa-solid fa-user"></i></span>
                     <input id="username" name="username" type="text" placeholder="Enter Username" class="input-form1">
                 </div>
                 <hr>
@@ -39,10 +39,10 @@
         </div>
         <div class="sign-lower1">
             <div>
-                <a class="forgot-pass1" href="/sign-up">Need An Account?</a>
+                <a class="forgot-pass1" href="/sign-up" style="text-decoration: none; color: #03BFCB">Need An Account?</a>
             </div>
             <div>
-                <a class="forgot-pass1" href="/forgot-password">Forgot Password?</a>
+                <a class="forgot-pass1" href="/forgot-password" style="text-decoration: none; color: #03BFCB;">Forgot Password?</a>
             </div>
         </div>
         <div class="button-container1">
