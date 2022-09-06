@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html xml:lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="" th:href="@{/css/sports.css}">
-    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Player Create')"/>
+<nav th:replace="fragments/partials :: navbar"/>
+<body class="sports-body">
 <div class="gallery">
     <a th:href="@{/sport/{name} (name = ${sport.name})}" th:each="sport: ${sports}"><img th:src="${sport.image}"></a>
 </div>
