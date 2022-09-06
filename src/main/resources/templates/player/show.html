@@ -42,14 +42,14 @@
             <div class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                       class="hover" style="color: black;text-transform: capitalize"></a>
+                       class="hover" style="color: black; text-decoration: none"></a>
                 </div>
             </div>
             <h5 class="fonts" style="text-decoration: underline">ATTENDING:</h5>
             <div  class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getAttendingEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                      class="hover" style="color: black; text-transform: capitalize" ></a>
+                      class="hover" style="color: black; text-decoration: none" ></a>
                 </div>
             </div>
             <h5 style="text-decoration: underline">My Ratings:</h5>
