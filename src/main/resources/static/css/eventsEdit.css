@@ -1,10 +1,6 @@
 
-::placeholder{
-    color: lightgrey;
-}
 
-
-body {
+ .edit-event-body{
     --primary: hsla(305, 96%, 32%, 0.37);
     --secondary: hsla(182, 90%, 35%, 0.36);
     min-height: 100vh;
@@ -37,6 +33,7 @@ body {
     justify-content: center;
     flex-direction: column;
     color: lightgrey;
+    font-size: 15px;
 }
 .edit-btn{
     --third: hsla(181, 100%, 50%, 0.82);
