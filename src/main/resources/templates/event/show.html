@@ -1,38 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
-          rel="stylesheet">
-    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet'/>
-    <link rel="stylesheet" href="" th:href="@{/css/SingleEvent.css}">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragments/partials :: head('Player Profile')">
 </head>
-<body>
+<body class="show-event-body">
+<nav th:replace="fragments/partials :: navbar"/>
 
 <div class="show-content-box">
     <div class="img-box" th:if="${event.eventPicUrl != null}">
-        <div class="show-edit">
-            <th:block sec:authorize="isAuthenticated()">
-                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
-                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="edit">Edit </a>
-                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="delete"> Delete</a>
-                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="upload">Change Event Image</a>
-                </div>
-            </th:block>
-        </div>
-        <img th:src="${event.eventPicUrl}" alt="event-image" class="img">
+        <img th:src="${event.eventPicUrl}" alt="event-image" class="img-show">
         <span th:text="${event.location}" class="show-location"></span>
     </div>
 </div>
@@ -89,15 +65,26 @@
     </div>
 
     <div class="show-content-2">
-        <div class="game-title">
-            <span th:text="${event.title}"></span>
+        <div class="show-edit">
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
+                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="delete"> <i class="fa-solid fa-trash"></i></a>
+                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="upload"><i class="fa-solid fa-circle-plus"></i></a>
+                </div>
+            </th:block>
         </div>
+        <h2 th:text="${event.title}"></h2>
+        <h6 th:text="${event.description}" id="description" class="desc-box"></h6>
         <div class="sport-row">
             <div>
-                <h1><span th:text="${event.sport.name}"></span></h1>
+                <span th:text="${event.sport.name}"></span>
             </div>
             <div>
-                <h1> Start:
+                <span> Start:
                     <th:block th:switch="${event.startTime.substring(0,2)}">
                         <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}"
                               class="card-text">Time: </span>
@@ -130,28 +117,65 @@
                         <span th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}"
                               class="card-text">Time: </span>
                     </th:block>
-                </h1>
+                </span>
             </div>
-        </div>
-        <div class="sport-row">
-            <i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span>
-        </div>
-    </div>
-    <div class="comment-box">
-        <div class="comment-submit">
-            <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
-                <input placeholder="Comment" id="comment" th:field="*{description}">
-                <button type="submit" class="comment-btn">Submit</button>
-            </form>
-        </div>
-        <div class="comment-display">
-            <div th:each="comment: ${event.comments}">
-                <span th:text="${comment.player.username}"></span>
-                <span th:text="${comment.description}"></span>
-                <hr>
-                <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
-                    <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
-                       th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
+            <div>
+                <i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span>
+            </div>
+            <div class="edit-weather">
+                <div>
+                    <div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
+                </div>
+                <div id="weather" style="visibility: hidden">
+                    <section id="cards" style="margin: 1em 0em;">
+                        <div class="card" id="day-1"
+                             style=" margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                            <div class="card-header"
+                                 style="font-weight: bold; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                Featured
+                            </div>
+                            <ul class="list-group list-group-flush"
+                                style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                <li class="list-group-item"
+                                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                </li>
+                                <li class="list-group-item"
+                                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                    A second item
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="comment-box">
+                <div class="comment-submit">
+                    <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
+                        <input placeholder="Comment" id="comment" th:field="*{description}">
+                        <button type="submit" class="comment-btn">Submit</button>
+                    </form>
+                </div>
+                <div class="comment-display">
+                    <div th:each="comment: ${event.comments}">
+                        <span th:text="${comment.player.username}"></span>
+                        <span th:text="${comment.description}"></span>
+                        <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
+                            <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
+                               th:value="${comment.id}" type="button" th:name="deleteComment">Delete</a>
+                        <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-start-container">
+                <div th:if="${event.player.id == #authentication.principal.id}">
+                    <div th:if="${event.started == true}">
+                        <div th:if="${event.confirmed == false}">
+                            <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
+                                <button type="submit" class="event-start-btn">Start Event</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,48 +197,11 @@
             </div>
         </div>
     </div>
-    <div th:if="${event.player.id == #authentication.principal.id}">
-        <div th:if="${event.started == true}">
-            <div th:if="${event.confirmed == false}">
-                <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
-                    <button type="submit">Start Event</button>
-                </form>
-            </div>
-        </div>
-    </div>
     <div th:object="${event}">
         <div th:each="player: ${event.getPlayers()}">
             <h5 th:text="${player.username}"></h5>
         </div>
     </div>
-</div>
-<div>
-    <span th:text="${event.description}" id="description" class="desc-box"></span>
-</div>
-
-</div>
-</div>
-<div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
-<div id="weather" style="visibility: hidden">
-    <section id="cards" style="margin: 1em 0em;">
-        <div class="card" id="day-1"
-             style="width: 18rem; margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-            <div class="card-header"
-                 style="font-weight: bold; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                Featured
-            </div>
-            <ul class="list-group list-group-flush"
-                style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                <li class="list-group-item"
-                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                </li>
-                <li class="list-group-item"
-                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                    A second item
-                </li>
-            </ul>
-        </div>
-    </section>
 </div>
 <script th:inline="javascript">
     /*<! [CDATA[*/
