@@ -45,7 +45,9 @@
                 <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
             </select>
         </div>
-        <button type="submit" th:value="${event.id}" name="id" class="edit-btn">Edit</button>
+        <div class="edit-btn-container">
+            <button type="submit" th:value="${event.id}" name="id" class="edit-btn">Edit</button>
+        </div>
     </form>
 </div>
 </body>
