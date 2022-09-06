@@ -8,7 +8,7 @@
     min-height: 100vh;
     width: 100%;
     /*background: linear-gradient(35deg, var(--primary), var(--secondary));*/
-    background-image: url("../img/field-background.jpg");
+    background-image: url("../img/aboutus-lights.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -29,7 +29,7 @@
     border: 1px solid white;
     margin-top: 5em;
     color: lightgrey;
-    background: rgba(128, 128, 128, 0.44);
+    background: rgba(128, 128, 128, 0.34);
     padding: 2em;
     border-radius: 10px;
     width: 25%;
@@ -47,9 +47,21 @@
 /*    background-color: red;*/
 /*}*/
 
-#fonts{
+.fonts{
     font-weight: bold;
+    font-family: 'Barlow', sans-serif;;
+    font-size: 2em;
+    color: blanchedalmond;
+    font-style: italic;
+    text-transform: capitalize;
+
 }
+
+.hover:hover {
+    background-color: rgba(0, 128, 0, 0.37);
+
+}
+
 
 
 /*:root {*/
@@ -179,11 +191,13 @@
 .fontcolor{
     margin-top: 60px;
     text-align: center;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
     font-size: 45px;
     margin-bottom: 20px;
     font-style: initial;
-
+    font-family: 'Barlow', sans-serif;;
+    /*font-size: 2em;*/
+    color: blanchedalmond;
 }
 .font2{
     width: 100%;

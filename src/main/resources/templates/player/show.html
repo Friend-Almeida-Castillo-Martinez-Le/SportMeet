@@ -33,18 +33,18 @@
                        th:name="edit">Edit Profile</a>
                 </div>
             </th:block>
-            <h5 style="text-decoration: underline">Hosting:</h5>
-            <div id="fonts" th:object="${player}">
+            <h5 class="fonts" style="text-decoration: underline">Hosting:</h5>
+            <div class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                       style="text-decoration: none; color: black"></a>
+                       class="hover" style="text-decoration: none; color: black"></a>
                 </div>
             </div>
-            <h5 style="text-decoration: underline">Attending:</h5>
-            <div th:object="${player}">
+            <h5 class="fonts" style="text-decoration: underline">Attending:</h5>
+            <div  class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getAttendingEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                       style="text-decoration: none; color: black"></a>
+                      class="hover" style="text-decoration: none; color: black;" ></a>
                 </div>
             </div>
         </div>
