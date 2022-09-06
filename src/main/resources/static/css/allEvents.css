@@ -156,7 +156,8 @@ span.card-text {
     text-decoration: none;
     font-family: 'Barlow', sans-serif;
     font-size: 20px !important;
-    text-align: center;
+    text-align: center !important;
+    justify-content: center;
     color: blanchedalmond;
 
 }
@@ -165,7 +166,7 @@ span.card-text {
     grid-area: f;
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
-    text-align: center;
+    /*text-align: center;*/
     color: blanchedalmond;
 
 }
