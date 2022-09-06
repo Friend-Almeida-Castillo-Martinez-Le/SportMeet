@@ -69,41 +69,105 @@ body#allEvents{
     display: grid !important;
     place-items: start !important;
 }
-div.card {
-    display: grid !important;
-    place-items: center !important;
-    position: static !important;
-    background-color: rgba(0, 0, 0, 0.7) !important;
-    box-shadow: 0 6px 15px rgba(112, 76, 142, 0.5) !important;
-    backdrop-filter: blur(4px) !important;
-    height: 200px !important;
-    width: 750px !important;
-    margin: 1em 10em 0 10em !important;
+
+.grid-container{
+    display: grid;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: center;
+    box-shadow: 1px 10px 15px rgba(112, 76, 142, 0.5);
+    backdrop-filter: blur(6px);
+    height: 225px;
+    width: 800px;
+    margin: 1em 10em 0 10em;
+    border-radius: 10px;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 20px;
+
+    grid-template-areas:
+
+    'a a a b b b b e c c'
+    'a a a d d d d d d d'
+    'a a a f f g g h h h'
+
+    ;
+
 }
 
-div.grid-container a {
-    text-decoration: none !important;
-}
-
-div.grid-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
+.card-thumbnail {
+    grid-area: a;
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
 }
 
 .card-title {
-    font-family: 'Barlow', sans-serif;;
-    font-size: 2em;
-    color: blanchedalmond;
+    grid-area: b;
 }
 
-.card-text {
-    font-family: 'Barlow', sans-serif;
-    font-size: 20px;
-    color: blanchedalmond;
-    margin-bottom: 0;
+.card-host {
+    grid-area: c;
 }
+
+.card-description {
+    grid-area: d;
+}
+
+.card-sport {
+    grid-area: e;
+}
+
+.card-date {
+    grid-area: f;
+}
+
+.card-time {
+    grid-area: g;
+}
+
+.card-location {
+    grid-area: h;
+}
+/*div.card {*/
+/*    display: grid !important;*/
+/*    place-items: center !important;*/
+/*    position: static !important;*/
+/*    background-color: rgba(0, 0, 0, 0.7) !important;*/
+/*    box-shadow: 0 6px 15px rgba(112, 76, 142, 0.5) !important;*/
+/*    backdrop-filter: blur(4px) !important;*/
+/*    height: 200px !important;*/
+/*    width: 750px !important;*/
+/*    margin: 1em 10em 0 10em !important;*/
+/*}*/
+.event-cards {
+    align-items: center;
+    width: 100%;
+}
+
+div.event-cards a {
+    text-decoration: none;
+}
+
+/*div.grid-container {*/
+/*    display: flex !important;*/
+/*    flex-direction: column !important;*/
+/*    align-items: center !important;*/
+/*    width: 100% !important;*/
+/*}*/
+
+/*.card-title {*/
+/*    font-family: 'Barlow', sans-serif;;*/
+/*    font-size: 2em;*/
+/*    color: blanchedalmond;*/
+/*}*/
+
+/*.card-text {*/
+/*    font-family: 'Barlow', sans-serif;*/
+/*    font-size: 20px;*/
+/*    color: blanchedalmond;*/
+/*    margin-bottom: 0;*/
+/*}*/
 /*************************** ALL EVENTS styling... END*/
 
 /*************************** ABOUT US styling... START*/
