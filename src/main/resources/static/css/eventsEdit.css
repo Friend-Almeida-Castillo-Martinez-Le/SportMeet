@@ -1,28 +1,23 @@
 
-:root {
-    --primary: hsla(305, 96%, 32%, 0.37);
-    --secondary: hsla(182, 90%, 35%, 0.36);
-    --third: hsla(181, 100%, 50%, 0.82);
-    --fourth: hsla(305, 100%, 59%, 0.78)
-}
 ::placeholder{
     color: lightgrey;
 }
 
 
 body {
+    --primary: hsla(305, 96%, 32%, 0.37);
+    --secondary: hsla(182, 90%, 35%, 0.36);
     min-height: 100vh;
     background: linear-gradient(45deg, var(--primary), var(--secondary)),
     url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
 }
 
 .edit-title{
-    margin-top: 5em;
     color: lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: xx-large;
+    font-size: large;
 }
 .edit-form{
     display: flex;
@@ -31,9 +26,9 @@ body {
     height: 100%;
     border: 1px solid lightgrey;
     padding: 2em;
-    width: 70%;
+    width: 40%;
     border-radius: 10px;
-    background: url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
+    background: url(../img/pexels-kseniya-lapteva-9176068.jpg) no-repeat center center / cover;
     font-size: larger;
 
 }
@@ -44,12 +39,14 @@ body {
     color: lightgrey;
 }
 .edit-btn{
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
     display: block;
-    width: 100%;
+    width: 50%;
     border: none;
     background: linear-gradient(45deg, var(--third), var(--fourth));
-    padding: 15px 20px;
-    font-size: 40px;
+    padding: 5px;
+    font-size: 20px;
     cursor: pointer;
     text-align: center;
     color: white;
@@ -62,6 +59,10 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 800px;
-    margin-top: 15em;
+    height: 600px;
+}
+.edit-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
