@@ -11,15 +11,21 @@
                 <div class="email-label1">
                     <label>Email</label>
                     <div class="email-input1">
-                        <input class="input-form2" th:field="*{email}" required/>
+                        <th:block th:if="${emailError}">
+                            <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
+                        </th:block>
+                        <input class="input-form2" th:field="*{email}" type="email" required/>
                     </div>
                     <hr>
                 </div>
                 <div class="email-label1">
                     <label>Username</label>
-                    <div class="email-input1">
-                        <input class="input-form2" th:field="*{username}" required/>
-                    </div>
+                        <div class="email-input1">
+                    <th:block th:if="${usernameError}">
+                        <span id="usernameError" name="usernameError" style="color: red">* Username already exists.</span><br>
+                    </th:block>
+                            <input class="input-form2" th:field="*{username}" required/>
+                        </div>
                     <hr>
                 </div>
             </div>
@@ -42,6 +48,9 @@
             <div class="email-label1">
                 <label>Password</label>
                 <div class="email-input1">
+                    <th:block th:if="${passwordError}">
+                        <span id="passwordError" name="passwordError" style="color: red">* Password invalid.</span><br>
+                    </th:block>
                     <input name="password" id="password" type="password" th:field="*{password}" class="input-form2"
                            required/>
                 </div>
@@ -54,6 +63,9 @@
             <div class="email-label1">
                 <label>Confirm Password</label>
                 <div class="email-input1">
+                    <th:block th:if="${confirmError}">
+                        <span id="confirmError" name="confirmError" style="color: red">* Passwords did not match.</span><br>
+                    </th:block>
                     <input name="confirm-password" id="confirm-password" type="password" class="input-form2"
                            required/>
                 </div>

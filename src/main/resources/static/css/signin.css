@@ -45,6 +45,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    font-size: 30px;
 
 }
 
@@ -85,6 +86,15 @@
     color: lightgrey;
     width: 100%;
 
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: white !important;
 }
 
 hr {
@@ -175,9 +185,7 @@ h1 {
     margin-top: 3em;
 }
 
-.email-label1 {
-    font-size: 20px;
-}
+
 
 .password-label1 {
     font-size: 30px;
@@ -625,6 +633,65 @@ hr {
     color: white;
 }
 
+#usernameError{
+    color: red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#passwordError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#confirmError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    left: 100%;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+#emailError{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    border: red;
+    padding: 5px;
+    font-size: large;
+    transition: 2s;
+    top: -40px;
+    left: -150px;
+    animation: fadeIn 3s;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.73);
+}
+
 .password-error {
     display: flex;
     flex-direction: column;
@@ -654,3 +721,148 @@ hr {
     animation: fadeIn 3s;
     border-radius: 6px;
 }
+
+/************* END SIGN-IN CSS ***************/
+
+/************* START SPORTS CSS ***************/
+.gallery {
+    --s: 16px; /* control the slanted part */
+    display: grid;
+    height: 350px;
+    gap: 8px;
+    grid-auto-flow: column;
+    place-items: center;
+    left: 10px;
+}
+.gallery > a {
+    width: 0;
+    min-width: calc(100% + var(--s));
+    height: 0;
+    min-height: 100%;
+    object-fit: cover;
+    clip-path: polygon(var(--s) 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+    cursor: pointer;
+    transition: .5s;
+}
+.gallery > a:hover {
+    width: 15vw;
+}
+.gallery > a:first-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: start;
+    clip-path: polygon(0 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+}
+.gallery > a:last-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: end;
+    clip-path: polygon(var(--s) 0,100% 0,100% 100%,0 100%);
+}
+.gallery > a > img {
+    width: 0;
+    min-width: calc(100% + var(--s));
+    height: 0;
+    min-height: 100%;
+    object-fit: cover;
+    clip-path: polygon(var(--s) 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+    cursor: pointer;
+    transition: .5s;
+}
+.gallery > a >img:hover {
+    width: 15vw;
+}
+.gallery >  a >img:first-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: start;
+    clip-path: polygon(0 0,100% 0,calc(100% - var(--s)) 100%,0 100%);
+}
+.gallery > a > img:last-child {
+    min-width: calc(100% + var(--s)/2);
+    place-self: end;
+    clip-path: polygon(var(--s) 0,100% 0,100% 100%,0 100%);
+}
+
+.sports-body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    align-content: center;
+    background: url("../img/stadium-lights.png") no-repeat center center / cover;
+}
+.navbar-sport{
+    display: flex;
+    position: absolute;
+    width: 100%;
+}
+/************* END SPORTS CSS ***************/
+/************* START EDIT EVENT CSS ***************/
+
+
+
+.edit-event-body{
+    --primary: hsla(305, 96%, 32%, 0.37);
+    --secondary: hsla(182, 90%, 35%, 0.36);
+    min-height: 100vh;
+    background: linear-gradient(45deg, var(--primary), var(--secondary)),
+    url("../img/pexels-kseniya-lapteva-9176068.jpg") no-repeat center center / cover;
+}
+
+.edit-title{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid lightgrey;
+    padding: 2em;
+    width: 40%;
+    border-radius: 10px;
+    background: url(../img/pexels-kseniya-lapteva-9176068.jpg) no-repeat center center / cover;
+    font-size: larger;
+
+}
+.edit-label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: lightgrey;
+    font-size: 15px;
+}
+.edit-btn{
+    --third: hsla(181, 100%, 50%, 0.82);
+    --fourth: hsla(305, 100%, 59%, 0.78);
+    display: block;
+    width: 50%;
+    border: none;
+    background: linear-gradient(45deg, var(--third), var(--fourth));
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 40px;
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
+
+
+.edit-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 600px;
+}
+.edit-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/************* END EDIT EVENT CSS ***************/
+
+

@@ -1,98 +1,10 @@
-<!DOCTYPE html>
-<html xml:lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=BhuTuka+Expanded+One&family=Montserrat:wght@100&display=swap"
-          rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="" th:href="@{/css/sports.css}">
-    <script src="https://kit.fontawesome.com/0304cf4152.js" crossorigin="anonymous"></script>
-    <style>
-        body{
-            background-image: url("/img/stadium-lights.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-    </style>
-</head>
-
-<body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark " style="width: 100%; padding: 0;">
-    <div class="container-fluid navbar-custom ">
-        <a class="navbar-brand" href="#">
-            <img src="" th:src="@{/img/black-back.png}" alt="" th:width="75px" th:height="50px">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 column justify-content-evenly">
-
-                <!--                Player link-->
-                <th:block sec:authorize="isAuthenticated()">
-                    <li class="nav-item">
-                        <form th:action="@{/player/{id} (id = ${#authentication.principal.id})}" th:method="GET">
-                            <a class="nav-link" th:href="@{/player/{id} (id = ${#authentication.principal.id})}">Profile</a>
-                        </form>
-                    </li>
-                </th:block>
-
-                <!--                event link -->
-                <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Events
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-start">
-                        <li>
-                            <a class="dropdown-item" type="button" th:href="@{/events}">All Events</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" type="button" th:href="@{/event/create}">Create an Event</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!--                sports link -->
-                <li class="nav-item"><a class="nav-link" href="/sports">Sports</a></li>
-
-                <!--                login-->
-                <li sec:authorize="!isAuthenticated()">
-                    <form th:action="@{/login}" th:method="get">
-                        <a class="nav-link" href="/login">Log In</a>
-                    </form>
-                </li>
-
-                <!--                sign up button -->
-                <li sec:authorize="!isAuthenticated()">
-                    <form th:action="@{/sign-up}" th:method="get">
-                        <a class="nav-link" href="/sign-up">Sign Up!</a>
-                    </form>
-                </li>
-
-                <!--                About Us-->
-                <li sec:authorize="isAuthenticated()" class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
-                </li>
-
-                <!--                logout -->
-                <li sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
-                        <button type="submit" class="btn-link btn">Logout</button>
-                    </form>
-                </li>
-            </ul>
-            <form sec:authorize="isAuthenticated()" class="d-flex" role="search" th:method="get" th:action="@{/event/search}">
-                <input class="form-control me-2 btn-outline-secondary" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Player Create')"/>
+<div class="navbar-sport">
+    <nav th:replace="fragments/partials :: navbar"/>
+</div>
+<body class="sports-body">
 <div class="gallery">
     <a th:href="@{/sport/{name} (name = ${sport.name})}" th:each="sport: ${sports}"><img th:src="${sport.image}"></a>
 </div>
