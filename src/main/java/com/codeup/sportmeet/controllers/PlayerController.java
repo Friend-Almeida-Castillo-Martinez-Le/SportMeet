@@ -108,6 +108,7 @@ public class PlayerController {
             Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
             model.addAttribute("allratings", ratingDao.searchRatingForRatee(currentPlayer.getId()));
+            model.addAttribute("teamratings", ratingDao.searchRatingForRater(currentPlayer.getId()));
 
             return ("player/show");
         }

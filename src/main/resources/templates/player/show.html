@@ -52,10 +52,14 @@
                        style="text-decoration: none; color: black"></a>
                 </div>
             </div>
-            <h5 style="text-decoration: underline">Ratings:</h5>
+            <h5 style="text-decoration: underline">My Ratings:</h5>
                 <div th:each="rating: ${allratings}">
                     Event ID: <span th:text="${rating.event.id}"></span> | Rater: <span th:text="${rating.rater.username}"></span> | Score: <span th:text="${rating.rating}"></span>
                 </div>
+            <h5 style="text-decoration: underline">Team Member Ratings:</h5>
+            <div th:each="rating: ${teamratings}">
+                Event ID: <span th:text="${rating.event.id}"></span> | Team member: <span th:text="${rating.ratee.username}"></span> | Score: <span th:text="${rating.rating}"></span>
+            </div>
 
 
         </div>
