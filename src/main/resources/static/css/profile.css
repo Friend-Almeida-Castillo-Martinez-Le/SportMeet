@@ -52,13 +52,13 @@
     font-family: 'Barlow', sans-serif;;
     font-size: 2em;
     color: blanchedalmond;
-    font-style: italic;
+    /*font-style: italic;*/
     text-transform: capitalize;
 
 }
 
 .hover:hover {
-    background-color: rgba(0, 128, 0, 0.37);
+    background-color: rgba(192, 42, 222, 0.4)
 
 }
 
