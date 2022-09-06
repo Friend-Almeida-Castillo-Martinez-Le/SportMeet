@@ -49,6 +49,7 @@ public class RatingController {
         Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Rating r = ratingDao.getById(id);
         r.setRating(rating);
+        r.setRated(true);
         ratingDao.save(r);
         model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
         model.addAttribute("allratings", ratingDao.searchRatingForRatee(currentPlayer.getId()));
