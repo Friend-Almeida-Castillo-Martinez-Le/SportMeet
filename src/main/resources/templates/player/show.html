@@ -42,14 +42,14 @@
             <div class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                       class="hover" style="color: black;text-transform: capitalize"></a>
+                       class="hover" style="color: black; text-decoration: none"></a>
                 </div>
             </div>
             <h5 class="fonts" style="text-decoration: underline">ATTENDING:</h5>
             <div  class="fonts" th:object="${player}">
                 <div th:each="event: ${player.getAttendingEvents()}">
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                      class="hover" style="color: black; text-transform: capitalize" ></a>
+                      class="hover" style="color: black; text-decoration: none" ></a>
                 </div>
             </div>
             <h5 style="text-decoration: underline">My Ratings:</h5>
@@ -58,13 +58,14 @@
                 </div>
             <h5 style="text-decoration: underline">Team Member Ratings:</h5>
             <div th:each="rating: ${teamratings}">
-                <form th:action="@{/rating/{id}/edit (id = ${rating.id})}" method="post">
-                    Event ID: <span th:text="${rating.event.id}"></span> | Team member: <span th:text="${rating.ratee.username}"></span> <br>
-                    <label for="score">Score(0-5): </label>
-                    <input type="number" id="score" name="rating" min="0" max="5" th:value="${rating.rating}">
-                    <button type="submit" class="btn btn-success" >Submit</button>
-                </form>
-
+                <div th:if="${!rating.rated}">
+                    <form th:action="@{/rating/{id}/edit (id = ${rating.id})}" method="post">
+                        Event ID: <span th:text="${rating.event.id}"></span> | Team member: <span th:text="${rating.ratee.username}"></span> <br>
+                        <label for="score">Score(0-5): </label>
+                        <input type="number" id="score" name="rating" min="0" max="5" th:value="${rating.rating}">
+                        <button type="submit" class="btn btn-success" >Submit</button>
+                    </form>
+                </div>
             </div>
 
 
