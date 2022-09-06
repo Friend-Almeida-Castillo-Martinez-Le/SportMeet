@@ -8,48 +8,48 @@
     <div class="event-cards" >
         <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
             <div class="grid-container">
-                <img th:src="@{/img/white-back.png}" alt="none" class="card-thumbnail"/>
+                <img th:src="@{/img/20-basketball-blue.png}" alt="none" class="card-thumbnail"/>
                 <h1 th:text="${event.title}" class="card-title"></h1>
                 <th:block sec:authorize="isAuthenticated()">
                     <span th:text="${event.player.username}" class="card-host">Host: </span>
                 </th:block>
                <th:block th:switch="${event.sport.name}" class="card-sport">
-                   <span th:case="Football"><img src="/img/rugby-ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Basketball"><img src="/img/basketball-ball.png" alt="ball" style="height: 20px;width: 20px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Tennis"><img src="/img/ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Baseball"><img src="/img/baseball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Golf"><img src="/img/golf.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Soccer"><img src="/img/soccer-ball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Bowling"><img src="/img/strike.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span th:case="Volleyball"><img src="/img/volleyball.png" alt="ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Football"><img src="/img/rugby-ball.png" alt="Football" style="height: 16px;width: px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Basketball"><img src="/img/basketball-ball.png" alt="Basketball" style="height: 20px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Tennis"><img src="/img/ball.png" alt="Tennis ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Baseball"><img src="/img/baseball.png" alt="Baseball" style="height: 16px;width: 16px;"><span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Golf"><img src="/img/golf.png" alt="Golf ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Soccer"><img src="/img/soccer-ball.png" alt="Soccer ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Bowling"><img src="/img/strike.png" alt="Bowling ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Volleyball"><img src="/img/volleyball.png" alt="Volleyball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
                </th:block>
                 <p th:text="${event.description}" class="card-description">Description: </p>
                 <span th:text="${event.date}" class="card-date">Date: </span>
                 <th:block th:switch="${event.startTime.substring(0,2)}" class="card-start">
-                    <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="01" th:text="${'1:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="02" th:text="${'2:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="03" th:text="${'3:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="04" th:text="${'4:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="05" th:text="${'5:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="06" th:text="${'6:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="07" th:text="${'7:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="08" th:text="${'8:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="09" th:text="${'9:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="10" th:text="${'10:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="11" th:text="${'11:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-                    <span th:case="12" th:text="${'12:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="13" th:text="${'1:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="14" th:text="${'2:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="15" th:text="${'3:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="16" th:text="${'4:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="17" th:text="${'5:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="18" th:text="${'6:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="19" th:text="${'7:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="20" th:text="${'8:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="21" th:text="${'9:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="22" th:text="${'10:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-                    <span th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                    <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="01" th:text="${'1:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="02" th:text="${'2:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="03" th:text="${'3:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="04" th:text="${'4:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="05" th:text="${'5:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="06" th:text="${'6:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="07" th:text="${'7:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="08" th:text="${'8:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="09" th:text="${'9:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="10" th:text="${'10:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="11" th:text="${'11:' + event.startTime.substring(3,5) + ' AM'}" class="card-start">Time: </span>
+                    <span th:case="12" th:text="${'12:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="13" th:text="${'1:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="14" th:text="${'2:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="15" th:text="${'3:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="16" th:text="${'4:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="17" th:text="${'5:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="18" th:text="${'6:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="19" th:text="${'7:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="20" th:text="${'8:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="21" th:text="${'9:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="22" th:text="${'10:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
+                    <span th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}" class="card-start">Time: </span>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
                     <span th:text="${event.location}" class="card-location">Address: </span>
