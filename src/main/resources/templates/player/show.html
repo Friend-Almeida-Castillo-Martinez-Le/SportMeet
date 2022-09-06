@@ -58,7 +58,13 @@
                 </div>
             <h5 style="text-decoration: underline">Team Member Ratings:</h5>
             <div th:each="rating: ${teamratings}">
-                Event ID: <span th:text="${rating.event.id}"></span> | Team member: <span th:text="${rating.ratee.username}"></span> | Score: <span th:text="${rating.rating}"></span>
+                <form th:action="@{/rating/{id}/edit (id = ${rating.id})}" method="post">
+                    Event ID: <span th:text="${rating.event.id}"></span> | Team member: <span th:text="${rating.ratee.username}"></span> <br>
+                    <label for="score">Score: </label>
+                    <input type="text" id="score" name="rating" th:value="${rating.rating}">
+                    <button type="submit">Submit</button>
+                </form>
+
             </div>
 
 
