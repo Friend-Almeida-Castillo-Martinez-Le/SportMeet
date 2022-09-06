@@ -6,6 +6,11 @@
 </head>
 <body id="body">
 <nav th:replace="fragments/partials :: navbar"/>
+<div sec:authorize="isAuthenticated()">
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+    Email: <span th:text="${#authentication.principal.email}"/>
+</div>
 <div id="card-2">
     <div id="card-1">
         <h1 id="title"></h1>
@@ -47,6 +52,12 @@
                        style="text-decoration: none; color: black"></a>
                 </div>
             </div>
+            <h5 style="text-decoration: underline">Ratings:</h5>
+                <div th:each="rating: ${allratings}">
+                    Event ID: <span th:text="${rating.event.id}"></span> | Rater: <span th:text="${rating.rater.username}"></span> | Score: <span th:text="${rating.rating}"></span>
+                </div>
+
+
         </div>
     </div>
 </div>

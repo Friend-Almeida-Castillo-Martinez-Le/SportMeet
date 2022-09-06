@@ -3,6 +3,7 @@ package com.codeup.sportmeet.controllers;
 
 import com.codeup.sportmeet.models.Event;
 import com.codeup.sportmeet.models.Player;
+import com.codeup.sportmeet.models.Rating;
 import com.codeup.sportmeet.repositories.PlayerRepository;
 import com.codeup.sportmeet.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,9 +29,10 @@ public class PlayerController {
     private PasswordEncoder passwordEncoder;
     private RatingRepository ratingDao;
 
-    public PlayerController(PlayerRepository playerDao, PasswordEncoder passwordEncoder) {
+    public PlayerController(PlayerRepository playerDao, PasswordEncoder passwordEncoder, RatingRepository ratingDao) {
         this.playerDao = playerDao;
         this.passwordEncoder = passwordEncoder;
+        this.ratingDao = ratingDao;
     }
 
     @Value("${FILESTACK_API}")
@@ -104,6 +107,8 @@ public class PlayerController {
         } else {
             Player currentPlayer = (Player) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
+            model.addAttribute("allratings", ratingDao.searchRatingForRatee(currentPlayer.getId()));
+
             return ("player/show");
         }
     }
