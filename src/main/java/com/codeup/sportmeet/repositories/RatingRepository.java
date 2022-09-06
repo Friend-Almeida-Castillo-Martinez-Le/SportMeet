@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
-    @Query("from Rating r where r.ratee=:ratee")
+    @Query("from Rating r where r.ratee.id=:ratee")
     List<Rating> searchRatingForRatee(@Param("ratee") Long ratee);
+    @Query("from Rating r where r.rater.id=:rater")
+    List<Rating> searchRatingForRater(@Param("rater") Long rater);
 }
