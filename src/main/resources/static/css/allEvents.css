@@ -88,8 +88,8 @@ body#allEvents{
     max-width: 100vw;
     margin: 1em 10em 0 10em;
     border-radius: 10px;
-    grid-template-columns: minmax(auto, 1fr);
-    grid-template-rows: minmax(auto, 1fr);
+    /*grid-template-columns: minmax(auto, 1fr);*/
+    /*grid-template-rows: minmax(auto, 1fr);*/
     grid-gap: 20px;
 
     /*grid-template-areas:*/
@@ -99,7 +99,8 @@ body#allEvents{
     /*'a a a f f g g h h h';*/
     grid-template-areas:
 
-    'a b e c'
+    'a e . c'
+    'a b b b'
     'a d d d'
     'a f g h';
 
@@ -110,17 +111,18 @@ body#allEvents{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 40% 40%;
-    max-width: 15vw;
+    max-width: 20vw;
     height: 30vh;
 
 }
 
-.card-title {
+h1.event-card-title {
     grid-area: b;
     width: 100%;
     font-family: 'Barlow', sans-serif;
     font-size: 2em;
     color: blanchedalmond;
+    margin: 0 1em 0 0;
 
 }
 
@@ -166,7 +168,7 @@ span.card-text {
     grid-area: f;
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
-    /*text-align: center;*/
+    text-align: center;
     color: blanchedalmond;
 
 }
@@ -175,6 +177,7 @@ span.card-text {
     grid-area: g;
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
+    text-align: center;
     color: blanchedalmond;
 
 }
@@ -185,6 +188,7 @@ span.card-text {
     font-size: 20px;
     color: blanchedalmond;
     display: flex;
+    margin-right: 2em;
 
 }
 

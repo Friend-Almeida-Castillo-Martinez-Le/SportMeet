@@ -9,7 +9,7 @@
         <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
             <div class="grid-container">
                 <img th:src="@{/img/20-basketball-blue.png}" alt="none" class="card-thumbnail"/>
-                <h1 th:text="${event.title}" class="card-title"></h1>
+                <h1 th:text="${event.title}" class="event-card-title"></h1>
                 <th:block sec:authorize="isAuthenticated()">
                     <span th:text="${event.player.username}" class="card-host">Host: </span>
                 </th:block>
