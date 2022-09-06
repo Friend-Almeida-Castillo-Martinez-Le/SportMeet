@@ -1,7 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/partials :: head('Player Create')"/>
-<nav th:replace="fragments/partials :: navbar"/>
+<div class="navbar-sport">
+    <nav th:replace="fragments/partials :: navbar"/>
+</div>
 <body class="sports-body">
 <div class="gallery">
     <a th:href="@{/sport/{name} (name = ${sport.name})}" th:each="sport: ${sports}"><img th:src="${sport.image}"></a>
