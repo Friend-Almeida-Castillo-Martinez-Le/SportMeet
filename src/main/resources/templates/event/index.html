@@ -14,8 +14,8 @@
                     <span th:text="${event.player.username}" class="card-host">Host: </span>
                 </th:block>
                <th:block th:switch="${event.sport.name}" class="card-sport">
-                   <span  class="card-sport" th:case="Football"><img src="/img/rugby-ball.png" alt="Football" style="height: 16px;width: px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
-                   <span  class="card-sport" th:case="Basketball"><img src="/img/basketball-ball.png" alt="Basketball" style="height: 20px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Football"><img src="/img/rugby-ball.png" alt="Football" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
+                   <span  class="card-sport" th:case="Basketball"><img src="/img/basketball-ball.png" alt="Basketball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
                    <span  class="card-sport" th:case="Tennis"><img src="/img/ball.png" alt="Tennis ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
                    <span  class="card-sport" th:case="Baseball"><img src="/img/baseball.png" alt="Baseball" style="height: 16px;width: 16px;"><span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>
                    <span  class="card-sport" th:case="Golf"><img src="/img/golf.png" alt="Golf ball" style="height: 16px;width: 16px;"> <span th:text="${event.sport.name}" class="card-text" style="font-size: medium" >Game: </span></span>

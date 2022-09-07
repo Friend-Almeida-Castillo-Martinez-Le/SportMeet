@@ -129,6 +129,7 @@ h1.event-card-title {
 span.card-host {
     grid-area: c;
     display: flex;
+    /*width: 100%;*/
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
     justify-content: center;
@@ -157,6 +158,7 @@ span.card-host {
 span.card-text {
     text-decoration: none;
     font-family: 'Barlow', sans-serif;
+    /*width: 100%;*/
     font-size: 20px !important;
     text-align: center !important;
     justify-content: center;
@@ -166,15 +168,17 @@ span.card-text {
 
 .card-date {
     grid-area: f;
+    /*width: 100%;*/
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     color: blanchedalmond;
 
 }
 
 .card-start {
     grid-area: g;
+    /*width: 100%;*/
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
     text-align: center;
@@ -184,6 +188,7 @@ span.card-text {
 
 .card-location {
     grid-area: h;
+    /*width: 100%;*/
     font-family: 'Barlow', sans-serif;
     font-size: 20px;
     color: blanchedalmond;
@@ -201,6 +206,7 @@ span.card-text {
 }
 
 .event-cards > a {
+    width: 100%;
     text-decoration: none;
 
 }
