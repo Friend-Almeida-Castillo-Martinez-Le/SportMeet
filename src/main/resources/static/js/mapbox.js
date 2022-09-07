@@ -64,7 +64,7 @@ function weatherDisplay(lat, lon) {
                 console.log(weatherDescription);
                 $('#day-1').children().first().html(date.toDateString());
                 $('#day-1').children().first().css('text-align', 'center');
-                $('#day-1').children().children().first().html('<span class="fw-bold">' + minTemp + '°F / ' + maxTemp + '°F </span>' + '<br>' + '<img src="" id="icon-1">')
+                $('#day-1').children().children().first().html('<span class="fw-bold">' + maxTemp + '°F / ' + minTemp + '°F </span>' + '<br>' + '<img src="" id="icon-1">')
                 $('#icon-1').attr('src', "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png")
                 $('#day-1').children().children().first().css('text-align', 'center')
                 $('#day-1').children().children().first().next().html( '<span class="fw-bold">' + weatherDescription + '</span>')

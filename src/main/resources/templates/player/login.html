@@ -14,10 +14,10 @@
     <form th:action="@{/login}" method="post" class="signin-form1">
         <div class="signin-container1">
             <div th:if="${param.error}">
-                <span style="color: red; font-size: 20px">* Invalid username or password.</span>
+                <span style="color: #ED1C24; font-size: 20px">* Invalid username or password.</span>
             </div>
             <div th:if="${param.logout}">
-                <span style="color: red; font-size: 20px">* You have been logged out.</span>
+                <span style="color: #ED1C24; font-size: 20px">* You have been logged out.</span>
             </div>
             <div class="email-label1">
                 <label for="username">Username</label>
