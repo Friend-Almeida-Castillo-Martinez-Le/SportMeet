@@ -6,11 +6,6 @@
 </head>
 <body id="body">
 <nav th:replace="fragments/partials :: navbar"/>
-<div sec:authorize="isAuthenticated()">
-    User ID: <span th:text="${#authentication.principal.id}"/>
-    Username: <span th:text="${#authentication.principal.username}"/>
-    Email: <span th:text="${#authentication.principal.email}"/>
-</div>
 <div id="card-2">
     <div id="card-1">
         <h1 id="title"></h1>
