@@ -136,7 +136,7 @@
                 <h5>Attending Players:</h5>
                 <div th:object="${event}">
                     <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
-                        <a class="nav-link" th:href="@{/player/{id} (id = ${player.id})}">
+                        <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
                             <span th:text="${player.username}"></span></a>
                     </button>
                 </div>
