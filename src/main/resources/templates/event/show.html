@@ -132,6 +132,14 @@
             </div>
             <div>
                 <i class="fa-solid fa-user"></i> <span th:text="${event.getPlayersAttending()}"></span>
+                <br>
+                <h5>Attending Players:</h5>
+                <div th:object="${event}">
+                    <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
+                        <a class="nav-link" th:href="@{/player/{id} (id = ${player.id})}">
+                            <span th:text="${player.username}"></span></a>
+                    </button>
+                </div>
             </div>
             <div class="edit-weather">
                 <div>
@@ -208,11 +216,7 @@
             </div>
         </div>
     </div>
-    <div th:object="${event}">
-        <div th:each="player: ${event.getPlayers()}">
-            <h5 th:text="${player.username}"></h5>
-        </div>
-    </div>
+
 </div>
 <script th:inline="javascript">
     /*<! [CDATA[*/
