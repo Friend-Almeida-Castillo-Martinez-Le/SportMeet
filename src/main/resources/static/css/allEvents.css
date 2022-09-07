@@ -98,6 +98,8 @@ body#allEvents p {
 
 .allevents-anchor {
     text-decoration: none;
+    display: flex;
+    justify-content: space-evenly;
 
 }
 .allevents-cards-container {
