@@ -101,8 +101,11 @@ body#allEvents p {
 
 }
 .allevents-cards-container {
-    display: flex;
-    margin: 5em 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1FR);
+    grid-column-gap: 10px;
+    grid-row-gap: 2em;
+    margin: 2em 0 0 0;
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
