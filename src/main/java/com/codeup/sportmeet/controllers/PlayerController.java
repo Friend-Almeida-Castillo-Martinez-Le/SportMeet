@@ -114,6 +114,20 @@ public class PlayerController {
         }
     }
 
+    @GetMapping("/player/{id}/show")
+    public String showPlayerShow(@PathVariable long id, Model model) {
+        if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
+            return "redirect:/login";
+        } else {
+            Player currentPlayer = playerDao.getById(id);
+            model.addAttribute("player", playerDao.getById(currentPlayer.getId()));
+            model.addAttribute("allratings", ratingDao.searchRatingForRatee(currentPlayer.getId()));
+            model.addAttribute("teamratings", ratingDao.searchRatingForRater(currentPlayer.getId()));
+
+            return ("player/show");
+        }
+    }
+
     @GetMapping("player/{id}/edit")
     public String playerEdit(Model model, @PathVariable long id, @RequestParam(value = "usernameError", required = false) boolean usernameError, @RequestParam(value = "passwordError", required = false) boolean passwordError, @RequestParam(value = "emailError", required = false) boolean emailError) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
