@@ -6,8 +6,6 @@
 <body class="show-event-body">
 <nav th:replace="fragments/partials :: navbar"/>
 <body>
-Compare event player id: <span th:text="${event.player.id}"></span>
-User id: <span th:text="${#authentication.principal.id}"></span>
 <div class="show-content-box">
     <div class="img-box" th:if="${event.eventPicUrl != null}">
         <img th:src="${event.eventPicUrl}" alt="event-image" class="img-show">
