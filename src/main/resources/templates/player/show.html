@@ -26,6 +26,8 @@
                        th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </th:block>
+            <br>
+
             <h5 class="fonts" style="text-decoration: underline">HOSTING:</h5>
             <div class="fonts" th:object="${player}">
 
@@ -33,7 +35,6 @@
                     <a th:href="@{/event/{id} (id = ${event.id})}" th:text="${event.title}"
                        class="hover" style="color: #B3B8CD; text-decoration: none; font-size: 20px"></a>
                 </div>
-
             </div>
             <br>
             <h5 class="fonts" style="text-decoration: underline">ATTENDING:</h5>
