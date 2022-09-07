@@ -7,19 +7,19 @@
 <nav th:replace="fragments/partials :: navbar"/>
 <body>
 <div class="show-content-box">
-    <div class="show-edit">
-<!--        <th:block sec:authorize="isAuthenticated()">-->
-<!--            <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">-->
-<!--                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="edit">Edit </a>-->
-<!--                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="delete"> Delete</a>-->
-<!--                <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="upload">Change Event Image</a>-->
-<!--                <h1><span th:text="${event.location}" class="show-location"></span></h1>-->
-<!--            </div>-->
-<!--        </th:block>-->
-    </div>
+<!--    <div class="show-edit">-->
+<!--&lt;!&ndash;        <th:block sec:authorize="isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:name="edit">Edit </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:name="delete"> Delete</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:name="upload">Change Event Image</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <h1><span th:text="${event.location}" class="show-location"></span></h1>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </th:block>&ndash;&gt;-->
+<!--    </div>-->
     <div class="img-box" th:if="${event.eventPicUrl != null}">
         <img th:src="${event.eventPicUrl}" alt="event-image" class="img-show">
     </div>
@@ -29,43 +29,31 @@
     <div class="event-info">
         <div class="host-row">
             <div>
-                <span><th:block th:switch="${event.date.substring(5,7)}">
-                    <span th:case="01"
-                          th:text="${'JAN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="02"
-                          th:text="${'FEB' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="03"
-                          th:text="${'MAR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="04"
-                          th:text="${'APR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="05"
-                          th:text="${'MAY' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="06"
-                          th:text="${'JUN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="07"
-                          th:text="${'JUL' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="08"
-                          th:text="${'AUG' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="09"
-                          th:text="${'SEP' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="10"
-                          th:text="${'OCT' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="11"
-                          th:text="${'NOV' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
-                    <span th:case="12"
-                          th:text="${'DEC' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
-                          class="card-text">Date: </span>
+                <span><th:block th:switch="${event.date.substring(5,7)}" class="card-date"><i class="fa-regular fa-calendar"></i>
+                    <span th:class="card-text" th:case="01" th:text="${'January' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="02" th:text="${'February' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="03" th:text="${'March' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="04" th:text="${'April' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="05" th:text="${'May' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="06" th:text="${'June' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="07" th:text="${'July' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="08" th:text="${'August' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="09" th:text="${'September' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="10" th:text="${'October' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="11" th:text="${'November' + ' '}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="12" th:text="${'December' + ' '}" class="card-text">Date: </span>
+                </th:block>
+                <th:block th:switch="${event.date.substring(8,10)}">
+                    <span th:class="card-text" th:case="01" th:text="${'1' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="02" th:text="${'2' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="03" th:text="${'3' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="04" th:text="${'4' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="05" th:text="${'5' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="06" th:text="${'6' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="07" th:text="${'7' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="08" th:text="${'8' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="09" th:text="${'9' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                    <span th:class="card-text" th:case="*" th:text="${event.date.substring(8,10) + ', ' + event.date.substring(0,4)}" class="card-text">Date: </span>
                 </th:block></span>
             </div>
             <div>
@@ -82,9 +70,7 @@
                     <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
                        th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
                     <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="delete"> <i class="fa-solid fa-trash"></i></a>
-                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="upload"><i class="fa-solid fa-circle-plus"></i></a>
+                       th:name="delete"><i class="fa-solid fa-trash"></i></a>
                 </div>
             </th:block>
         </div>
@@ -191,9 +177,11 @@
                 <div th:if="${event.player.id == #authentication.principal.id}">
                     <div th:if="${event.started == true}">
                         <div th:if="${event.confirmed == false}">
+                            <div th:if="${event.playersAttending > 0}">
                             <form th:action="@{/event/{id}/start (id = ${event.id})}" th:method="get">
                                 <button type="submit" class="event-start-btn">Start Event</button>
                             </form>
+                            </div>
                         </div>
                     </div>
                 </div>
