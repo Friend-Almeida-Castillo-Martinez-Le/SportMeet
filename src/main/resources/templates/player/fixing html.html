@@ -1,46 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Player Profile')">
+
+    <title>Reset Password</title>
 </head>
-<body class="sign-in-body">
-<nav th:replace="fragments/partials :: navbar" />
-<h1 class="sign-in-title">Edit Player</h1>
-<div class="form-container1">
-    <div class="single-container">
-        <div class="signin-email-username">
-            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
-                <div class="signin-container1">
-                    <th:block th:if="${usernameError}">
-                        <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
-                    </th:block>
-                    <label class="form-label">Username:</label>
-                    <input class="form-control" th:field="*{username}" />
+
+<body class="reset-body">
+<nav th:replace="fragments/partials :: navbar"/>
+<div class="forgot-container">
+    <div class="logo-title">
+        <!--        <img src="" th:src="@{/img/black-back.png}" height="200" width="200" alt="">-->
+    </div>
+    <div class="form_container">
+        <div class="fontcolor">
+            <span class="fontcolor "> Enter a new password?</span>
+            <br>
+            <!--            <span class="font2">This will be your new Password</span>-->
+            <form class="login" th:action="@{/set/{id}/password (id = ${player.id})}" th:method="post">
+                <div class="reset_field">
                     <th:block th:if="${passwordError}">
-                        <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
+                        <span id="passwordError" name="passwordError" style="color: #ED1C24; font-size: 20px">* Password invalid.</span>
                     </th:block>
-                    <label class="form-label" for="password">Password:</label>
-                    <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>
-                    <span id="message"></span>
-                    <span id="message2"></span>
-                    <label class="form-label" for="confirm-password">Confirm Password:</label>
-                    <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>
-                    <span id="message3"></span>
-                    <th:block th:if="${emailError}">
-                        <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
+                    <th:block th:if="${confirmError}">
+                        <span id="confirmError" name="confirmError" style="color: #ED1C24; font-size: 20px">* Passwords did not match.</span>
                     </th:block>
-                    <label class="form-label">Email:</label>
-                    <input type="email" class="form-control" th:field="*{email}" />
-                    <label>First Name:</label>
-                    <input class="form-control" th:field="*{firstName}"  required/>
-                    <label class="form-label">Last Name:</label>
-                    <input class="form-control" th:field="*{lastName}" />
-                    <input type="submit" />
+                    <label class="label-email" for="password">New Password</label>
+                    <div class="button">
+                        <div>
+                            <input class="login__input" type="password" name="password" id="password">
+                            <span class="req-message" id="message" style="font-size: 8px;"></span>
+                            <span class="req-message" id="message2" style="font-size: 8px;"></span>
+                        </div>
+                    </div>
+                    <label class="label-email" for="confirm-password">Confirm Password</label>
+                    <div class="button">
+                        <div>
+                            <input class="login__input" type="password" name="confirm-password" id="confirm-password">
+                            <span class="req-message" id="message3" style="font-size: 8px"></span>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <div>
+                            <button class="login__submit" type="submit">
+                                <span>Reset Password</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
 
+<script>
+    function isAllPresent(str) {
+        // Regex to check if a string
+        // contains uppercase, lowercase
+        // special character & numeric value
+        let pattern = new RegExp(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
+        );
+
+        // If the string is empty
+        // then print No
+        if (!str || str.length === 0) {
+            return "No";
+        }
+
+        // Print Yes If the string matches
+        // with the Regex
+        if (pattern.test(str)) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    $('#password').on('keyup', function () {
+        console.log('hello');
+        if ($('#password').val().length < 8) {
+            $('#message').html('* Password is too short must be at least 8 characters.<br>').css('color', '#ED1C24');
+        } else if ($('#password').val().length > 20) {
+            $('#message').html('* Password is too long must be 20 or fewer characters.<br>').css('color', '#ED1C24');
+        } else {
+            $('#message').html('Password length is good.<br>').css('color', 'green');
+        }
+        if (isAllPresent($('#password').val()) === "No") {
+            $('#message2').html('* Must contain lowercase, uppercase, number, and special character.<br>').css('color', '#ED1C24');
+        } else {
+            $('#message2').html('Password is strong.<br>').css('color', 'green');
+        }
+    })
+
+    $('#confirm-password').on('keyup', function () {
+        if ($('#password').val() !== $('#confirm-password').val()) {
+            $('#message3').html('* Passwords do not match.<br>').css('color', '#ED1C24');
+        } else {
+            $('#message3').html('Passwords match.<br>').css('color', 'green');
+        }
+    })
+</script>
+
+</body>
+</html>
