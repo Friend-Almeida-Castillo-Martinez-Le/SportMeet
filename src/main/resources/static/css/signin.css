@@ -165,8 +165,10 @@ hr {
     margin: 0;
 }
 
+
 .sign-in-title {
     display: flex;
+
     align-items: center;
     justify-content: center;
     width: 100%;
