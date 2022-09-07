@@ -309,26 +309,22 @@ body#aboutus p {
     object-fit: cover;
 }
 
-button.primary {
-    background-color: #03BFCB;
-    border: 1px solid #03BFCB;
-    border-radius: 3px;
+.social-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: transparent;
     color: #231E39;
     font-family: Montserrat, sans-serif;
     font-weight: 500;
-    padding: 10px 25px;
-}
-
-button.primary.ghost {
-    background-color: transparent;
-    color: #02899C;
+    padding: 5px 15px;
 }
 
 .skills {
     background-color: #1F1A36;
-    text-align: left;
+    text-align: center;
     padding: 15px;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .skills ul {
