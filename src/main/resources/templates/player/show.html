@@ -21,18 +21,20 @@
                 <h6 th:text="'@' + ${player.username}"></h6>
 <!--            </div>-->
 
-            <th:block sec:authorize="isAuthenticated()">
-                <div th:if="${player.id == #authentication.principal.id}">
-                    <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button"
-                       th:name="upload">Change Profile Picture</a>
-                </div>
-            </th:block>
+<!--            <th:block sec:authorize="isAuthenticated()">-->
+<!--                <div th:if="${player.id == #authentication.principal.id}">-->
+<!--                    <a th:href="@{/profile/{id}/upload (id = ${player.id})}" th:value="${player.id}" type="button"-->
+<!--                       th:name="upload">Change Profile Picture</a>-->
+<!--                </div>-->
+<!--            </th:block>-->
             <th:block sec:authorize="isAuthenticated()">
                 <div th:if="${player.id == #authentication.principal.id}">
                     <a th:href="@{/player/{id}/edit (id = ${player.id})}" th:value="${player.id}" type="button"
                        th:name="edit">Edit Profile</a>
                 </div>
             </th:block>
+            <br>
+
             <h5 class="fonts" style="text-decoration: underline">HOSTING:</h5>
             <div class="fonts" th:object="${player}">
 
