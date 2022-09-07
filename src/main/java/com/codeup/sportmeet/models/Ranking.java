@@ -16,6 +16,12 @@ public class Ranking {
     @Column
     private long upvote;
 
+    @Column
+    private long min;
+
+    @Column
+    private long max;
+
     public Ranking() {
     }
 
@@ -41,5 +47,21 @@ public class Ranking {
 
     public void setUpvote(long upvote) {
         this.upvote = upvote;
+    }
+
+    public long getMin() {
+        return min;
+    }
+
+    public void setMin(long min) {
+        this.min = min;
+    }
+
+    public long getMax() {
+        return max;
+    }
+
+    public void setMax(long max) {
+        this.max = max;
     }
 }

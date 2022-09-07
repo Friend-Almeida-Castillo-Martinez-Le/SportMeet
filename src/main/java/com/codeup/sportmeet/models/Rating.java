@@ -25,6 +25,10 @@ public class Rating {
     @Column
     private boolean rated;
 
+    @ManyToOne
+    @JoinColumn (name = "eventratings_id")
+    private Event eventratings;
+
     public Rating() {
     }
 
@@ -81,5 +85,17 @@ public class Rating {
 
     public void setRated(boolean rated) {
         this.rated = rated;
+    }
+
+    @ManyToOne
+    @JoinColumn (name = "playerratings_id")
+    private Player playerratings;
+
+    public Event getEventratings() {
+        return eventratings;
+    }
+
+    public void setEventratings(Event eventratings) {
+        this.eventratings = eventratings;
     }
 }

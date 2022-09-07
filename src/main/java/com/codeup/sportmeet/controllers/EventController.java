@@ -1,13 +1,7 @@
 package com.codeup.sportmeet.controllers;
 
-import com.codeup.sportmeet.models.Comment;
-import com.codeup.sportmeet.models.Event;
-import com.codeup.sportmeet.models.Player;
-import com.codeup.sportmeet.models.Sport;
-import com.codeup.sportmeet.repositories.CommentRepository;
-import com.codeup.sportmeet.repositories.EventRepository;
-import com.codeup.sportmeet.repositories.PlayerRepository;
-import com.codeup.sportmeet.repositories.SportRepository;
+import com.codeup.sportmeet.models.*;
+import com.codeup.sportmeet.repositories.*;
 import org.hibernate.type.LocalTimeType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -35,11 +29,14 @@ public class EventController {
     private PlayerRepository playersDao;
     private CommentRepository commentsDao;
 
-    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao, CommentRepository commentsDao) {
+    private RatingRepository ratingDao;
+
+    public EventController(EventRepository eventsDao, SportRepository sportsDao, PlayerRepository playerDao, CommentRepository commentsDao, RatingRepository ratingDao) {
         this.playersDao = playerDao;
         this.eventsDao = eventsDao;
         this.sportsDao = sportsDao;
         this.commentsDao = commentsDao;
+        this.ratingDao = ratingDao;
     }
 
     @Value("${FILESTACK_API}")
@@ -217,6 +214,17 @@ public class EventController {
                 ev.setPlayersAttending(eventsDao.getById(event.getId()).getPlayers().size());
             }
             eventsDao.save(ev);
+            //create ratings among fellow members
+            for(Player player: eventsDao.getById(ev.getId()).getPlayers()){
+                //don't make rating for oneself to onself
+                if(player.getId() != pl.getId()){
+                    //create rating for oneself to team member
+                    ratingDao.save(new Rating(playersDao.getById(player.getId()), playersDao.getById(pl.getId()), eventsDao.getById(ev.getId()),0));
+                    //create rating for team member to self
+                    ratingDao.save(new Rating(playersDao.getById(pl.getId()), playersDao.getById(player.getId()), eventsDao.getById(ev.getId()),0));
+                }
+
+            }
             System.out.println(currentPlayer.getEvents());
             return "redirect:/event/" + ev.getId();
         }

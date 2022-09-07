@@ -61,6 +61,9 @@ public class Event {
     @Column
     private boolean isConfirmed = false;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventratings")
+    private List<Rating> ratings;
+
     public Event() {
     }
 
