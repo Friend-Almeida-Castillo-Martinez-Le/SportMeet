@@ -4,22 +4,22 @@
 <head th:replace="fragments/partials :: head('Player Profile')">
 
 </head>
-<body id="body">
+<body id="aboutus">
 <nav th:replace="fragments/partials :: navbar"/>
-<div id="card-2">
-    <div id="card-1">
-        <h1 id="title"></h1>
+<div class="all-cards-container" id="">
+    <div class="card-container-about" style="width: 20%">
+
         <div th:if="${player.profilePicUrl != null}">
-            <img th:src="${player.profilePicUrl}" alt="profile-picture"
+            <img  class="round" th:src="${player.profilePicUrl}" alt="profile-picture"
                  style="height: 120px;width: 120px;border-radius: 100%">
             <br>
         </div>
         <br>
         <div>
-            <div id="container">
+<!--            <div id="container">-->
                 <h6 th:text="${player.firstName} + ' ' + ${player.lastName}"></h6>
                 <h6 th:text="'@' + ${player.username}"></h6>
-            </div>
+<!--            </div>-->
 
             <th:block sec:authorize="isAuthenticated()">
                 <div th:if="${player.id == #authentication.principal.id}">
@@ -35,23 +35,28 @@
             </th:block>
             <h5 class="fonts" style="text-decoration: underline">HOSTING:</h5>
             <div class="fonts" th:object="${player}">
+
                 <div th:each="event: ${player.getEvents()}">
-                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                       class="hover" style="color: black; text-decoration: none"></a>
+                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="${event.title}"
+                       class="hover" style="color: #B3B8CD; text-decoration: none; font-size: 20px"></a>
                 </div>
+
             </div>
+            <br>
             <h5 class="fonts" style="text-decoration: underline">ATTENDING:</h5>
             <div  class="fonts" th:object="${player}">
+
                 <div th:each="event: ${player.getAttendingEvents()}">
-                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="'- ' + ${event.title}"
-                      class="hover" style="color: black; text-decoration: none" ></a>
+                    <a th:href="@{/event/{id} (id = ${event.id})}" th:text="${event.title}"
+                      class="hover" style="color: #B3B8CD; text-decoration: none; font-size: 20px" ></a>
                 </div>
+                <br>
             </div>
-            <h5 style="text-decoration: underline">My Ratings:</h5>
+            <h5 class="fonts" style="text-decoration: underline">MY RATINGS:</h5>
                 <div th:each="rating: ${allratings}">
                     Event ID: <span th:text="${rating.event.id}"></span> | Rater: <span th:text="${rating.rater.username}"></span> | Score: <span th:text="${rating.rating}"></span>
                 </div>
-            <h5 style="text-decoration: underline">Team Member Ratings:</h5>
+            <h5 class="fonts" style="text-decoration: underline">TEAM MEMBER RATINGS:</h5>
             <div th:each="rating: ${teamratings}">
                 <div th:if="${!rating.rated}">
                     <form th:action="@{/rating/{id}/edit (id = ${rating.id})}" method="post">
