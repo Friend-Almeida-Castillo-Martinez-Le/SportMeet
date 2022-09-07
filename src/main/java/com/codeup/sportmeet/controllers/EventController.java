@@ -159,7 +159,7 @@ public class EventController {
             String today = format.format(new Date());
             Date todayAsDate = format.parse(today);
             LocalTime now = LocalTime.now();
-            if (format.parse(event.getDate()).equals(todayAsDate) || format.parse(event.getDate()).after(todayAsDate)) {
+            if (todayAsDate.equals(format.parse(event.getDate())) || todayAsDate.after(format.parse(event.getDate()))) {
                 if (Integer.parseInt(event.getStartTime().substring(0, 2)) <= now.getHour() && Integer.parseInt(event.getStartTime().substring(3, 5)) <= now.getMinute()) {
                     System.err.println(Integer.parseInt(event.getStartTime().substring(3, 5)));
                     System.err.println(now.getMinute());
