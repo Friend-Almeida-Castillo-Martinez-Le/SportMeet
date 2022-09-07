@@ -7,29 +7,47 @@
 <nav th:replace="fragments/partials :: navbar"/>
 <body>
 <div class="show-content-box">
-    <div class="show-edit">
-<!--        <th:block sec:authorize="isAuthenticated()">-->
-<!--            <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">-->
-<!--                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="edit">Edit </a>-->
-<!--                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="delete"> Delete</a>-->
-<!--                <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"-->
-<!--                   th:name="upload">Change Event Image</a>-->
-<!--                <h1><span th:text="${event.location}" class="show-location"></span></h1>-->
-<!--            </div>-->
-<!--        </th:block>-->
-    </div>
-    <div class="img-box" th:if="${event.eventPicUrl != null}">
+
+    <div class="img-box w-75" th:if="${event.eventPicUrl != null}">
         <img th:src="${event.eventPicUrl}" alt="event-image" class="img-show">
     </div>
-     <span th:text="${event.location}" class="show-location"></span>
+
 </div>
 <div class="single-container">
-    <div class="event-info">
-        <div class="host-row">
+
+
+    <div class="show-content-2">
+        <div>
+<!--            host name-->
+            <span> Host: <span th:text="${event.player.username}"></span></span>
+        </div>
+        <span th:text="${event.location}" class="show-location"></span>
+        <div class="show-edit">
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
+                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="delete"> <i class="fa-solid fa-trash"></i></a>
+                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="upload"><i class="fa-solid fa-circle-plus"></i></a>
+                </div>
+            </th:block>
+        </div>
+        <h2 th:text="${event.title}"></h2>
+        <h6 th:text="${event.description}" id="description" class="desc-box"></h6>
+        <div class="sport-row">
             <div>
-                <span><th:block th:switch="${event.date.substring(5,7)}">
+                <span th:text="${event.sport.name}"></span>
+            </div>
+<!--            start time-->
+            <div>
+
+                <!--            start date -->
+                <div class="event-info">
+                    <div class="host-row">
+                        <div>
+                 <span> <span class="h4">Date:</span>  <th:block th:switch="${event.date.substring(5,7)}">
                     <span th:case="01"
                           th:text="${'JAN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
                           class="card-text">Date: </span>
@@ -67,34 +85,11 @@
                           th:text="${'DEC' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}"
                           class="card-text">Date: </span>
                 </th:block></span>
-            </div>
-            <div>
-                <span> Host: <span th:text="${event.player.username}"></span></span>
-            </div>
-        </div>
+                        </div>
 
-    </div>
+                    </div>
 
-    <div class="show-content-2">
-        <div class="show-edit">
-            <th:block sec:authorize="isAuthenticated()">
-                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
-                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="delete"> <i class="fa-solid fa-trash"></i></a>
-                    <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
-                       th:name="upload"><i class="fa-solid fa-circle-plus"></i></a>
                 </div>
-            </th:block>
-        </div>
-        <h2 th:text="${event.title}"></h2>
-        <h6 th:text="${event.description}" id="description" class="desc-box"></h6>
-        <div class="sport-row">
-            <div>
-                <span th:text="${event.sport.name}"></span>
-            </div>
-            <div>
                 <span> Start:
                     <th:block th:switch="${event.startTime.substring(0,2)}">
                         <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}"
