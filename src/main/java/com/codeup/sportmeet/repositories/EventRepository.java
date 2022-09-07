@@ -26,4 +26,9 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("from Event event where event.sport.name like %:pathVar% order by event.date, event.startTime asc")
     List<Event> searchBySportName(@Param("pathVar") String pathVar);
+
+    @Transactional
+    @Modifying
+    @Query("update Event event set event.eventPicUrl = :url where event.id = :id")
+    void updateEventPic(@Param("id") Long id , @Param("url") String url);
 }

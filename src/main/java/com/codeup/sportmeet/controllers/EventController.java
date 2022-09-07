@@ -249,19 +249,19 @@ public class EventController {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
-            if (timeError) {
-                model.addAttribute("timeError", timeError);
-            }
             session.setAttribute("id", id);
             model.addAttribute("fsKey", fsKey);
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("event", eventsDao.getById(id));
+            if (timeError) {
+                model.addAttribute("timeError", timeError);
+            }
             return "event/edit";
         }
     }
 
     @PostMapping(value = "event/{id}/edit")
-    public String editEvent(@ModelAttribute("event") Event event, HttpSession session) throws ParseException {
+    public String editEvent(@ModelAttribute("event") Event event, HttpSession session, @RequestParam("profile_img") String url) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String today = format.format(new Date());
         Date todayAsDate = format.parse(today);
@@ -270,6 +270,9 @@ public class EventController {
             return "redirect:/login";
         } else {
             Long id = (Long) session.getAttribute("id");
+            if (!url.equals("")) {
+                eventsDao.updateEventPic(id, url);
+            }
             if (format.parse(event.getDate()).after(todayAsDate)) {
                 eventsDao.updateEvent(id, event.getTitle(), event.getDescription(), event.getLocation(), event.getStartTime(), event.getDate(), event.getSport());
             } else if (format.parse(event.getDate()).equals(todayAsDate) && Integer.parseInt(event.getStartTime().substring(0, 2)) > now.getHour()) {

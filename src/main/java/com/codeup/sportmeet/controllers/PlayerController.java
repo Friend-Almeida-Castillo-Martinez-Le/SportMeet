@@ -134,6 +134,7 @@ public class PlayerController {
             return "redirect:/login";
         } else {
             model.addAttribute("player", playerDao.getById(id));
+            model.addAttribute("fsKey", fsKey);
             model.addAttribute("passwordError", passwordError);
             model.addAttribute("usernameError", usernameError);
             model.addAttribute("emailError", emailError);
@@ -142,7 +143,7 @@ public class PlayerController {
     }
 
     @PostMapping("player/{id}/edit")
-    public String submitPlayerEdit(@ModelAttribute("player") Player player, @RequestParam(name = "password") String password, @RequestParam(name = "confirm-password") String confirmPassword) {
+    public String submitPlayerEdit(@ModelAttribute("player") Player player, @RequestParam(name = "password") String password, @RequestParam(name = "confirm-password") String confirmPassword, @RequestParam("profile_img") String url) {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {
@@ -177,6 +178,9 @@ public class PlayerController {
             }
             if (player.getLastName() != null) {
                 playerDao.updatePlayerLastName(player.getId(), player.getLastName());
+            }
+            if (!url.equals("")) {
+                playerDao.updatePlayerProfilePic(player.getId(), url);
             }
             return "redirect:/player/" + player.getId();
         }

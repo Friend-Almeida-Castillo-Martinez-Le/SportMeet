@@ -12,14 +12,14 @@
                 <div class="email-label1">
                     <label>New First Name</label>
                     <div class="email-input1">
-                        <input class="input-form2" th:field="*{firstName}" required/>
+                        <input class="input-form2" th:field="*{firstName}"/>
                     </div>
                     <hr>
                 </div>
                 <div class="email-label1">
                     <label>New Last Name</label>
                     <div class="email-input1">
-                        <input class="input-form2" th:field="*{lastName}" required/>
+                        <input class="input-form2" th:field="*{lastName}"/>
                     </div>
                     <hr>
                 </div>
@@ -31,7 +31,7 @@
                         <th:block th:if="${emailError}">
                             <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
                         </th:block>
-                        <input class="input-form2" th:field="*{email}" type="email" required/>
+                        <input class="input-form2" th:field="*{email}" type="email"/>
                     </div>
                     <hr>
                 </div>
@@ -41,7 +41,7 @@
                         <th:block th:if="${usernameError}">
                             <span id="usernameError" name="usernameError" style="color: red">* Username already exists.</span><br>
                         </th:block>
-                        <input class="input-form2" th:field="*{username}" required/>
+                        <input class="input-form2" th:field="*{username}"/>
                     </div>
                     <hr>
                 </div>
@@ -52,8 +52,7 @@
                     <th:block th:if="${passwordError}">
                         <span id="passwordError" name="passwordError" style="color: red">* Password invalid.</span><br>
                     </th:block>
-                    <input name="password" id="password" type="password" th:field="*{password}" class="input-form2"
-                           required/>
+                    <input name="password" id="password" type="password" th:field="*{password}" class="input-form2"/>
                 </div>
                 <hr>
             </div>
@@ -67,8 +66,7 @@
                     <th:block th:if="${confirmError}">
                         <span id="confirmError" name="confirmError" style="color: red">* Passwords did not match.</span><br>
                     </th:block>
-                    <input name="confirm-password" id="confirm-password" type="password" class="input-form2"
-                           required/>
+                    <input name="confirm-password" id="confirm-password" type="password" class="input-form2"/>
                 </div>
                 <hr>
             </div>
@@ -79,11 +77,7 @@
         <div id="image">
             <label for="fileupload"></label>
             <input type="hidden" id="fileupload">
-            <button id="picker" type="button" class="upload-picker-btn">
-                <img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload
-                Profile
-                Picture
-            </button>
+            <button class=" btn btn-green" id="picker" type="button" style="width: 100%; height: 100%; justify-content: center; align-items: center; font-size: .8em;margin-bottom: 20px; border: 1px solid white;border-radius: 2em"><img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px">Change Profile Picture</button>
             <div id="thumbnail-container"></div>
             <input type="hidden" name="profile_img" id="hidden-input">
         </div>
@@ -142,6 +136,61 @@
         }
     })
 </script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const file = /*[[${fsKey}]]*/ 'default';
+    console.log(file);
+    const client = filestack.init(file);
+    const options = {
+        onUploadDone: updateForm,
+        onUploadDone: (res) =>
+            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`),
+        maxSize: 10 * 1024 * 1024,
+        accept: 'image/*',
+        uploadInBackground: false,
+    };
+    const picker = client.picker(options);
+
+    const fileInput = document.getElementById('fileupload');
+    const btn = document.getElementById('picker');
+    const nameBox = document.getElementById('nameBox');
+    const urlBox = document.getElementById('urlBox');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        picker.open();
+    });
+
+    function updateForm(result) {
+        const fileData = result.filesUploaded[0];
+        fileInput.value = fileData.url;
+
+        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
+            const container = document.getElementById('thumbnail-container');
+            const thumbnail = document.getElementById('thumbnail') || new Image();
+            thumbnail.id = 'thumbnail';
+            thumbnail.src = client.transform(fileData.handle, {
+                resize: {
+                    width: 200
+                }
+            });
+
+            if (!container.contains(thumbnail)) {
+                container.appendChild(thumbnail);
+            }
+        }
+
+        const name = document.createTextNode('Selected: ' + fileData.filename);
+        const url = document.createElement('a');
+        url.href = fileData.url;
+        url.appendChild(document.createTextNode(fileData.url));
+        nameBox.appendChild(name);
+        urlBox.appendChild(document.createTextNode('Uploaded to: '));
+        urlBox.appendChild(url);
+    };
+    /*]]>*/
+</script>
 </body>
 </html>
 
@@ -150,7 +199,7 @@
 
 
 
-///////////////// this is the old page/////////////////////////
+<!--///////////////// this is the old page/////////////////////////-->
 
 
 <!--<body class="sign-in-body">-->
