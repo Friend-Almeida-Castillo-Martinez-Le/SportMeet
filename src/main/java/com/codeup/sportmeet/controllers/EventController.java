@@ -253,6 +253,7 @@ public class EventController {
                 model.addAttribute("timeError", timeError);
             }
             session.setAttribute("id", id);
+            model.addAttribute("fsKey", fsKey);
             model.addAttribute("sports", sportsDao.findAll());
             model.addAttribute("event", eventsDao.getById(id));
             return "event/edit";
