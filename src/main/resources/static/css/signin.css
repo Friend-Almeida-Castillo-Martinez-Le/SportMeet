@@ -865,6 +865,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 50%;
 }
 /************* END EDIT EVENT CSS ***************/
 /************* START SHOW EVENT CSS ***************/

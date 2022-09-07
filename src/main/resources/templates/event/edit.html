@@ -4,40 +4,73 @@
 <head th:replace="fragments/partials :: head('Player Profile')">
 </head>
 <nav th:replace="fragments/partials :: navbar"/>
-<body class="edit-event-body">
-<div class="edit-title">
-    <h1>Enter New Information</h1>
+<body class="create-body">
+<div class="create-title">
+    <div class="create-container head1">
+        <h1>Enter New Information</h1>
+    </div>
 </div>
-<div class="edit-container">
-    <form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}" class="edit-form">
-        <th:block th:if="${timeError}">
-            <span id="timeError" name="timeError" style="color: red; font-size: 20px">* Can not create an event in the past.</span><br>
-        </th:block>
-        <div class="edit-label">
-            <label for="title">New Title</label>
-            <input type="text" id="title" placeholder="Title" th:field="*{title}">
-        </div>
-        <div class="edit-label">
-            <label for="description">New Description</label>
-            <input type="text" id="description" placeholder="Description" th:field="*{description}">
-        </div>
-        <div class="edit-label">
-            <label for="location">New Address</label>
-            <input type="text" id="location" placeholder="City, State" th:field="*{location}">
-        </div>
-        <div class="edit-label">
-            <label for="startTime">New Start Time</label>
-            <input type="time" id="startTime" placeholder="Start Time" th:field="*{startTime}">
-        </div>
-        <div class="edit-label">
-            <label for="date">New Date</label>
-            <input type="date" id="date" th:field="*{date}">
-        </div>
-        <div class="edit-label">
-            <label for="sport">Sport</label>
-            <select name="sport" id="sport" th:field="*{sport}">
-                <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
-            </select>
+    <form th:action="@{/event/{id}/edit (id = ${event.id})}" th:method="post" th:object="${event}"
+          class="create-register-form">
+        <div class="create-register-container">
+            <th:block th:if="${timeError}">
+                <span id="timeError" name="timeError" style="color: red; font-size: 20px">* Can not create an event in the past.</span><br>
+            </th:block>
+            <div class="create-title-label">
+                <div class="create-title-div">
+                    <label for="title">New Title</label>
+                    <div class="create-email-input">
+                        <span class="lock-icon"></span>
+                        <input id="title" name="title" type="text" placeholder="Name of the Event" class="create-input-form"
+                               th:field="*{title}">
+                    </div>
+                    <hr>
+                </div>
+                <div class="create-title-div">
+                    <label for="location">New Location</label>
+                    <div class="create-email-input">
+                        <span class="lock-icon"></span>
+                        <input type="text" placeholder="Where will you play?" class="create-input-form"
+                               th:field="*{location}" id="location">
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="create-username-label">
+                <div class="create-sport-box">
+                    <label for="sport">New Sport</label>
+                    <div class="create-email-input">
+                        <select name="sport" id="sport" th:field="*{sport}" class="create-select" style="color: #03BFCB">
+                            <option th:each="sport: ${sports}" th:text="${sport.name}" th:value="${sport.id}"></option>
+                        </select>
+                    </div>
+                    <hr>
+                </div>
+                <div class="create-time-box">
+                    <label for="date">New Date - Start Time</label>
+                    <div class="create-time-input">
+                        <div class="create-date">
+                            <input id="date" name="date" type="date" th:field="*{date}"  style="color-scheme: dark; color: #03BFCB">
+                        </div>
+                        <div class="create-time-slot">
+                            <div class="create-start-time">
+                                <label class="create-time-title" for="start-time"></label>
+                                <input id="start-time" name="title" type="time" class="create-input-form"
+                                       th:field="*{startTime}" style="color-scheme: dark; color: #03BFCB">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="create-description-label">
+                <label for="description">New Description</label>
+                <div class="create-description-input">
+                    <input id="description" type="text" placeholder="Describe the event"
+                           class="create-description-form" th:field="*{description}">
+                </div>
+                <hr>
+            </div>
         </div>
         <div class="edit-btn-container">
             <button type="submit" th:value="${event.id}" name="id" class="edit-btn">Edit</button>
