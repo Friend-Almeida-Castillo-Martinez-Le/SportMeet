@@ -5,30 +5,29 @@
 <body id="allEvents">
 
     <nav th:replace="fragments/partials :: navbar"></nav>
-    <div class="event-cards" >
-        <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">
-            <div class="grid-container">
-                <img th:src="@{/img/20-basketball-blue.png}" alt="none" class="card-thumbnail"/>
-                
-                <h1 th:text="${event.title}" class="event-card-title"></h1>
-                
-                <th:block sec:authorize="isAuthenticated()">
-                    <span th:text="${event.player.username}" class="card-host">Host: </span>
-                </th:block>
-                
-               <th:block th:switch="${event.sport.name}" class="card-sport">
-                   <span  class="card-sport" th:case="Football"><img src="/img/big-fball.png" alt="Football"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Basketball"><img src="/img/big-bball.png" alt="Basketball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Tennis"><img src="/img/big-tball.png" alt="Tennis ball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Baseball"><img src="/img/big-baseball.png" alt="Baseball"><span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Golf"><img src="/img/big-golf.png" alt="Golf ball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Soccer"><img src="/img/big-sball.png" alt="Soccer ball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Bowling"><img src="/img/big-bowlball.png" alt="Bowling ball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
-                   <span  class="card-sport" th:case="Volleyball"><img src="/img/big-volley.png" alt="Volleyball"> <span th:text="${event.sport.name}" class="card-text" >Game: </span></span>
+
+    <div class="allevents-cards-container" >
+        <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button" class="allevents-anchor">
+            <div class="card-container-allevents">
+<!--                <img th:src="@{/img/20-basketball-blue.png}" alt="none" class="round"/>-->
+               <th:block th:switch="${event.sport.name}" >
+                   <span  class="card-sport" th:case="Football"><img src="/img/big-fball.png" alt="Football" class="round"></span>
+                   <span  class="card-sport" th:case="Basketball"><img src="/img/big-bball.png" alt="Basketball" class="round"></span>
+                   <span  class="card-sport" th:case="Tennis"><img src="/img/big-tball.png" alt="Tennis ball" class="round"></span>
+                   <span  class="card-sport" th:case="Baseball"><img src="/img/big-baseball.png" alt="Baseball" class="round"></span>
+                   <span  class="card-sport" th:case="Golf"><img src="/img/big-golf.png" alt="Golf ball" class="round"></span>
+                   <span  class="card-sport" th:case="Soccer"><img src="/img/big-sball.png" alt="Soccer ball" class="round"></span>
+                   <span  class="card-sport" th:case="Bowling"><img src="/img/big-bowlball.png" alt="Bowling ball" class="round"></span>
+                   <span  class="card-sport" th:case="Volleyball"><img src="/img/big-volley.png" alt="Volleyball" class="round"></span>
                </th:block>
-               
-                <p th:text="${event.description}" class="card-description">Description: </p>
-                <th:block th:switch="${event.date.substring(5,7)}">
+
+                <h5 th:text="${event.title}" class="event-card-title"></h5>
+                <br><br>
+<!--                <th:block sec:authorize="isAuthenticated()">-->
+<!--                    <h6><i class="fa-solid fa-crown"></i><span th:text="${event.player.username}" class="card-host">Host: </span></h6>-->
+<!--                </th:block>-->
+<!--                <p th:text="${event.description}" class="card-description">Description: </p>-->
+                <th:block th:switch="${event.date.substring(5,7)}" class="card-date"><i class="fa-regular fa-calendar"></i>
                     <span th:class="card-date" th:case="01" th:text="${'January' + ' '}" class="card-text">Date: </span>
                     <span th:class="card-date" th:case="02" th:text="${'February' + ' '}" class="card-text">Date: </span>
                     <span th:class="card-date" th:case="03" th:text="${'March' + ' '}" class="card-text">Date: </span>
@@ -43,7 +42,7 @@
                     <span th:class="card-date" th:case="12" th:text="${'December' + ' '}" class="card-text">Date: </span>
                 </th:block>
 
-                <th:block th:switch="${event.date.substring(8,10)}" class="card-date">
+                <th:block th:switch="${event.date.substring(8,10)}">
                     <span th:class="card-date" th:case="01" th:text="${'1' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
                     <span th:class="card-date" th:case="02" th:text="${'2' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
                     <span th:class="card-date" th:case="03" th:text="${'3' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
@@ -56,7 +55,9 @@
                     <span th:class="card-date" th:case="*" th:text="${event.date.substring(8,10) + ', ' + event.date.substring(0,4)}" class="card-text">Date: </span>
                 </th:block>
 
-                <th:block th:switch="${event.startTime.substring(0,2)}" class="card-start" >
+                <br>
+
+                <th:block th:switch="${event.startTime.substring(0,2)}" class="card-start" ><i class="fa-regular fa-clock"></i>
                     <span th:class="card-start" th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
                     <span th:class="card-start" th:case="01" th:text="${'1:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
                     <span th:class="card-start" th:case="02" th:text="${'2:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
@@ -83,9 +84,9 @@
                     <span th:class="card-start" th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
                 </th:block>
 
-                <th:block sec:authorize="isAuthenticated()">
+                <p><th:block sec:authorize="isAuthenticated()"><i class="fa-solid fa-location-dot"></i>
                     <span th:text="${event.location}" class="card-location">Address: </span>
-                </th:block>
+                </th:block></p>
             </div>
         </a>
     </div>
