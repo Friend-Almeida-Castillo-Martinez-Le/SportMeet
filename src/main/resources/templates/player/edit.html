@@ -1,44 +1,94 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/partials :: head('Player Edit')" />
+
 <body class="sign-in-body">
-<nav th:replace="fragments/partials :: navbar" />
+<nav th:replace="fragments/partials :: navbar"/>
 <h1 class="sign-in-title">Edit Player</h1>
 <div class="form-container1">
-    <div class="single-container">
-        <div class="signin-email-username">
-            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
-                <div class="signin-container1">
-                <th:block th:if="${usernameError}">
-                    <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
-                </th:block>
-                <label class="form-label">Username:</label>
-                <input class="form-control" th:field="*{username}" />
-                <th:block th:if="${passwordError}">
-                    <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
-                </th:block>
-                <label class="form-label" for="password">Password:</label>
-                <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>
+    <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
+        <div class="signin-container1">
+            <div class="signin-email-username">
+                <div class="email-label1">
+                    <label>New First Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{firstName}" required/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="email-label1">
+                    <label>New Last Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{lastName}" required/>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="signin-email-username">
+                <div class="email-label1">
+                    <label>New Email</label>
+                    <div class="email-input1">
+                        <th:block th:if="${emailError}">
+                            <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
+                        </th:block>
+                        <input class="input-form2" th:field="*{email}" type="email" required/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="email-label1">
+                    <label>New Username</label>
+                    <div class="email-input1">
+                        <th:block th:if="${usernameError}">
+                            <span id="usernameError" name="usernameError" style="color: red">* Username already exists.</span><br>
+                        </th:block>
+                        <input class="input-form2" th:field="*{username}" required/>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="email-label1">
+                <label>New Password</label>
+                <div class="email-input1">
+                    <th:block th:if="${passwordError}">
+                        <span id="passwordError" name="passwordError" style="color: red">* Password invalid.</span><br>
+                    </th:block>
+                    <input name="password" id="password" type="password" th:field="*{password}" class="input-form2"
+                           required/>
+                </div>
+                <hr>
+            </div>
+            <div class="password-error">
                 <span id="message"></span>
                 <span id="message2"></span>
-                <label class="form-label" for="confirm-password">Confirm Password:</label>
-                <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>
+            </div>
+            <div class="email-label1">
+                <label>Confirm Password</label>
+                <div class="email-input1">
+                    <th:block th:if="${confirmError}">
+                        <span id="confirmError" name="confirmError" style="color: red">* Passwords did not match.</span><br>
+                    </th:block>
+                    <input name="confirm-password" id="confirm-password" type="password" class="input-form2"
+                           required/>
+                </div>
+                <hr>
+            </div>
+            <div class="confirm-error">
                 <span id="message3"></span>
-                <th:block th:if="${emailError}">
-                    <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
-                </th:block>
-                <label class="form-label">Email:</label>
-                <input type="email" class="form-control" th:field="*{email}" />
-                <label class="form-label">First Name:</label>
-                <input class="form-control" th:field="*{firstName}" />
-                <label class="form-label">Last Name:</label>
-                <input class="form-control" th:field="*{lastName}" />
-                <input type="submit" />
-               </div>
-            </form>
-
+            </div>
         </div>
-    </div>
+        <div id="image">
+            <label for="fileupload"></label>
+            <input type="hidden" id="fileupload">
+            <button id="picker" type="button" class="upload-picker-btn">
+                <img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px"> Upload
+                Profile
+                Picture
+            </button>
+            <div id="thumbnail-container"></div>
+            <input type="hidden" name="profile_img" id="hidden-input">
+        </div>
+        <input type="submit" class="sign-in-submit"/>
+    </form>
 </div>
 
 
@@ -50,13 +100,11 @@
         let pattern = new RegExp(
             "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
         );
-
         // If the string is empty
         // then print No
         if (!str || str.length === 0) {
             return "No";
         }
-
         // Print Yes If the string matches
         // with the Regex
         if (pattern.test(str)) {
@@ -96,3 +144,108 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+///////////////// this is the old page/////////////////////////
+
+
+<!--<body class="sign-in-body">-->
+<!--<nav th:replace="fragments/partials :: navbar" />-->
+<!--<h1 class="sign-in-title">Edit Player</h1>-->
+<!--<div class="form-container1">-->
+<!--    <div class="single-container">-->
+<!--        <div class="signin-email-username">-->
+<!--            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">-->
+<!--                <div class="signin-container1">-->
+<!--                <th:block th:if="${usernameError}">-->
+<!--                    <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>-->
+<!--                </th:block>-->
+<!--                <label class="form-label">Username:</label>-->
+<!--                <input class="form-control" th:field="*{username}" />-->
+<!--                <th:block th:if="${passwordError}">-->
+<!--                    <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>-->
+<!--                </th:block>-->
+<!--                <label class="form-label" for="password">Password:</label>-->
+<!--                <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>-->
+<!--                <span id="message"></span>-->
+<!--                <span id="message2"></span>-->
+<!--                <label class="form-label" for="confirm-password">Confirm Password:</label>-->
+<!--                <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>-->
+<!--                <span id="message3"></span>-->
+<!--                <th:block th:if="${emailError}">-->
+<!--                    <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>-->
+<!--                </th:block>-->
+<!--                <label class="form-label">Email:</label>-->
+<!--                <input type="email" class="form-control" th:field="*{email}" />-->
+<!--                <label class="form-label">First Name:</label>-->
+<!--                <input class="form-control" th:field="*{firstName}" />-->
+<!--                <label class="form-label">Last Name:</label>-->
+<!--                <input class="form-control" th:field="*{lastName}" />-->
+<!--                <input type="submit" />-->
+<!--               </div>-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+<!--<script>-->
+<!--    function isAllPresent(str) {-->
+<!--        // Regex to check if a string-->
+<!--        // contains uppercase, lowercase-->
+<!--        // special character & numeric value-->
+<!--        let pattern = new RegExp(-->
+<!--            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"-->
+<!--        );-->
+
+<!--        // If the string is empty-->
+<!--        // then print No-->
+<!--        if (!str || str.length === 0) {-->
+<!--            return "No";-->
+<!--        }-->
+
+<!--        // Print Yes If the string matches-->
+<!--        // with the Regex-->
+<!--        if (pattern.test(str)) {-->
+<!--            return "Yes";-->
+<!--        } else {-->
+<!--            return "No";-->
+<!--        }-->
+<!--    }-->
+
+<!--    $('#password').on('keyup',function () {-->
+<!--        console.log('hello');-->
+<!--        if ($('#password').val().length < 8) {-->
+<!--            $('#message').html('* Password is too short must be at least 8 characters.<br>').css('color', 'red');-->
+<!--        }-->
+<!--        else if ($('#password').val().length > 20) {-->
+<!--            $('#message').html('* Password is too long must be 20 or fewer characters.<br>').css('color', 'red');-->
+<!--        }-->
+<!--        else {-->
+<!--            $('#message').html('Password length is good.<br>').css('color', 'green');-->
+<!--        }-->
+<!--        if (isAllPresent($('#password').val()) === "No") {-->
+<!--            $('#message2').html('* Must contain lowercase, uppercase, number, and special character.<br>').css('color', 'red');-->
+<!--        }-->
+<!--        else {-->
+<!--            $('#message2').html('Password is strong.<br>').css('color', 'green');-->
+<!--        }-->
+<!--    })-->
+
+<!--    $('#confirm-password').on('keyup', function () {-->
+<!--        if ($('#password').val() !== $('#confirm-password').val()) {-->
+<!--            $('#message3').html('* Passwords do not match.<br>').css('color', 'red');-->
+<!--        }-->
+<!--        else {-->
+<!--            $('#message3').html('Passwords match.<br>').css('color', 'green');-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

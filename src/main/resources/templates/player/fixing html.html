@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="sign-in-body">
+<nav th:replace="fragments/partials :: navbar" />
+<h1 class="sign-in-title">Edit Player</h1>
+<div class="form-container1">
+    <div class="single-container">
+        <div class="signin-email-username">
+            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
+                <div class="signin-container1">
+                    <th:block th:if="${usernameError}">
+                        <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
+                    </th:block>
+                    <label class="form-label">Username:</label>
+                    <input class="form-control" th:field="*{username}" />
+                    <th:block th:if="${passwordError}">
+                        <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
+                    </th:block>
+                    <label class="form-label" for="password">Password:</label>
+                    <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>
+                    <span id="message"></span>
+                    <span id="message2"></span>
+                    <label class="form-label" for="confirm-password">Confirm Password:</label>
+                    <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>
+                    <span id="message3"></span>
+                    <th:block th:if="${emailError}">
+                        <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
+                    </th:block>
+                    <label class="form-label">Email:</label>
+                    <input type="email" class="form-control" th:field="*{email}" />
+                    <label>First Name:</label>
+                    <input class="form-control" th:field="*{firstName}"  required/>
+                    <label class="form-label">Last Name:</label>
+                    <input class="form-control" th:field="*{lastName}" />
+                    <input type="submit" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
