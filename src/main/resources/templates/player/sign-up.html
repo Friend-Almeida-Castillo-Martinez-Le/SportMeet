@@ -9,6 +9,22 @@
         <div class="signin-container1">
             <div class="signin-email-username">
                 <div class="email-label1">
+                    <label>First Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{firstName}" required/>
+                    </div>
+                    <hr>
+                </div>
+                <div class="email-label1">
+                    <label>Last Name</label>
+                    <div class="email-input1">
+                        <input class="input-form2" th:field="*{lastName}" required/>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="signin-email-username">
+                <div class="email-label1">
                     <label>Email</label>
                     <div class="email-input1">
                         <th:block th:if="${emailError}">
@@ -26,22 +42,6 @@
                     </th:block>
                             <input class="input-form2" th:field="*{username}" required/>
                         </div>
-                    <hr>
-                </div>
-            </div>
-            <div class="signin-email-username">
-                <div class="email-label1">
-                    <label>First Name</label>
-                    <div class="email-input1">
-                        <input class="input-form2" th:field="*{firstName}" required/>
-                    </div>
-                    <hr>
-                </div>
-                <div class="email-label1">
-                    <label>Last Name</label>
-                    <div class="email-input1">
-                        <input class="input-form2" th:field="*{lastName}" required/>
-                    </div>
                     <hr>
                 </div>
             </div>
