@@ -70,7 +70,6 @@
 
 body#allEvents{
     background-image: url("../img/stadium-lights.png") !important;
-    height: 100vh !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: cover !important;
