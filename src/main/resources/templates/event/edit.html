@@ -72,10 +72,73 @@
                 <hr>
             </div>
         </div>
+        <div id="image">
+            <label for="fileupload"></label>
+            <input type="hidden" id="fileupload">
+            <button class=" btn btn-green" id="picker" type="button" style="width: 100%; height: 100%; justify-content: center; align-items: center; font-size: .8em;margin-bottom: 20px; border: 1px solid white;border-radius: 2em"><img src="/img/file.png" alt="file" style="height: 16px;width: 16px; margin-bottom: 4px">Change Event Image</button>
+            <div id="thumbnail-container"></div>
+            <input type="hidden" name="profile_img" id="hidden-input">
+        </div>
         <div class="edit-btn-container">
             <button type="submit" th:value="${event.id}" name="id" class="edit-btn">Edit</button>
         </div>
     </form>
 </div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const file = /*[[${fsKey}]]*/ 'default';
+    const client = filestack.init(file);
+    const options = {
+        onUploadDone: updateForm,
+        onUploadDone: (res) =>
+            $('#hidden-input').val(`https://cdn.filestackcontent.com/${res.filesUploaded[0].handle}`),
+        maxSize: 10 * 1024 * 1024,
+        accept: 'image/*',
+        uploadInBackground: false,
+    };
+    const picker = client.picker(options);
+
+    const fileInput = document.getElementById('fileupload');
+    const btn = document.getElementById('picker');
+    const nameBox = document.getElementById('nameBox');
+    const urlBox = document.getElementById('urlBox');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        picker.open();
+    });
+
+
+    function updateForm(result) {
+        const fileData = result.filesUploaded[0];
+        fileInput.value = fileData.url;
+
+        if (['jpeg', 'png'].indexOf(fileData.mimetype.split('/')[1]) !== -1) {
+            const container = document.getElementById('thumbnail-container');
+            const thumbnail = document.getElementById('thumbnail') || new Image();
+            thumbnail.id = 'thumbnail';
+            thumbnail.src = client.transform(fileData.handle, {
+                resize: {
+                    width: 200
+                }
+            });
+
+            if (!container.contains(thumbnail)) {
+                container.appendChild(thumbnail);
+            }
+        }
+
+        const name = document.createTextNode('Selected: ' + fileData.filename);
+        const url = document.createElement('a');
+        url.href = fileData.url;
+        url.appendChild(document.createTextNode(fileData.url));
+        nameBox.appendChild(name);
+        urlBox.appendChild(document.createTextNode('Uploaded to: '));
+        urlBox.appendChild(url);
+    }
+
+    /*]]>*/
+</script>
 </body>
 </html>
