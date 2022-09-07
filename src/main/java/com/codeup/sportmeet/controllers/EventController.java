@@ -223,9 +223,7 @@ public class EventController {
                     //create rating for team member to self
                     ratingDao.save(new Rating(playersDao.getById(pl.getId()), playersDao.getById(player.getId()), eventsDao.getById(ev.getId()),0));
                 }
-
             }
-            System.out.println(currentPlayer.getEvents());
             return "redirect:/event/" + ev.getId();
         }
     }
