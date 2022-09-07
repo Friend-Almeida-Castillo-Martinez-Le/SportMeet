@@ -8,17 +8,17 @@
 <body>
 <div class="show-content-box">
     <div class="show-edit">
-        <th:block sec:authorize="isAuthenticated()">
-            <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
-                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
-                   th:name="edit">Edit </a>
-                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
-                   th:name="delete"> Delete</a>
-                <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"
-                   th:name="upload">Change Event Image</a>
-                <h1><span th:text="${event.location}" class="show-location"></span></h1>
-            </div>
-        </th:block>
+<!--        <th:block sec:authorize="isAuthenticated()">-->
+<!--            <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">-->
+<!--                <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"-->
+<!--                   th:name="edit">Edit </a>-->
+<!--                <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"-->
+<!--                   th:name="delete"> Delete</a>-->
+<!--                <a th:href="@{/event/{id}/upload (id = ${event.id})}" th:value="${event.id}" type="button"-->
+<!--                   th:name="upload">Change Event Image</a>-->
+<!--                <h1><span th:text="${event.location}" class="show-location"></span></h1>-->
+<!--            </div>-->
+<!--        </th:block>-->
     </div>
     <div class="img-box" th:if="${event.eventPicUrl != null}">
         <img th:src="${event.eventPicUrl}" alt="event-image" class="img-show">
