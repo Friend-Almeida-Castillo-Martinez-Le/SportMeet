@@ -215,15 +215,15 @@ public class EventController {
             }
             eventsDao.save(ev);
             //create ratings among fellow members
-            for(Player player: eventsDao.getById(ev.getId()).getPlayers()){
-                //don't make rating for oneself to onself
-                if(player.getId() != pl.getId()){
-                    //create rating for oneself to team member
-                    ratingDao.save(new Rating(playersDao.getById(player.getId()), playersDao.getById(pl.getId()), eventsDao.getById(ev.getId()),0));
-                    //create rating for team member to self
-                    ratingDao.save(new Rating(playersDao.getById(pl.getId()), playersDao.getById(player.getId()), eventsDao.getById(ev.getId()),0));
-                }
-            }
+//            for(Player player: eventsDao.getById(ev.getId()).getPlayers()){
+//                //don't make rating for oneself to onself
+//                if(player.getId() != pl.getId()){
+//                    //create rating for oneself to team member
+//                    ratingDao.save(new Rating(playersDao.getById(player.getId()), playersDao.getById(pl.getId()), eventsDao.getById(ev.getId()),0));
+//                    //create rating for team member to self
+//                    ratingDao.save(new Rating(playersDao.getById(pl.getId()), playersDao.getById(player.getId()), eventsDao.getById(ev.getId()),0));
+//                }
+//            }
             return "redirect:/event/" + ev.getId();
         }
     }

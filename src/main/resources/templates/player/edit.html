@@ -10,12 +10,12 @@
             <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
                 <div class="signin-container1">
                 <th:block th:if="${usernameError}">
-                    <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
+                    <span id="usernameError" name="usernameError" style="color: #ED1C24; font-size: 20px">* Username already exists.</span><br>
                 </th:block>
                 <label class="form-label">Username:</label>
                 <input class="form-control" th:field="*{username}" />
                 <th:block th:if="${passwordError}">
-                    <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
+                    <span id="passwordError" name="passwordError" style="color: #ED1C24; font-size: 20px">* Password invalid.</span><br>
                 </th:block>
                 <label class="form-label" for="password">Password:</label>
                 <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>
@@ -25,7 +25,7 @@
                 <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>
                 <span id="message3"></span>
                 <th:block th:if="${emailError}">
-                    <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
+                    <span id="emailError" name="emailError" style="color: #ED1C24; font-size: 20px">* Email already in use.</span><br>
                 </th:block>
                 <label class="form-label">Email:</label>
                 <input type="email" class="form-control" th:field="*{email}" />
