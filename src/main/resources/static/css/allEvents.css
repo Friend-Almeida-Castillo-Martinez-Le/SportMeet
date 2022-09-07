@@ -73,7 +73,7 @@ body#allEvents{
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: cover !important;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
     display: grid !important;
     place-items: start !important;
 }

@@ -162,8 +162,8 @@
             <div class="comment-box">
                 <div class="comment-submit">
                     <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post" th:object="${comment}">
-                        <input placeholder="Comment" id="comment" th:field="*{description}">
-                        <button type="submit" class="comment-btn">Submit</button>
+                        <input type="text" class="form-control border-bottom border-light mb-1 bg-dark bg-opacity-75" placeholder="Comment" id="comment" th:field="*{description}">
+                        <button type="submit" class="comment-btn mx-auto">Post Comment</button>
                     </form>
                 </div>
                 <div class="comment-display">
