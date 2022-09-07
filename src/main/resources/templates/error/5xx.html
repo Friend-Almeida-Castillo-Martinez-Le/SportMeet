@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="'Server Error'"></title>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="fragments/partials :: head('Servor Error')">
 </head>
-<body>
-<div>
-    <h1>We're sorry we are experiencing a server error. Please try again later...</h1>
-</div>
+<body id="allEvents">
+<nav th:replace="fragments/partials :: navbar"></nav>
+    <div style="color: red; margin: auto" >
+        <div  style="background-color: black ; border: 1px solid white; margin-bottom: 12em; padding: 2em">
+            <h1>We're sorry we are experiencing a server error. Please try again later...</h1>
+        </div>
+    </div>
 </body>
 </html>
