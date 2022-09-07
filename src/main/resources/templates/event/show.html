@@ -177,7 +177,7 @@
                 </div>
                 <div class="comment-display">
                     <div th:each="comment: ${event.comments}">
-                        <span th:text="${comment.player.username}"></span>
+                        <span th:text="${comment.player.username}"></span>:
                         <span th:text="${comment.description}"></span>
                         <div th:if="${comment.player.id == #authentication.principal.id or comment.event.player.id == #authentication.principal.id}">
                             <a th:href="@{/comment/{id}/delete (id = ${comment.id})}" th:method="get"
