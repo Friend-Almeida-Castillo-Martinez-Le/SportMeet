@@ -141,31 +141,32 @@
                     </button>
                 </div>
             </div>
-            <div class="edit-weather">
-                <div>
-                    <div id='map' style='width: 20em; height: 20em; border-radius: 100%'></div>
-                </div>
-                <div id="weather" style="visibility: hidden">
-                    <section id="cards" style="margin: 1em 0em;">
-                        <div class="card" id="day-1"
-                             style=" margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                            <div class="card-header"
-                                 style="font-weight: bold; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                                Featured
+            <div class="edit-weather container">
+                <div class="row mx-auto">
+                    <div id='map' class="col-3" style='width: 43em; min-height: 20em'></div>
+                    <div class="col-4" id="weather" style="visibility: hidden">
+                        <section id="cards" style="margin: 1em 0em;">
+                            <div class="card" id="day-1"
+                                 style=" margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                <div class="card-header"
+                                     style="font-weight: bold; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                    Featured
+                                </div>
+                                <ul class="list-group list-group-flush"
+                                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                    <li class="list-group-item"
+                                        style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                    </li>
+                                    <li class="list-group-item"
+                                        style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
+                                        A second item
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="list-group list-group-flush"
-                                style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                                <li class="list-group-item"
-                                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                                </li>
-                                <li class="list-group-item"
-                                    style="background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
-                                    A second item
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
+
             </div>
             <div class="comment-box">
                 <div class="comment-submit">
