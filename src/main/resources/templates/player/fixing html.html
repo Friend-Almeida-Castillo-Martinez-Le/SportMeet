@@ -1,46 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body class="sign-in-body">
-<nav th:replace="fragments/partials :: navbar" />
-<h1 class="sign-in-title">Edit Player</h1>
-<div class="form-container1">
-    <div class="single-container">
-        <div class="signin-email-username">
-            <form th:action="@{/player/{id}/edit (id = ${player.id})}" th:method="post" th:object="${player}" class="signin-form1">
-                <div class="signin-container1">
-                    <th:block th:if="${usernameError}">
-                        <span id="usernameError" name="usernameError" style="color: red; font-size: 20px">* Username already exists.</span><br>
-                    </th:block>
-                    <label class="form-label">Username:</label>
-                    <input class="form-control" th:field="*{username}" />
-                    <th:block th:if="${passwordError}">
-                        <span id="passwordError" name="passwordError" style="color: red; font-size: 20px">* Password invalid.</span><br>
-                    </th:block>
-                    <label class="form-label" for="password">Password:</label>
-                    <input name="password" id="password" type="password" class="form-control" th:field="*{password}"/>
-                    <span id="message"></span>
-                    <span id="message2"></span>
-                    <label class="form-label" for="confirm-password">Confirm Password:</label>
-                    <input name="confirm-password" id="confirm-password" type="password" class="form-control"/>
-                    <span id="message3"></span>
-                    <th:block th:if="${emailError}">
-                        <span id="emailError" name="emailError" style="color: red; font-size: 20px">* Email already in use.</span><br>
-                    </th:block>
-                    <label class="form-label">Email:</label>
-                    <input type="email" class="form-control" th:field="*{email}" />
-                    <label>First Name:</label>
-                    <input class="form-control" th:field="*{firstName}"  required/>
-                    <label class="form-label">Last Name:</label>
-                    <input class="form-control" th:field="*{lastName}" />
-                    <input type="submit" />
-                </div>
-            </form>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/partials :: head('Player Profile')">
 
+    <title>Forgot Password</title>
+</head>
+
+<body class="reset-body">
+<nav th:replace="fragments/partials :: navbar"/>
+<div class="forgot-container">
+    <div class="logo-title">
+        <!--        <img src="" th:src="@{img/black-back.png}" height="200" width="200" alt="">-->
+    </div>
+    <div class="form_container">
+        <div class="fontcolor">
+            <span class="fontcolor "> Forgot Your Password?</span>
+            <br>
+            <span class="font2">Enter email address registered to the account</span>
+            <form class="login" th:action="@{/forgot-password}" th:method="post">
+                <div class="login__field">
+                    <div class="email_field">
+                        <!--                        <label for="username" class="label-email">Username</label>-->
+                        <div class="button">
+                            <div>
+                                <th:block th:if="${usernameError}">
+                                    <span id="username-error" name="username-error" style="color: red; font-size: 20px">* User does not exist</span>
+                                </th:block>
+                                <input type="text" class="login__input" placeholder="Username" id="username"
+                                       name="username">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="email_field">
+                        <!--                        <label for="email" class="label-email">Email......</label>-->
+                        <div class="button">
+                            <div>
+                                <input type="email" class="login__input" placeholder="Email" id="email" name="email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <div>
+                        <button class="login__submit">
+                            <span class="">Reset Password</span>
+                        </button>
+                    </div>
+                </div>
+                <!--                <div class="button">-->
+                <!--                    <button type="button" class="login__submit">Sign-up</button>-->
+                <!--                </div>-->
+            </form>
         </div>
     </div>
 </div>
 
+</body>
+</html>
