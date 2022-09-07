@@ -14,6 +14,7 @@
 /* -----------------NAVBAR Customizations...START ----------------*/
 .navbar-custom {
     width:100% !important;
+    font-family: Barlow, sans-serif !important;
     /*background: rgb(2,0,36) !important;*/
     /*background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(221,44,206,1) 56%, rgba(93,18,106,1) 100%, rgba(198,42,184,1) 100%, rgba(255,46,238,1) 100%, rgba(36,30,30,0.37) 100%) !important;*/
     background: rgb(2,0,36) !important;
@@ -21,13 +22,13 @@
 
 }
 .nav-link {
-    font-size: 16px !important;
+    font-size: 20px !important;
     color: var(--third) !important;
 
 }
 
 .btn-link {
-    font-size: 16px !important;
+    font-size: 20px !important;
     color: rgb(244, 21, 244) !important;
     text-decoration: none !important;
 
@@ -59,7 +60,7 @@
 
 .dropdown-item {
     color: var(--third) !important;
-    font-size: 16px;
+    font-size: 18px;
 
 }
 
