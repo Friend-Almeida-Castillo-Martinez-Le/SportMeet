@@ -32,6 +32,7 @@
     color: rgb(244, 21, 244) !important;
     text-decoration: none !important;
 
+
 }
 
 .search {
@@ -70,7 +71,7 @@
 
 body#allEvents{
     background-image: url("../img/stadium-lights.png") !important;
-    height: 100vh !important;
+    height: 100vh;
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: cover !important;
@@ -113,8 +114,11 @@ body#allEvents p {
     flex-direction: row;
     width: 100%;
     text-decoration: none;
+
+    font-family: Barlow, sans-serif;
     height: 700px;
     overflow-y: auto;
+
 }
 
 /*.top-cards-container {*/
