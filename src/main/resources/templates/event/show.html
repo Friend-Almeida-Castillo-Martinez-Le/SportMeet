@@ -28,18 +28,18 @@
                 </div>
             </th:block>
         </div>
-        <h2 th:text="${event.title}"></h2>
-        <h6 th:text="${event.description}" id="description"
-            class="desc-box"></h6>
+
+
         <div class="sport-row">
-            <div>
-                Sport: <span th:text="${event.sport.name}"></span>
-            </div>
-<!--            START THE LEFT SIDE INFO-->
+
             <div class="container">
                 <div class="row">
+<!--            START THE LEFT SIDE INFO-->
                     <div class="col-8">
                         <div>
+                            <h2 th:text="${event.title}"></h2>
+                            <span>Location: <span th:text="${event.location}" ></span> </span>
+                            <br>
 
                             <!--            start date -->
                             <div class="event-info">
@@ -128,16 +128,8 @@
                 </span>
                         </div>
                         <div>
-                            <i class="fa-solid fa-user"></i> <span
-                                th:text="${event.getPlayersAttending()}"></span>
-                            <br>
-                            <h5>Attending Players:</h5>
-                            <div th:object="${event}">
-                                <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
-                                    <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
-                                        <span th:text="${player.username}"></span></a>
-                                </button>
-                            </div>
+
+
                         </div>
 
 
@@ -145,17 +137,51 @@
 <!--                    RIGHT SIDE INFO-->
                     <div class="col-4">
                         <div>
+                            <div class="text-end">
+                                Sport: <span th:text="${event.sport.name}"></span>
+                            </div>
                             <!--            host name-->
-                            <span>Host: <span th:text="${event.player.username}"></span></span>
-                            <br>
-                            <span>Location: <span th:text="${event.location}" ></span> </span>
+                            <div class="text-end">
+                                <span>Host: <span th:text="${event.player.username}"></span></span>
+                                <br>
+                            </div>
+
+<!--                            player count-->
+                            <div class="text-end">
+                                <i class="fa-solid fa-user"></i> <span
+                                    th:text="${event.getPlayersAttending()}"></span>
+                                <br>
+                            </div>
+
+
 
                         </div>
 
 
                     </div>
+<!--                    players list-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex align-items-center">
+                                <h5>Attending Players:</h5>
+                            </div>
+                            <div class="col text-end">
+                                <div th:object="${event}">
+                                    <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
+                                        <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
+                                            <span th:text="${player.username}"></span></a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
+            <!--DESCRIPTION -->
+            <h6 th:text="${event.description}" id="description"
+                class="desc-box"></h6>
 <!--            weather and map-->
             <div class="edit-weather container">
                 <div class="row mx-auto">
@@ -185,6 +211,7 @@
 
             </div>
 
+<!--            COMMENT-->
             <div class="comment-box">
                 <div class="comment-submit">
                     <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post"
@@ -222,7 +249,7 @@
                 </div>
             </div>
             <!--attend button-->
-            <div class="mx-auto text-center" th:if="${event.player.id != #authentication.principal.id}">
+            <div class="mx-auto" th:if="${event.player.id != #authentication.principal.id}">
                 <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
                     <div th:if="${event.started == false}">
                         <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
@@ -231,7 +258,7 @@
                                 <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
                                 <label for="attending"><h2>Want to attend event?</h2></label><br>
                             </div>
-                            <div>
+                            <div class="d-flex">
                                 <button type="submit" class="attend-btn">Attend</button>
                             </div>
                         </form>
