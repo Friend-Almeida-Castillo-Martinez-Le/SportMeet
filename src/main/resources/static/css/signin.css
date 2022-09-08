@@ -1230,3 +1230,7 @@ i {
 /************* END SHOW EVENT CSS ***************/
 /************* START WELCOME CSS ***************/
 
+.host-attend-box{
+    height: 300px;
+    overflow-y: auto;
+}
