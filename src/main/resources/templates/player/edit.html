@@ -56,7 +56,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="password-error">
+            <div class="password-error"  style="top: 50%; left: 65%">
                 <span id="message"></span>
                 <span id="message2"></span>
             </div>
@@ -70,7 +70,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="confirm-error">
+            <div class="confirm-error"  style="top: 65%; left: 65%">
                 <span id="message3"></span>
             </div>
         </div>
@@ -134,6 +134,14 @@
         else {
             $('#message3').html('Passwords match.<br>').css('color', 'green');
         }
+    })
+
+    $('#confirm-password').on('keyup', function () {
+        $('.confirm-error').css('background', 'black');
+    })
+
+    $('#password').on('keyup', function () {
+        $('.password-error').css('background', 'black');
     })
 </script>
 
