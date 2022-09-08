@@ -199,7 +199,7 @@
             <div class="edit-weather container">
                 <div class="row mx-auto">
                     <div id='map' class="col-3" style='width: 42vw; height: 30em'></div>
-                    <div class="col-3" id="weather" style="visibility: hidden">
+                    <div class="col-3" id="weather" style="visibility: hidden; margin-left: auto">
                         <section id="cards" style="">
                             <div class="card" id="day-1"
                                  style=" margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
@@ -229,9 +229,10 @@
                 <div class="comment-submit">
                     <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post"
                           th:object="${comment}">
-                        <input type="text" class="form-control border-bottom border-light mb-1 bg-dark bg-opacity-75"
-                               placeholder="Comment" id="comment" th:field="*{description}">
-                        <button type="submit" class="comment-btn mx-auto">Post Comment
+                        <textarea rows="2" cols="30" class="border-bottom border-light mb-1 bg-dark bg-opacity-75"
+                               placeholder="Comment" id="comment" th:field="*{description}" style="resize: none">
+                        </textarea>
+                        <button type="submit" class="comment-btn">Post Comment
                         </button>
                     </form>
                 </div>

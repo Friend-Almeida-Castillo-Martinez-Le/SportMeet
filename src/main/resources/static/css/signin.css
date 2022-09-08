@@ -1153,10 +1153,8 @@ hr {
 
 #comment {
     background-color: transparent;
-    width: 100%;
     color: lightgrey;
     border: none;
-
 }
 
 .comment-submit {
