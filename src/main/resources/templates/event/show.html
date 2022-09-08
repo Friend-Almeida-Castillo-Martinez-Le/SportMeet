@@ -169,7 +169,7 @@
                                 <div th:object="${event}" style="display: flex; justify-content: end;align-items: baseline" >
                                     <button class="btn btn-secondary mx-1 rounded" th:each="player: ${event.getPlayers()}" style="border-radius: 50% !important; background: #03BFCB; object-fit: fill; height: 48px; width: 48px; color: white !important;">
                                         <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}" style="display: flex !important; padding: 0 !important; justify-content: center !important; align-items: center !important; color: white !important">
-                                            <span th:text="${player.firstName.substring(0,1) + player.lastName.substring(0,1)}"></span></a>
+                                            <span th:text="${player.firstName.substring(0,1).toUpperCase() + player.lastName.substring(0,1).toUpperCase()}"></span></a>
                                     </button>
                                     <!--attend button-->
                                     <span th:if="${event.player.id != #authentication.principal.id}">
