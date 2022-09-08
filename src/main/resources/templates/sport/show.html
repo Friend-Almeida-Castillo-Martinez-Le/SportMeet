@@ -1,60 +1,96 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/partials :: head('Sport List')"/>
-<div class="navbar-sport">
-    <nav th:replace="fragments/partials :: navbar"/>
+<head th:insert="fragments/partials :: head('Sport Events')">
+</head>
+<body id="allEvents">
+
+<nav th:replace="fragments/partials :: navbar"></nav>
+
+<div class="allevents-cards-container" >
+    <a th:each="event: ${events}" th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button" class="allevents-anchor">
+        <div class="card-container-allevents">
+            <!--                <img th:src="@{/img/20-basketball-blue.png}" alt="none" class="round"/>-->
+            <th:block th:switch="${event.sport.name}" >
+                <span  class="card-sport" th:case="Football"><img src="/img/big-fball.png" alt="Football" class="round"></span>
+                <span  class="card-sport" th:case="Basketball"><img src="/img/big-bball.png" alt="Basketball" class="round"></span>
+                <span  class="card-sport" th:case="Tennis"><img src="/img/big-tball.png" alt="Tennis ball" class="round"></span>
+                <span  class="card-sport" th:case="Baseball"><img src="/img/big-baseball.png" alt="Baseball" class="round"></span>
+                <span  class="card-sport" th:case="Golf"><img src="/img/big-golf.png" alt="Golf ball" class="round"></span>
+                <span  class="card-sport" th:case="Soccer"><img src="/img/big-sball.png" alt="Soccer ball" class="round"></span>
+                <span  class="card-sport" th:case="Bowling"><img src="/img/big-bowlball.png" alt="Bowling ball" class="round"></span>
+                <span  class="card-sport" th:case="Volleyball"><img src="/img/big-volley.png" alt="Volleyball" class="round"></span>
+            </th:block>
+
+            <h5 th:text="${event.title}" class="event-card-title"></h5>
+            <br><br>
+            <!--                <th:block sec:authorize="isAuthenticated()">-->
+            <!--                    <h6><i class="fa-solid fa-crown"></i><span th:text="${event.player.username}" class="card-host">Host: </span></h6>-->
+            <!--                </th:block>-->
+            <!--                <p th:text="${event.description}" class="card-description">Description: </p>-->
+            <th:block th:switch="${event.date.substring(5,7)}" class="card-date"><i class="fa-regular fa-calendar"></i>
+                <span th:class="card-date" th:case="01" th:text="${'January' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="02" th:text="${'February' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="03" th:text="${'March' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="04" th:text="${'April' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="05" th:text="${'May' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="06" th:text="${'June' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="07" th:text="${'July' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="08" th:text="${'August' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="09" th:text="${'September' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="10" th:text="${'October' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="11" th:text="${'November' + ' '}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="12" th:text="${'December' + ' '}" class="card-text">Date: </span>
+            </th:block>
+
+            <th:block th:switch="${event.date.substring(8,10)}">
+                <span th:class="card-date" th:case="01" th:text="${'1' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="02" th:text="${'2' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="03" th:text="${'3' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="04" th:text="${'4' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="05" th:text="${'5' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="06" th:text="${'6' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="07" th:text="${'7' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="08" th:text="${'8' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="09" th:text="${'9' + ', ' +  event.date.substring(0,4)}" class="card-text">Date: </span>
+                <span th:class="card-date" th:case="*" th:text="${event.date.substring(8,10) + ', ' + event.date.substring(0,4)}" class="card-text">Date: </span>
+            </th:block>
+
+            <br>
+
+            <th:block th:switch="${event.startTime.substring(0,2)}" class="card-start" ><i class="fa-regular fa-clock"></i>
+                <span th:class="card-start" th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="01" th:text="${'1:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="02" th:text="${'2:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="03" th:text="${'3:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="04" th:text="${'4:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="05" th:text="${'5:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="06" th:text="${'6:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="07" th:text="${'7:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="08" th:text="${'8:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="09" th:text="${'9:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="10" th:text="${'10:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="11" th:text="${'11:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="12" th:text="${'12:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="13" th:text="${'1:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="14" th:text="${'2:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="15" th:text="${'3:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="16" th:text="${'4:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="17" th:text="${'5:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="18" th:text="${'6:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="19" th:text="${'7:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="20" th:text="${'8:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="21" th:text="${'9:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="22" th:text="${'10:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+                <span th:class="card-start" th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
+            </th:block>
+
+            <p><th:block sec:authorize="isAuthenticated()"><i class="fa-solid fa-location-dot"></i>
+                <span th:text="${event.location}" class="card-location">Address: </span>
+            </th:block></p>
+        </div>
+    </a>
 </div>
-<body class="sports-body">
-<div th:each="event: ${events}">
-    <div class="grid-container">
-    <h3 th:text="${event.title}" class="text-light"></h3>
-    <p th:text="${event.sport.name}" class="text-light"></p>
-    <p th:text="${event.description}" class="text-light"></p>
-    <th:block sec:authorize="isAuthenticated()">
-        <p th:text="${event.location}" class="text-light"></p>
-        <th:block th:switch="${event.date.substring(5,7)}">
-            <span th:case="01" th:text="${'JAN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="02" th:text="${'FEB' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="03" th:text="${'MAR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="04" th:text="${'APR' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="05" th:text="${'MAY' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="06" th:text="${'JUN' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="07" th:text="${'JUL' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="08" th:text="${'AUG' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="09" th:text="${'SEP' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="10" th:text="${'OCT' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="11" th:text="${'NOV' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-            <span th:case="12" th:text="${'DEC' + '-' + event.date.substring(8,10) + '-' + event.date.substring(0,4)}" class="card-text">Date: </span>
-        </th:block>
-        <th:block th:switch="${event.startTime.substring(0,2)}">
-            <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="01" th:text="${'1:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="02" th:text="${'2:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="03" th:text="${'3:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="04" th:text="${'4:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="05" th:text="${'5:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="06" th:text="${'6:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="07" th:text="${'7:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="08" th:text="${'8:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="09" th:text="${'9:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="10" th:text="${'10:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="11" th:text="${'11:' + event.startTime.substring(3,5) + ' AM'}" class="card-text">Time: </span>
-            <span th:case="12" th:text="${'12:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="13" th:text="${'1:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="14" th:text="${'2:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="15" th:text="${'3:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="16" th:text="${'4:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="17" th:text="${'5:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="18" th:text="${'6:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="19" th:text="${'7:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="20" th:text="${'8:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="21" th:text="${'9:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="22" th:text="${'10:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-            <span th:case="23" th:text="${'11:' + event.startTime.substring(3,5) + ' PM'}" class="card-text">Time: </span>
-        </th:block>
-        <a th:href="@{/event/{id} (id = ${event.id})}" type="button" role="button">View</a>
-    </th:block>
-    </div>
-</div>
+
+
 </body>
 </html>

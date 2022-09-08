@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns="http://www.w3.org/1999/html">
-<head th:replace="fragments/partials :: head('Player Profile')">
+<head th:replace="fragments/partials :: head('Event Page')">
 </head>
 <body class="show-event-body">
 <nav th:replace="fragments/partials :: navbar"/>
@@ -17,21 +17,13 @@
 
 
     <div class="show-content-2">
-        <div>
-            <!--            host name-->
-            <span> Host: <span th:text="${event.player.username}"></span></span>
-        </div>
-        <span th:text="${event.location}" class="show-location"></span>
+
         <div class="show-edit">
             <th:block sec:authorize="isAuthenticated()">
-                <div th:if="${event.player.id ==
-#authentication.principal.id}" class="edit-delete">
-                    <a th:href="@{/event/{id}/edit (id =
-${event.id})}" th:value="${event.id}" type="button"
-                       th:name="edit"><i class="fa-solid
-fa-pen-to-square"></i></a>
-                    <a th:href="@{/event/{id}/delete (id =
-${event.id})}" th:value="${event.id}" type="button"
+                <div th:if="${event.player.id == #authentication.principal.id}" class="edit-delete">
+                    <a th:href="@{/event/{id}/edit (id = ${event.id})}" th:value="${event.id}" type="button"
+                       th:name="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a th:href="@{/event/{id}/delete (id = ${event.id})}" th:value="${event.id}" type="button"
                        th:name="delete"> <i class="fa-solid fa-trash"></i></a>
                 </div>
             </th:block>
@@ -41,15 +33,18 @@ ${event.id})}" th:value="${event.id}" type="button"
             class="desc-box"></h6>
         <div class="sport-row">
             <div>
-                <span th:text="${event.sport.name}"></span>
+                Sport: <span th:text="${event.sport.name}"></span>
             </div>
-            <!--            start time-->
-            <div>
-
-                <!--            start date -->
-                <div class="event-info">
-                    <div class="host-row">
+<!--            START THE LEFT SIDE INFO-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
                         <div>
+
+                            <!--            start date -->
+                            <div class="event-info">
+                                <div class="host-row">
+                                    <div>
                  <span> <span class="h4">Date:</span>  <th:block th:switch="${event.date.substring(5,7)}"
                                                                  class="card-date"><i
                          class="fa-regular fa-calendar"></i>
@@ -92,12 +87,12 @@ ${event.id})}" th:value="${event.id}" type="button"
                     <span th:class="card-date" th:case="*"
                           th:text="${event.date.substring(8,10) + ', ' + event.date.substring(0,4)}" class="card-text">Date: </span>
                 </th:block></span>
-                        </div>
+                                    </div>
 
-                    </div>
+                                </div>
 
-                </div>
-                <span> Start:
+                            </div>
+                            <span> Start:
                     <th:block th:switch="${event.startTime.substring(0,2)}">
                         <span th:case="00" th:text="${'12:' + event.startTime.substring(3,5) + ' AM'}"
                               class="card-text">Time: </span>
@@ -131,24 +126,42 @@ ${event.id})}" th:value="${event.id}" type="button"
                               class="card-text">Time: </span>
                     </th:block>
                 </span>
-            </div>
-            <div>
-                <i class="fa-solid fa-user"></i> <span
-                    th:text="${event.getPlayersAttending()}"></span>
-                <br>
-                <h5>Attending Players:</h5>
-                <div th:object="${event}">
-                    <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
-                        <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
-                            <span th:text="${player.username}"></span></a>
-                    </button>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-user"></i> <span
+                                th:text="${event.getPlayersAttending()}"></span>
+                            <br>
+                            <h5>Attending Players:</h5>
+                            <div th:object="${event}">
+                                <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
+                                    <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
+                                        <span th:text="${player.username}"></span></a>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+<!--                    RIGHT SIDE INFO-->
+                    <div class="col-4">
+                        <div>
+                            <!--            host name-->
+                            <span>Host: <span th:text="${event.player.username}"></span></span>
+                            <br>
+                            <span>Location: <span th:text="${event.location}" ></span> </span>
+
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
+<!--            weather and map-->
             <div class="edit-weather container">
                 <div class="row mx-auto">
-                    <div id='map' class="col-3" style='width: 43em; min-height: 20em'></div>
-                    <div class="col-4" id="weather" style="visibility: hidden">
-                        <section id="cards" style="margin: 1em 0em;">
+                    <div id='map' class="col-3" style='width: 42vw; height: 30em'></div>
+                    <div class="col-3" id="weather" style="visibility: hidden">
+                        <section id="cards" style="">
                             <div class="card" id="day-1"
                                  style=" margin-right: 1em; background: transparent; color: white; border: none; backdrop-filter: blur(3px); text-align: center">
                                 <div class="card-header"
@@ -171,6 +184,7 @@ ${event.id})}" th:value="${event.id}" type="button"
                 </div>
 
             </div>
+
             <div class="comment-box">
                 <div class="comment-submit">
                     <form th:action="@{/comment/{id}/create (id = ${event.id})}" th:method="post"
@@ -193,6 +207,7 @@ ${event.id})}" th:value="${event.id}" type="button"
                     </div>
                 </div>
             </div>
+<!--            start button-->
             <div class="btn-start-container">
                 <div th:if="${event.player.id == #authentication.principal.id}">
                     <div th:if="${event.started == true}">
@@ -206,25 +221,26 @@ ${event.id})}" th:value="${event.id}" type="button"
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div th:if="${event.player.id != #authentication.principal.id}">
-        <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
-            <div th:if="${event.started == false}">
-                <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
-                      th:object="${event}">
-                    <div class="attend-box">
-                        <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
-                        <label for="attending"><h2>Want to attend event?</h2></label><br>
+            <!--attend button-->
+            <div class="mx-auto text-center" th:if="${event.player.id != #authentication.principal.id}">
+                <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+                    <div th:if="${event.started == false}">
+                        <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
+                              th:object="${event}">
+                            <div class="attend-box">
+                                <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
+                                <label for="attending"><h2>Want to attend event?</h2></label><br>
+                            </div>
+                            <div>
+                                <button type="submit" class="attend-btn">Attend</button>
+                            </div>
+                        </form>
                     </div>
-                    <div>
-                        <button type="submit" class="attend-btn">Attend</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
 
 </div>
 <script th:inline="javascript">

@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/partials :: head('Player Create')"/>
+<head th:replace="fragments/partials :: head('Sign Up')"/>
 <body class="sign-in-body">
 <nav th:replace="fragments/partials :: navbar"/>
 <h1 class="sign-in-title">Make An Account</h1>
@@ -56,7 +56,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="password-error">
+            <div class="password-error" style="left: 65%; top: 51%">
                 <span id="message"></span>
                 <span id="message2"></span>
             </div>
@@ -71,7 +71,7 @@
                 </div>
                 <hr>
             </div>
-            <div class="confirm-error">
+            <div class="confirm-error" style="left: 65%; top: 65%">
                 <span id="message3"></span>
             </div>
         </div>
