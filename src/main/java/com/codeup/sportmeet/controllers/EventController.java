@@ -188,7 +188,7 @@ public class EventController {
     }
 
     @PostMapping("event/{id}/attend")
-    public String attendEvent(@ModelAttribute("event") Event event, Model model) throws Exception {
+    public String attendEvent(@ModelAttribute("event") Event event) throws Exception {
         if (String.valueOf(SecurityContextHolder.getContext().getAuthentication().getPrincipal()).equalsIgnoreCase("anonymousUser")) {
             return "redirect:/login";
         } else {

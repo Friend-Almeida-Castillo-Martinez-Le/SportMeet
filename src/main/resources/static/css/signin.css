@@ -1116,10 +1116,10 @@ hr {
     --third: hsla(181, 100%, 50%, 0.82);
     --fourth: hsla(305, 100%, 59%, 0.78);
     display: block;
-    width: 100%;
+    width: 47px;
+    height: 47px;
     border: none;
     background: linear-gradient(45deg, var(--third), var(--fourth));
-    /*padding: 15px 20px;*/
     font-size: 20px;
     cursor: pointer;
     text-align: center;

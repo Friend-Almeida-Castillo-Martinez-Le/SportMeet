@@ -166,11 +166,24 @@
                                 <h5>Attending Players:</h5>
                             </div>
                             <div class="col text-end">
-                                <div th:object="${event}">
-                                    <button class="btn btn-secondary mx-1" th:each="player: ${event.getPlayers()}">
-                                        <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}">
-                                            <span th:text="${player.username}"></span></a>
+                                <div th:object="${event}" style="display: flex; justify-content: end;align-items: baseline" >
+                                    <button class="btn btn-secondary mx-1 rounded" th:each="player: ${event.getPlayers()}" style="border-radius: 50% !important; background: #03BFCB; object-fit: fill; height: 48px; width: 48px; color: white !important;">
+                                        <a class="nav-link" th:href="@{/player/{id}/show (id = ${player.id})}" style="display: flex !important; padding: 0 !important; justify-content: center !important; align-items: center !important; color: white !important">
+                                            <span th:text="${player.firstName.substring(0,1) + player.lastName.substring(0,1)}"></span></a>
                                     </button>
+                                    <!--attend button-->
+                                    <span th:if="${event.player.id != #authentication.principal.id}">
+                                    <span th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
+                                        <span th:if="${event.started == false}">
+                                            <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
+                                                  th:object="${event}">
+                                                <span class="d-flex">
+                                                    <button th:value="${event.id}" type="submit" class="attend-btn">+</button>
+                                                </span>
+                                            </form>
+                                        </span>
+                                    </span>
+                                </span>
                                 </div>
                             </div>
                         </div>
@@ -245,23 +258,6 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!--attend button-->
-            <div class="mx-auto" th:if="${event.player.id != #authentication.principal.id}">
-                <div th:if="${eventPlayerUsernames.contains(#authentication.principal.username) == false}">
-                    <div th:if="${event.started == false}">
-                        <form th:action="@{/event/{id}/attend (id = ${event.id})}" class="attend-form" th:method="post"
-                              th:object="${event}">
-                            <div class="attend-box">
-                                <input type="checkbox" th:value="${event.id}" id="attending" name="attending">
-                                <label for="attending"><h2>Want to attend event?</h2></label><br>
-                            </div>
-                            <div class="d-flex">
-                                <button type="submit" class="attend-btn">Attend</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
