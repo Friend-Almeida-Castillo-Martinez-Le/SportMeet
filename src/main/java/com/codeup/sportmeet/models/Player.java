@@ -70,6 +70,7 @@ public class Player {
         comments = copy.comments;
         rating = copy.rating;
         ratings = copy.ratings;
+        profilePicUrl = copy.profilePicUrl;
     }
 
     public Player(String username, String password, String email, String firstName, String lastName, List<Comment> comments) {
