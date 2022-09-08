@@ -113,6 +113,8 @@ body#allEvents p {
     flex-direction: row;
     width: 100%;
     text-decoration: none;
+    height: 700px;
+    overflow-y: auto;
 }
 
 /*.top-cards-container {*/
